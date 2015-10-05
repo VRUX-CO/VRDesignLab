@@ -62,3 +62,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# stupid shit
+LightmapSnapshot.asset
+LightmapSnapshot.asset.meta
