@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: cc5b3491b57cb415f94d0f23e9993751
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: battery
+    100002: battery_glass
+    100004: battery_juice
+    100006: //RootNode
+    100008: menu_background
+    100010: menu_button
+    100012: menu_button_glow
+    100014: Texture Group
+    100016: text_01
+    100018: text_02
+    100020: text_03
+    100022: Camera
+    100024: Directional Light
+    400000: battery
+    400002: battery_glass
+    400004: battery_juice
+    400006: //RootNode
+    400008: menu_background
+    400010: menu_button
+    400012: menu_button_glow
+    400014: Texture Group
+    400016: text_01
+    400018: text_02
+    400020: text_03
+    400022: Camera
+    400024: Directional Light
+    2300000: battery
+    2300002: battery_glass
+    2300004: battery_juice
+    2300006: menu_background
+    2300008: menu_button
+    2300010: menu_button_glow
+    2300012: text_01
+    2300014: text_02
+    2300016: text_03
+    3300000: battery
+    3300002: battery_glass
+    3300004: battery_juice
+    3300006: menu_background
+    3300008: menu_button
+    3300010: menu_button_glow
+    3300012: text_01
+    3300014: text_02
+    3300016: text_03
+    4300000: menu_button
+    4300002: battery
+    4300004: menu_background
+    4300006: menu_button_glow
+    4300008: battery_glass
+    4300010: battery_juice
+    4300012: text_01
+    4300014: text_03
+    4300016: text_02
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

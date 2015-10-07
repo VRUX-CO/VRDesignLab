@@ -22,6 +22,7 @@ limitations under the License.
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// Cross-platform wrapper for Unity Input.
@@ -516,7 +517,7 @@ public static class OVRInputControl
 			InputMapping im = inputMap[i];
 			if (im.component == comp && im.joystickNumber == joystickNumber)
 			{
-				OVRDebugUtils.Assert(false, "Input mapping already exists!");
+				Assert.IsTrue(false, "Input mapping already exists!");
 				return;
 			}
 		}

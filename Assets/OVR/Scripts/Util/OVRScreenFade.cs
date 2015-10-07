@@ -39,6 +39,7 @@ public class OVRScreenFade : MonoBehaviour
 
 	private Material fadeMaterial = null;
 	private bool isFading = false;
+	private YieldInstruction fadeInstruction = new WaitForEndOfFrame();
 
 	/// <summary>
 	/// Initialize.
@@ -87,7 +88,7 @@ public class OVRScreenFade : MonoBehaviour
 		isFading = true;
 		while (elapsedTime < fadeTime)
 		{
-			yield return new WaitForEndOfFrame();
+			yield return fadeInstruction;
 			elapsedTime += Time.deltaTime;
 			color.a = 1.0f - Mathf.Clamp01(elapsedTime / fadeTime);
 			fadeMaterial.color = color;

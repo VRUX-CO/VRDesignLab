@@ -19,6 +19,10 @@ limitations under the License.
 
 ************************************************************************************/
 
+#if !UNITY_5 || UNITY_5_0
+#error Oculus Utilities require Unity 5.1 or higher.
+#endif
+
 using System;
 using System.Collections;
 using System.Linq;
@@ -45,6 +49,11 @@ public class OVRManager : MonoBehaviour
 	/// Gets a reference to the active OVRTracker
 	/// </summary>
 	public static OVRTracker tracker { get; private set; }
+
+	/// <summary>
+	/// Gets a reference to the active OVRInput
+	/// </summary>
+	public static OVRInput input { get; private set; }
 
 	private static bool _profileIsCached = false;
 	private static OVRProfile _profile;
@@ -97,16 +106,53 @@ public class OVRManager : MonoBehaviour
 	/// </summary>
 	public static event Action HSWDismissed;
 	
+	private static bool _isHmdPresentCached = false;
+	private static bool _isHmdPresent = false;
+	/// <summary>
+	/// If true, a head-mounted display is connected and present.
+	/// </summary>
+	public static bool isHmdPresent
+	{
+		get {
+			if (!_isHmdPresentCached)
+			{
+				_isHmdPresentCached = true;
+				_isHmdPresent = OVRPlugin.hmdPresent;
+			}
+
+			return _isHmdPresent;
+		}
+
+		private set {
+			_isHmdPresentCached = true;
+			_isHmdPresent = value;
+		}
+	}
+
+	private static bool _isHSWDisplayedCached = false;
+	private static bool _isHSWDisplayed = false;
+	private static bool _wasHSWDisplayed;
 	/// <summary>
 	/// If true, then the Oculus health and safety warning (HSW) is currently visible.
 	/// </summary>
 	public static bool isHSWDisplayed
 	{
-		get {			
-			if (!VR.VRDevice.isPresent)
+		get {
+			if (!isHmdPresent)
 				return false;
 
-			return OVRPlugin.hswVisible;
+			if (!_isHSWDisplayedCached)
+			{
+				_isHSWDisplayedCached = true;
+				_isHSWDisplayed = OVRPlugin.hswVisible;
+			}
+
+			return _isHSWDisplayed;
+		}
+
+		private set {
+			_isHSWDisplayedCached = true;
+			_isHSWDisplayed = value;
 		}
 	}
 	
@@ -115,7 +161,7 @@ public class OVRManager : MonoBehaviour
 	/// </summary>
 	public static void DismissHSWDisplay()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!isHmdPresent)
 			return;
 
 		OVRPlugin.DismissHSW();
@@ -127,14 +173,14 @@ public class OVRManager : MonoBehaviour
 	public bool chromatic
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return false;
 
 			return OVRPlugin.chromatic;
 		}
 
 		set {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return;
 
 			OVRPlugin.chromatic = value;
@@ -147,14 +193,14 @@ public class OVRManager : MonoBehaviour
 	public bool monoscopic
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return true;
 
 			return OVRPlugin.monoscopic;
 		}
 		
 		set {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return;
 
 			OVRPlugin.monoscopic = value;
@@ -164,22 +210,7 @@ public class OVRManager : MonoBehaviour
 	/// <summary>
 	/// If true, distortion rendering work is submitted a quarter-frame early to avoid pipeline stalls and increase CPU-GPU parallelism.
 	/// </summary>
-	public bool queueAhead
-	{
-		get {
-			if (!VR.VRDevice.isPresent)
-				return false;
-
-			return (OVRPlugin.queueAheadFraction != 0f);
-		}
-
-		set {
-			if (!VR.VRDevice.isPresent)
-				return;
-
-			OVRPlugin.queueAheadFraction = (value) ? 0.25f : 0f;
-		}
-	}
+	public bool queueAhead = true;
 	
 	/// <summary>
 	/// Gets the current battery level.
@@ -189,7 +220,7 @@ public class OVRManager : MonoBehaviour
 	public static float batteryLevel
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return 1f;
 
 			return OVRPlugin.batteryLevel;
@@ -204,7 +235,7 @@ public class OVRManager : MonoBehaviour
 	public static float batteryTemperature
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return 0f;
 
 			return OVRPlugin.batteryTemperature;
@@ -219,7 +250,7 @@ public class OVRManager : MonoBehaviour
 	public static int batteryStatus
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return -1;
 
 			return (int)OVRPlugin.batteryStatus;
@@ -233,7 +264,7 @@ public class OVRManager : MonoBehaviour
 	public static float volumeLevel
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!isHmdPresent)
 				return 0f;
 
 			return OVRPlugin.systemVolume;
@@ -254,9 +285,7 @@ public class OVRManager : MonoBehaviour
 	/// True if the current platform supports virtual reality.
 	/// </summary>
     public bool isSupportedPlatform { get; private set; }
-	
-	private static bool usingPositionTrackingCached = false;
-	private static bool usingPositionTracking = false;
+
 	private static bool wasHmdPresent = false;
 	private static bool wasPositionTracked = false;
 
@@ -279,19 +308,8 @@ public class OVRManager : MonoBehaviour
 
 		instance = this;
 
-		var netVersion = new System.Version(OVRPlugin.WrapperVersion);
-		System.Version ovrVersion = new System.Version("0.0.0");
-		var versionString = OVRPlugin.version;
-		var success = false;
-		try {
-			ovrVersion = new System.Version(versionString);
-			success = true;
-		} catch (Exception e) {
-			Debug.Log("Failed to parse Oculus version string \"" + versionString + "\" with message \"" + e.Message + "\".");
-		}
-		if (!success || netVersion > ovrVersion)
-			Debug.LogWarning("Version check failed. Please make sure you are using Oculus runtime " +
-			                 OVRPlugin.WrapperVersion + " or newer.");
+		System.Version netVersion = OVRPlugin.wrapperVersion;
+		System.Version ovrVersion = OVRPlugin.version;
 
 		Debug.Log("Unity v" + Application.unityVersion + ", " +
 		          "Oculus Utilities v" + netVersion + ", " +
@@ -330,6 +348,8 @@ public class OVRManager : MonoBehaviour
 			display = new OVRDisplay();
 		if (tracker == null)
 			tracker = new OVRTracker();
+		if (input == null)
+			input = new OVRInput();
 
 		if (resetTrackerOnLoad)
 			display.RecenterPose();
@@ -345,21 +365,23 @@ public class OVRManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (!usingPositionTrackingCached || usingPositionTracking != usePositionTracking)
-		{
-			tracker.isEnabled = usePositionTracking;
-			usingPositionTracking = usePositionTracking;
-			usingPositionTrackingCached = true;
-		}
+		tracker.isEnabled = usePositionTracking;
 
 		// Dispatch any events.
-		if (HMDLost != null && wasHmdPresent && !VR.VRDevice.isPresent)
+		isHmdPresent = OVRPlugin.hmdPresent;
+
+		if (isHmdPresent)
+		{
+			OVRPlugin.queueAheadFraction = (queueAhead) ? 0.25f : 0f;
+		}
+
+		if (HMDLost != null && wasHmdPresent && !isHmdPresent)
 			HMDLost();
 
-        if (HMDAcquired != null && !wasHmdPresent && VR.VRDevice.isPresent)
+        if (HMDAcquired != null && !wasHmdPresent && isHmdPresent)
 			HMDAcquired();
 
-        wasHmdPresent = VR.VRDevice.isPresent;
+        wasHmdPresent = isHmdPresent;
 
 		if (TrackingLost != null && wasPositionTracked && !tracker.isPositionTracked)
 			TrackingLost();
@@ -369,15 +391,21 @@ public class OVRManager : MonoBehaviour
 
 		wasPositionTracked = tracker.isPositionTracked;
 
+		isHSWDisplayed = OVRPlugin.hswVisible;
+
 		if (isHSWDisplayed && Input.anyKeyDown)
-		{
 			DismissHSWDisplay();
-			
+		
+		if (!isHSWDisplayed && _wasHSWDisplayed)
+		{
 			if (HSWDismissed != null)
 				HSWDismissed();
 		}
+		
+		_wasHSWDisplayed = isHSWDisplayed;
 
 		display.Update();
+		input.Update();
 		
 		if (volumeController != null)
 		{
@@ -426,7 +454,7 @@ public class OVRManager : MonoBehaviour
 
     public static void PlatformUIConfirmQuit()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!isHmdPresent)
 			return;
 
 		OVRPlugin.ShowUI(OVRPlugin.PlatformUI.ConfirmQuit);
@@ -434,7 +462,7 @@ public class OVRManager : MonoBehaviour
 
     public static void PlatformUIGlobalMenu()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!isHmdPresent)
 			return;
 
 		OVRPlugin.ShowUI(OVRPlugin.PlatformUI.GlobalMenu);

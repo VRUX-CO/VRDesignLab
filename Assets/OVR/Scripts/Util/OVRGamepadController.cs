@@ -345,6 +345,30 @@ public class OVRGamepadController : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Sets the current vibration for a VR node.
+	/// </summary>
+	/// <param name="node">
+	/// The node where the vibration will be applied, if possible.
+	/// </para>
+	/// <param name="strength">
+	/// The strength of the vibration, where 0 none and 1 is the maximum possible.
+	/// </param>
+	/// <param name="frequency">
+	/// The frequency of the vibration in Hertz, if applicable.
+	/// </param>
+	public static bool GPC_SetVibration(UnityEngine.VR.VRNode node, float strength, float frequency)
+	{
+#if !UNITY_ANDROID || UNITY_EDITOR
+		return OVR_GamepadController_SetVibration((int)node, strength, frequency);
+#else
+        if (strength > 0.5f)
+            Handheld.Vibrate();
+
+        return true;
+#endif
+	}
+
+	/// <summary>
 	/// Returns true if the gamepad controller is available.
 	/// </summary>
 	public static bool GPC_IsAvailable()
@@ -407,6 +431,8 @@ public class OVRGamepadController : MonoBehaviour
 	public static extern float OVR_GamepadController_GetAxis(int axis);
 	[DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
 	public static extern bool OVR_GamepadController_GetButton(int button);
+	[DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern bool OVR_GamepadController_SetVibration(int node, float strength, float frequency);
 #endif
     void LateUpdate()
     {

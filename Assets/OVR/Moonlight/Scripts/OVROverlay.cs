@@ -46,32 +46,41 @@ public class OVROverlay : MonoBehaviour
 	};
 
 	OverlayType		currentOverlayType = OverlayType.Overlay;
-#if !UNITY_ANDROID || UNITY_EDITOR
     Texture         texture;
-#endif
 	IntPtr 			texId = IntPtr.Zero;
 
-	void Awake()
+	private void ApplyTexture()
 	{
-		Debug.Log ("Overlay Awake");
+		if (this.GetComponent<Renderer>().material.mainTexture == texture)
+			return;
 
 		// Getting the NativeTextureID/PTR synchronizes with the multithreaded renderer, which
 		// causes a problem on the first frame if this gets called after the OVRDisplay initialization,
 		// so do it in Awake() instead of Start().
 		texId = this.GetComponent<Renderer>().material.mainTexture.GetNativeTexturePtr();
-#if !UNITY_ANDROID || UNITY_EDITOR
         texture = this.GetComponent<Renderer>().material.mainTexture;
-#endif
+	}
+
+	void Awake()
+	{
+		Debug.Log ("Overlay Awake");
+
+		ApplyTexture();
+    }
+
+    void Start()
+    {
+        if (!OVRManager.isHmdPresent)
+        {
+            enabled = false;
+            return;
+        }
     }
 
 	void Update()
     {
 #if !UNITY_ANDROID || UNITY_EDITOR
-        if (this.GetComponent<Renderer>().material.mainTexture != texture)
-        {
-            texId = this.GetComponent<Renderer>().material.mainTexture.GetNativeTexturePtr();
-            texture = this.GetComponent<Renderer>().material.mainTexture;
-        }
+		ApplyTexture();
 #endif
 
 		if (Input.GetKey (KeyCode.Joystick1Button0))
@@ -86,10 +95,10 @@ public class OVROverlay : MonoBehaviour
 		{
 			currentOverlayType = OverlayType.Overlay;
 		}
-	}
+    }
 
-	void OnRenderObject ()
-	{
+    void OnRenderObject()
+    {
 		// The overlay must be specified every eye frame, because it is positioned relative to the
 		// current head location.  If frames are dropped, it will be time warped appropriately,
 		// just like the eye buffers.
@@ -102,30 +111,19 @@ public class OVROverlay : MonoBehaviour
 
 		bool overlay = (currentOverlayType == OverlayType.Overlay);
 
-		Transform camPose = Camera.current.transform;
-		Matrix4x4 modelToCamera = camPose.worldToLocalMatrix * transform.localToWorldMatrix;
+        bool headLocked = false;
+        for (var t = transform; t != null && !headLocked; t = t.parent)
+            headLocked |= (t == Camera.current.transform);
 
-		Vector3 headPos = VR.InputTracking.GetLocalPosition(VR.VRNode.Head);
-		Quaternion headOrt = VR.InputTracking.GetLocalRotation(VR.VRNode.Head);
-		Matrix4x4 cameraToStart = Matrix4x4.TRS(headPos, headOrt, Vector3.one);
 
-		Matrix4x4 modelToStart = cameraToStart * modelToCamera;
-
-		OVRPose pose;
-		pose.position = modelToStart.GetColumn(3);
-		pose.orientation = Quaternion.LookRotation(modelToStart.GetColumn(2), modelToStart.GetColumn(1));
-
-        // Convert left-handed to right-handed.
-        pose.position.z = -pose.position.z;
-        pose.orientation.w = -pose.orientation.w;
+		OVRPose pose = (headLocked) ? transform.ToHeadSpacePose() : transform.ToTrackingSpacePose();
 
 		Vector3 scale = transform.lossyScale;
         for (int i = 0; i < 3; ++i)
             scale[i] /= Camera.current.transform.lossyScale[i];
 
-		OVRPlugin.Bool result = OVRPlugin.SetOverlayQuad(overlay.ToBool(), texId, IntPtr.Zero, pose.ToPosef(), scale.ToVector3f());
-
-		GetComponent<Renderer>().enabled = (result == OVRPlugin.Bool.False);		// render with the overlay plane instead of the normal renderer
+		// render with the overlay plane instead of the normal renderer
+		GetComponent<Renderer>().enabled = !OVRPlugin.SetOverlayQuad(overlay, headLocked, texId, IntPtr.Zero, pose.flipZ().ToPosef(), scale.ToVector3f());
 	}
 	
 }

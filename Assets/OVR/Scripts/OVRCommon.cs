@@ -27,6 +27,50 @@ using System.Collections.Generic;
 /// </summary>
 public static class OVRExtensions
 {
+	/// <summary>
+	/// Converts the given world-space transform to an OVRPose in tracking space.
+	/// </summary>
+	public static OVRPose ToTrackingSpacePose(this Transform transform)
+	{
+		OVRPose headPose;
+		headPose.position = UnityEngine.VR.InputTracking.GetLocalPosition(UnityEngine.VR.VRNode.Head);
+		headPose.orientation = UnityEngine.VR.InputTracking.GetLocalRotation(UnityEngine.VR.VRNode.Head);
+
+		var ret = headPose * transform.ToHeadSpacePose();
+
+		return ret;
+	}
+
+	/// <summary>
+	/// Converts the given world-space transform to an OVRPose in head space.
+	/// </summary>
+	public static OVRPose ToHeadSpacePose(this Transform transform)
+	{
+		return Camera.current.transform.ToOVRPose().Inverse() * transform.ToOVRPose();
+	}
+
+	internal static OVRPose ToOVRPose(this Transform t, bool isLocal = false)
+	{
+		OVRPose pose;
+		pose.orientation = (isLocal) ? t.localRotation : t.rotation;
+		pose.position = (isLocal) ? t.localPosition : t.position;
+		return pose;
+	}
+	
+	internal static void FromOVRPose(this Transform t, OVRPose pose, bool isLocal = false)
+	{
+		if (isLocal)
+		{
+			t.localRotation = pose.orientation;
+			t.localPosition = pose.position;
+		}
+		else
+		{
+			t.rotation = pose.orientation;
+			t.position = pose.position;
+		}
+	}
+
 	internal static OVRPose ToOVRPose(this OVRPlugin.Posef p)
 	{
 		return new OVRPose()
@@ -60,11 +104,6 @@ public static class OVRExtensions
 	{
 		return new OVRPlugin.Quatf() { x = q.x, y = q.y, z = q.z, w = q.w };
 	}
-
-	internal static OVRPlugin.Bool ToBool(this bool b)
-	{
-		return (b) ? OVRPlugin.Bool.True : OVRPlugin.Bool.False;
-	}
 }
 
 /// <summary>
@@ -95,6 +134,38 @@ public struct OVRPose
 	/// The orientation.
 	/// </summary>
 	public Quaternion orientation;
+
+	/// <summary>
+	/// Multiplies two poses.
+	/// </summary>
+	public static OVRPose operator*(OVRPose lhs, OVRPose rhs)
+	{
+		var ret = new OVRPose();
+		ret.position = lhs.position + lhs.orientation * rhs.position;
+		ret.orientation = lhs.orientation * rhs.orientation;
+		return ret;
+	}
+
+	/// <summary>
+	/// Computes the inverse of the given pose.
+	/// </summary>
+	public OVRPose Inverse()
+	{
+		OVRPose ret;
+		ret.orientation = Quaternion.Inverse(orientation);
+		ret.position = ret.orientation * -position;
+		return ret;
+	}
+
+	/// <summary>
+	/// Converts the pose from left- to right-handed or vice-versa.
+	/// </summary>
+	internal OVRPose flipZ()
+	{
+		var ret = this;
+		ret.position.z = -ret.position.z;
+		return ret;
+	}
 
 	internal OVRPlugin.Posef ToPosef()
 	{

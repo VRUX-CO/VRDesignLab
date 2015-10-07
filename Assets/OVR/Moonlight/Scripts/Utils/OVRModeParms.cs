@@ -41,7 +41,7 @@ public class OVRModeParms : MonoBehaviour
 	/// </summary>
 	void Start()
 	{		
-		if (!VR.VRDevice.isPresent)
+		if (!OVRManager.isHmdPresent)
 		{
 			enabled = false;
 			return;

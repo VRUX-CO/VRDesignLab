@@ -57,6 +57,14 @@ public class OVRCameraRig : MonoBehaviour
 	/// </summary>
 	public Transform rightEyeAnchor { get; private set; }
 	/// <summary>
+	/// Always coincides with the pose of the left hand.
+	/// </summary>
+	public Transform leftHandAnchor { get; private set; }
+	/// <summary>
+	/// Always coincides with the pose of the right hand.
+	/// </summary>
+	public Transform rightHandAnchor { get; private set; }
+	/// <summary>
 	/// Always coincides with the pose of the tracker.
 	/// </summary>
 	public Transform trackerAnchor { get; private set; }
@@ -68,6 +76,7 @@ public class OVRCameraRig : MonoBehaviour
 	private readonly string trackingSpaceName = "TrackingSpace";
 	private readonly string trackerAnchorName = "TrackerAnchor";
 	private readonly string eyeAnchorName = "EyeAnchor";
+	private readonly string handAnchorName = "HandAnchor";
 	private readonly string legacyEyeAnchorName = "Camera";
 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -129,11 +138,15 @@ public class OVRCameraRig : MonoBehaviour
 		centerEyeAnchor.localRotation = VR.InputTracking.GetLocalRotation(VR.VRNode.CenterEye);
         leftEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : VR.InputTracking.GetLocalRotation(VR.VRNode.LeftEye);
 		rightEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : VR.InputTracking.GetLocalRotation(VR.VRNode.RightEye);
+		leftHandAnchor.localRotation = OVRInput.GetLocalHandRotation(OVRInput.Hand.Left);
+		rightHandAnchor.localRotation = OVRInput.GetLocalHandRotation(OVRInput.Hand.Right);
 
 		trackerAnchor.localPosition = tracker.position;
 		centerEyeAnchor.localPosition = VR.InputTracking.GetLocalPosition(VR.VRNode.CenterEye);
 		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : VR.InputTracking.GetLocalPosition(VR.VRNode.LeftEye);
 		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : VR.InputTracking.GetLocalPosition(VR.VRNode.RightEye);
+		leftHandAnchor.localPosition = OVRInput.GetLocalHandPosition(OVRInput.Hand.Left);
+		rightHandAnchor.localPosition = OVRInput.GetLocalHandPosition(OVRInput.Hand.Right);
 
 		if (UpdatedAnchors != null)
 		{
@@ -155,42 +168,47 @@ public class OVRCameraRig : MonoBehaviour
 		if (rightEyeAnchor == null)
             rightEyeAnchor = ConfigureEyeAnchor(trackingSpace, VR.VRNode.RightEye);
 
+		if (leftHandAnchor == null)
+            leftHandAnchor = ConfigureHandAnchor(trackingSpace, OVRPlugin.Node.LeftHand);
+
+		if (rightHandAnchor == null)
+            rightHandAnchor = ConfigureHandAnchor(trackingSpace, OVRPlugin.Node.RightHand);
+
 		if (trackerAnchor == null)
 			trackerAnchor = ConfigureTrackerAnchor(trackingSpace);
 
-        bool needsCamera = (leftEyeCamera == null || rightEyeCamera == null);
-
-		if (needsCamera)
+        if (leftEyeCamera == null || rightEyeCamera == null)
 		{
-            leftEyeCamera = centerEyeAnchor.GetComponent<Camera>();
-			if (leftEyeCamera == null)
+			Camera centerEyeCamera = centerEyeAnchor.GetComponent<Camera>();
+
+			if (centerEyeCamera == null)
 			{
-				leftEyeCamera = centerEyeAnchor.gameObject.AddComponent<Camera>();
+				centerEyeCamera = centerEyeAnchor.gameObject.AddComponent<Camera>();
 			}
 
-            rightEyeCamera = leftEyeCamera;
+			// Only the center eye camera should now render.
+			var cameras = gameObject.GetComponentsInChildren<Camera>();
+			for (int i = 0; i < cameras.Length; i++)
+			{
+				Camera cam = cameras[i];
+
+				if (cam == centerEyeCamera)
+					continue;
+
+				if (cam && (cam.transform == leftEyeAnchor || cam.transform == rightEyeAnchor) && cam.enabled)
+				{
+					Debug.LogWarning("Having a Camera on " + cam.name + " is deprecated. Disabling the Camera. Please use the Camera on " + centerEyeCamera.name + " instead.");
+					cam.enabled = false;
+
+					// Use "MainCamera" if the previous cameras used it.
+					if (cam.CompareTag("MainCamera"))
+						centerEyeCamera.tag = "MainCamera";
+				}
+			}
+			
+			leftEyeCamera = centerEyeCamera;
+			rightEyeCamera = centerEyeCamera;
 		}
-		
-		// Only the center eye camera should now render.
-
-        int cameraCount = 0;
-        int mainCount = 0;
-		
-		foreach (var c in gameObject.GetComponentsInChildren<Camera>().Where(v => v != leftEyeCamera))
-		{
-			if (c && c.enabled)
-			{
-				Debug.LogWarning("Having a Camera on " + c.name + " is deprecated. Disabling the Camera. Please use the Camera on " + leftEyeCamera.name + " instead.");
-				c.enabled = false;
-
-				if (c.CompareTag("MainCamera"))
-					mainCount++;
-			}
-        }
-
-        // Use "MainCamera" unless there were previously cameras and they didn't use it.
-        if (needsCamera && (cameraCount == 0 || mainCount != 0))
-            leftEyeCamera.tag = "MainCamera";
 	}
 
 	private Transform ConfigureRootAnchor(string name)
@@ -225,6 +243,31 @@ public class OVRCameraRig : MonoBehaviour
 		{
 			string legacyName = legacyEyeAnchorName + eye.ToString();
 			anchor = transform.Find(legacyName);
+		}
+
+		if (anchor == null)
+		{
+			anchor = new GameObject(name).transform;
+		}
+
+		anchor.name = name;
+		anchor.parent = root;
+		anchor.localScale = Vector3.one;
+		anchor.localPosition = Vector3.zero;
+		anchor.localRotation = Quaternion.identity;
+
+		return anchor;
+	}
+
+	private Transform ConfigureHandAnchor(Transform root, OVRPlugin.Node hand)
+	{
+		string handName = (hand == OVRPlugin.Node.LeftHand) ? "Left" : "Right";
+		string name = handName + handAnchorName;
+		Transform anchor = transform.Find(root.name + "/" + name);
+
+		if (anchor == null)
+		{
+			anchor = transform.Find(name);
 		}
 
 		if (anchor == null)
