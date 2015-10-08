@@ -18,14 +18,20 @@ public class BalloonClick : MonoBehaviour
 
   public void OnClick()
   {
+    // Luis, fix this, it's ugly and I'm sure you have a better way
 
+    // show particles
+    gameObject.GetComponentInChildren<ParticleSystem>().Play();
 
+    // play pop sound
+    if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
 
-    // destroy everything
+    // destroy everything after delay to give time for particle system to finish
+    int destroyDelay = 1;
     foreach (Transform child in this.transform)
     {
-      Destroy(child.gameObject);
+      Destroy(child.gameObject, destroyDelay);
     }
-    Destroy(this);
+    Destroy(this, destroyDelay);
   }
 }
