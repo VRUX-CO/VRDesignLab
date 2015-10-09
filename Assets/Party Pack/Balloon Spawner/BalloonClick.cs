@@ -4,6 +4,7 @@ using System.Collections;
 public class BalloonClick : MonoBehaviour
 {
   public BalloonSpawner spawner;
+    public GameObject balloonMesh;
 
   // Use this for initialization
   void Start()
@@ -21,11 +22,11 @@ public class BalloonClick : MonoBehaviour
   {
     // Luis, fix this, it's ugly and I'm sure you have a better way
 
-    // show particles
+    /*// show particles
     gameObject.GetComponentInChildren<ParticleSystem>().Play();
-
-    // play pop sound
-    if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
+    */
+        // play pop sound
+        if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
 
     // tell the spawner we've been popped
     spawner.BalloonPopped();
