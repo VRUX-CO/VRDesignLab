@@ -36,4 +36,30 @@ public class ProceduralPlane : MonoBehaviour
     StartCoroutine(Dupdate(duh + 10));
   }
 
+  public void OnHoverStart()
+  {
+    Debug.Log("Start");
+    ShowButtons(true);
+  }
+
+  public void OnHoverEnd()
+  {
+    Debug.Log("End");
+    ShowButtons(false);
+  }
+
+  public void ShowButtons(bool show)
+  {
+    LookButton[] buttons = gameObject.GetComponentsInChildren<LookButton>();
+    for (int i = 0; i < buttons.Length; i++)
+    {
+      Renderer[] renderers = buttons[i].GetComponentsInChildren<Renderer>();
+      foreach (Renderer r in renderers)
+      {
+        r.enabled = show;
+      }
+    }
+  }
+
+
 }

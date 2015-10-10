@@ -13,6 +13,9 @@ public class LookButton : MonoBehaviour
     MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
     renderer.material = mat;
 
+    // start off hidden
+    renderer.enabled = false;
+
   }
 
   // Update is called once per frame
@@ -20,4 +23,15 @@ public class LookButton : MonoBehaviour
   {
 
   }
+
+  public void OnHoverStart()
+  {
+    Debug.Log("Start");
+  }
+
+  public void OnHoverEnd()
+  {
+    Debug.Log("End");
+  }
+
 }

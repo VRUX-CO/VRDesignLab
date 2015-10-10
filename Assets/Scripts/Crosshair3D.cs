@@ -39,6 +39,8 @@ public class Crosshair3D : MonoBehaviour
   private Transform thisTransform = null;
   private Material crosshairMaterial = null;
   private Vector3 originalScale;
+  private GameObject previousHitGameObject;
+
   //private float distance;
 
   /*void Start()
@@ -161,5 +163,36 @@ public class Crosshair3D : MonoBehaviour
         hit.transform.gameObject.BroadcastMessage("OnClick", SendMessageOptions.DontRequireReceiver);
       }
     }
+
+
+    // steve's bullshit
+    if (true)
+    {
+      ray = new Ray(cameraPosition, cameraForward);
+      if (Physics.Raycast(ray, out hit))
+      {
+        if (previousHitGameObject != hit.transform.gameObject)
+        {
+          EndHoover();
+
+          previousHitGameObject = hit.transform.gameObject;
+          previousHitGameObject.BroadcastMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
+        }
+      }
+      else
+      {
+        EndHoover();
+      }
+    }
   }
+
+  void EndHoover()
+  {
+    if (previousHitGameObject != null)
+    {
+      previousHitGameObject.BroadcastMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
+      previousHitGameObject = null;
+    }
+  }
+
 }
