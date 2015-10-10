@@ -3,28 +3,46 @@ using System.Collections;
 
 public class ProceduralPlane : MonoBehaviour
 {
+  public Camera m_Camera;
 
   // Use this for initialization
   void Start()
   {
-    BuildMesh();
+    m_Camera = Camera.main;
+
+    BuildMesh(1f, 2.5f);
+    // StartCoroutine(Dupdate(0));
   }
 
   // Update is called once per frame
   void Update()
   {
-
+    transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.forward,
+            Vector3.forward);
   }
 
-  void BuildMesh()
+  IEnumerator Dupdate(int duh)
+  {
+    Debug.Log(string.Format("fuck: {0}", duh));
+
+    Vector3 relativePos = Camera.main.transform.position - transform.position;
+
+    Quaternion rotation = Quaternion.LookRotation(relativePos);
+
+    rotation = rotation * Quaternion.Euler(duh, 0, 0);
+    transform.rotation = rotation;
+
+    yield return new WaitForSeconds(.1f);
+    StartCoroutine(Dupdate(duh + 10));
+  }
+
+  void BuildMesh(float length, float width)
   {
     // You can change that line to provide another MeshFilter
     MeshFilter filter = gameObject.AddComponent<MeshFilter>();
     Mesh mesh = filter.mesh;
     mesh.Clear();
 
-    float length = 1f;
-    float width = 1f;
     int resX = 2; // 2 minimum
     int resZ = 2;
 
