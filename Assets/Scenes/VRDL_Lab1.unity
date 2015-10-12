@@ -201,6 +201,22 @@ Prefab:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 832801196}
+    - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+      propertyPath: _playOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+      propertyPath: _rows
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+      propertyPath: _maxRows
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+      propertyPath: _framesPerSecond
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
   m_IsPrefabParent: 0
