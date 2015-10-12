@@ -211,11 +211,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: _maxRows
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: _framesPerSecond
-      value: 1
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
