@@ -178,7 +178,7 @@ public class Crosshair3D : MonoBehaviour
       {
         if (previousHitGameObject != hit.transform.gameObject)
         {
-          EndHoover();
+          EndHover();
 
           hit.transform.gameObject.BroadcastMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
 
@@ -192,12 +192,12 @@ public class Crosshair3D : MonoBehaviour
       }
       else
       {
-        EndHoover();
+        EndHover();
       }
     }
   }
 
-  void EndHoover()
+  void EndHover()
   {
     if (previousHitGameObject != null)
     {

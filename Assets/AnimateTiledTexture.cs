@@ -11,13 +11,11 @@ public class AnimateTiledTexture : MonoBehaviour
 {
   public int _columns = 2;                        // The number of columns of the texture
   public int _rows = 2;                           // The number of rows of the texture
-  public Vector2 _scale = new Vector3(1f, 1f);    // Scale the texture. This must be a non-zero number. negative scale flips the image
   public int _maxRows = 0;                        // keep 0 if you want rows*cols.  If you have less frames than rows*cols, set it here
 
+  private Vector2 _scale = new Vector3(1f, 1f);    // Scale the texture. This must be a non-zero number. negative scale flips the image
   private int _index = 0;                         // Keeps track of the current frame 
   private Vector2 _textureSize = Vector2.zero;    // Keeps track of the texture scale 
-  private bool _isPlaying = false;                // A flag to determine if the animation is currently playing
-
   private bool _forwards = true;    // set to backwards to animate in reverse
   private long _currentCoroutineIndex = 0;
   private float _framesPerSecond = 24f;
@@ -60,8 +58,6 @@ public class AnimateTiledTexture : MonoBehaviour
   private IEnumerator updateTiling()
   {
     long routineIndex = _currentCoroutineIndex;
-
-    _isPlaying = true;
 
     // This is the max number of frames
     int maxIndex = (_rows * _columns);
@@ -111,8 +107,6 @@ public class AnimateTiledTexture : MonoBehaviour
       else
         yield return new WaitForSeconds(1f / _framesPerSecond);
     }
-
-    _isPlaying = false;
   }
 
   private void ApplyOffset()
