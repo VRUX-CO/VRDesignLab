@@ -11,14 +11,13 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 ************************************************************************************/
 
 // uncomment this to test the different modes.
-#define CROSSHAIR_TESTING
+// #define CROSSHAIR_TESTING
 
 using UnityEngine;
-using System.Collections;				// required for Coroutines
+using System.Collections;
 
 public class Crosshair3D : MonoBehaviour
 {
-
   // NOTE: three different crosshair methods are shown here.  The most comfortable for the
   // user is going to be when the crosshair is located in the world (or slightly in front of)
   // the position where the user's gaze is.  Positioning the cursor a fixed distance from the
@@ -40,18 +39,9 @@ public class Crosshair3D : MonoBehaviour
   private Material crosshairMaterial = null;
   private Vector3 originalScale;
   private GameObject previousHitGameObject;
+  private GameObject previousHitButtonRevealer;
   private AnimateTiledTexture _animatedCrosshair;
 
-  //private float distance;
-
-  /*void Start()
-  {
-      originalScale = this.transform.localScale;
-  }*/
-
-  /// <summary>
-  /// Initialize the crosshair
-  /// </summary>
   void Awake()
   {
     thisTransform = transform;
@@ -69,9 +59,6 @@ public class Crosshair3D : MonoBehaviour
     crosshairMaterial = GetComponent<Renderer>().material;
   }
 
-  /// <summary>
-  /// Cleans up the cloned material
-  /// </summary>
   void OnDestroy()
   {
     if (crosshairMaterial != null)
@@ -80,9 +67,6 @@ public class Crosshair3D : MonoBehaviour
     }
   }
 
-  /// <summary>
-  /// Updates the position of the crosshair.
-  /// </summary>
   void LateUpdate()
   {
 #if CROSSHAIR_TESTING
@@ -118,9 +102,6 @@ public class Crosshair3D : MonoBehaviour
 
     GetComponent<Renderer>().enabled = true;
 
-    //*************************
-    // position the cursor based on the mode
-    //*************************
     switch (mode)
     {
       case CrosshairMode.Dynamic:
@@ -165,43 +146,19 @@ public class Crosshair3D : MonoBehaviour
       ray = new Ray(cameraPosition, cameraForward);
       if (Physics.Raycast(ray, out hit))
       {
-        hit.transform.gameObject.BroadcastMessage("OnClick", SendMessageOptions.DontRequireReceiver);
+        hit.transform.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
       }
     }
 
-
-    // steve's bullshit
-    if (true)
-    {
-      ray = new Ray(cameraPosition, cameraForward);
-      if (Physics.Raycast(ray, out hit))
-      {
-        if (previousHitGameObject != hit.transform.gameObject)
-        {
-          EndHover();
-
-          hit.transform.gameObject.BroadcastMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
-
-          if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
-          {
-            _animatedCrosshair.Play(true);
-          }
-
-          previousHitGameObject = hit.transform.gameObject;
-        }
-      }
-      else
-      {
-        EndHover();
-      }
-    }
+    UpdateHoverState();
+    UpdateButtonRevealer();
   }
 
   void EndHover()
   {
     if (previousHitGameObject != null)
     {
-      previousHitGameObject.BroadcastMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
+      previousHitGameObject.SendMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
 
       if (previousHitGameObject.GetComponent<CrosshairTargetable>() != null)
       {
@@ -209,6 +166,80 @@ public class Crosshair3D : MonoBehaviour
       }
 
       previousHitGameObject = null;
+    }
+  }
+
+  void UpdateHoverState()
+  {
+    Ray ray;
+    RaycastHit hit;
+    LayerMask mask = 0;
+
+    // get the camera forward vector and position
+    Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
+    Vector3 cameraForward = cameraController.centerEyeAnchor.forward;
+
+    ray = new Ray(cameraPosition, cameraForward);
+    if (Physics.Raycast(ray, out hit))
+    {
+      if (previousHitGameObject != hit.transform.gameObject)
+      {
+        EndHover();
+
+        hit.transform.gameObject.SendMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
+
+        if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
+        {
+          _animatedCrosshair.Play(true);
+        }
+
+        previousHitGameObject = hit.transform.gameObject;
+      }
+    }
+    else
+    {
+      EndHover();
+    }
+  }
+
+  void UpdateButtonRevealer()
+  {
+    Ray ray;
+    RaycastHit hit;
+
+    // get the camera forward vector and position
+    Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
+    Vector3 cameraForward = cameraController.centerEyeAnchor.forward;
+
+    ray = new Ray(cameraPosition, cameraForward);
+
+    int layerMask = 1 << 11;
+
+    // Does the ray intersect any objects which are in the player layer.
+    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+    {
+      if (previousHitButtonRevealer != hit.transform.gameObject)
+      {
+        EndButtonRevealer();
+
+        hit.transform.gameObject.SendMessage("OnRevealStart", SendMessageOptions.DontRequireReceiver);
+
+        previousHitButtonRevealer = hit.transform.gameObject;
+      }
+    }
+    else
+    {
+      EndButtonRevealer();
+    }
+  }
+
+  void EndButtonRevealer()
+  {
+    if (previousHitButtonRevealer != null)
+    {
+      previousHitButtonRevealer.SendMessage("OnRevealEnd", SendMessageOptions.DontRequireReceiver);
+
+      previousHitButtonRevealer = null;
     }
   }
 }

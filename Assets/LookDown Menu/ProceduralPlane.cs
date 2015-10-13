@@ -23,8 +23,6 @@ public class ProceduralPlane : MonoBehaviour
 
   IEnumerator Dupdate(int duh)
   {
-    Debug.Log(string.Format("fuck: {0}", duh));
-
     Vector3 relativePos = Camera.main.transform.position - transform.position;
 
     Quaternion rotation = Quaternion.LookRotation(relativePos);
@@ -36,15 +34,13 @@ public class ProceduralPlane : MonoBehaviour
     StartCoroutine(Dupdate(duh + 10));
   }
 
-  public void OnHoverStart()
+  public void OnRevealStart()
   {
-    Debug.Log("Start");
     ShowButtons(true);
   }
 
-  public void OnHoverEnd()
+  public void OnRevealEnd()
   {
-    Debug.Log("End");
     ShowButtons(false);
   }
 
