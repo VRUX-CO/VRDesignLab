@@ -18,7 +18,7 @@ public class AnimateTiledTexture : MonoBehaviour
   private Vector2 _textureSize = Vector2.zero;    // Keeps track of the texture scale 
   private bool _forwards = true;    // set to backwards to animate in reverse
   private long _currentCoroutineIndex = 0;
-  private float _framesPerSecond = 24f;
+  private float _framesPerSecond = 60f;
 
   public void Play(bool openReticle)
   {

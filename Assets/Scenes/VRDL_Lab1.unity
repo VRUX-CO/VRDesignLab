@@ -211,7 +211,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: _maxRows
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11411616, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: _framesPerSecond
@@ -227,15 +227,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450042, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 450042, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 450042, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
