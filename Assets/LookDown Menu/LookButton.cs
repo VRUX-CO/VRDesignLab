@@ -10,23 +10,25 @@ public class LookButton : MonoBehaviour
 
   void Update()
   {
-    Color c = startColor;
+    //  Color c = startColor;
 
-    buttonRenderer.material.color = new Color(c.r, c.g, c.b, .3f); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
+    //  buttonRenderer.material.color = new Color(c.r, c.g, c.b, .3f); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
   }
 
   // Use this for initialization
   void Start()
   {
-    MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
-
     buttonRenderer = gameObject.AddComponent<MeshRenderer>();
-    buttonRenderer.material = mat;
-
     startColor = buttonRenderer.material.color;
 
+    MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
+
+    mat.color = new Color(startColor.r, startColor.g, startColor.b, .3f); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
+
+    buttonRenderer.material = mat;
+
     // start off hidden
-    buttonRenderer.enabled = true;
+    buttonRenderer.enabled = false;
   }
 
   public void OnClick()
@@ -51,11 +53,7 @@ public class LookButton : MonoBehaviour
   {
     if (fadeIn)
     {
-      Color alphaFadedColor = Color.white;
 
-      // modify alpha
-      // create your own time based algorithm and start it when you want the fade to start
-      alphaFadedColor.a = Time.realtimeSinceStartup / 10f;
     }
     else
     {

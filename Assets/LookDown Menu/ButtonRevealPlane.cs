@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProceduralPlane : MonoBehaviour
+public class ButtonRevealPlane : MonoBehaviour
 {
   Camera m_Camera;
 
