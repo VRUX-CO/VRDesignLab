@@ -17,8 +17,19 @@ public class ButtonRevealPlane : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    MoveInfrontOfCamera();
+
     //   transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.forward,
     //         Vector3.forward);
+  }
+
+  void MoveInfrontOfCamera()
+  {
+    Vector3 pos = Camera.main.transform.position;
+    pos.z += .15f;
+    pos.y = .1f;
+
+    transform.position = pos;
   }
 
   IEnumerator Dupdate(int duh)
