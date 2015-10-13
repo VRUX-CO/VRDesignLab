@@ -23,9 +23,10 @@ public class LookButton : MonoBehaviour
 
     MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
 
-    mat.color = new Color(startColor.r, startColor.g, startColor.b, .3f); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
+    mat.SetColor("_TintColor", new Color(1, 0, 0, .1f)); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
 
     buttonRenderer.material = mat;
+    Debug.Log(string.Format("{0} {1}", mat.color, " fuck"));
 
     // start off hidden
     buttonRenderer.enabled = false;
