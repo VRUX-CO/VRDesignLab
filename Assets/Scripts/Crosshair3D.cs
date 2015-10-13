@@ -40,6 +40,7 @@ public class Crosshair3D : MonoBehaviour
   private Material crosshairMaterial = null;
   private Vector3 originalScale;
   private GameObject previousHitGameObject;
+  private AnimateTiledTexture _animatedCrosshair;
 
   //private float distance;
 
@@ -60,6 +61,10 @@ public class Crosshair3D : MonoBehaviour
       enabled = false;
       return;
     }
+
+    // not required
+    _animatedCrosshair = GetComponent<AnimateTiledTexture>();
+
     // clone the crosshair material
     crosshairMaterial = GetComponent<Renderer>().material;
   }
@@ -175,8 +180,14 @@ public class Crosshair3D : MonoBehaviour
         {
           EndHoover();
 
+          hit.transform.gameObject.BroadcastMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
+
+          if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
+          {
+            _animatedCrosshair.Play(true);
+          }
+
           previousHitGameObject = hit.transform.gameObject;
-          previousHitGameObject.BroadcastMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
         }
       }
       else
@@ -191,8 +202,13 @@ public class Crosshair3D : MonoBehaviour
     if (previousHitGameObject != null)
     {
       previousHitGameObject.BroadcastMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
+
+      if (previousHitGameObject.GetComponent<CrosshairTargetable>() != null)
+      {
+        _animatedCrosshair.Play(false);
+      }
+
       previousHitGameObject = null;
     }
   }
-
 }
