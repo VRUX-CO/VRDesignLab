@@ -9,19 +9,22 @@ public class LookButton : MonoBehaviour
   Color defaultColor;
   Color fadeStartColor;
   public ButtonRevealPlane revealPlane;
+  public GameObject textLabel;
 
-  public float fadeDuration = .5f;
-  private float _timeStartedLerping;
-  bool isUpdatingFade = false;
   bool isFadingIn = false;
+
+  TextMesh labelTextMesh;
+  bool isFadingTextIn = false;
+  AnimationUpdater fadeUpdater = new AnimationUpdater();
+  AnimationUpdater textUpdater = new AnimationUpdater();
+
 
   void Update()
   {
-    if (isUpdatingFade)
+    if (fadeUpdater.IsRunning())
     {
       float alpha = 1;
-      float timeSinceStarted = Time.time - _timeStartedLerping;
-      float percentageComplete = timeSinceStarted / fadeDuration;
+      float percentageComplete = fadeUpdater.PercentageComplete();
 
       if (isFadingIn)
         alpha = Mathf.Lerp(fadeStartColor.a, defaultColor.a, percentageComplete);
@@ -29,9 +32,14 @@ public class LookButton : MonoBehaviour
         alpha = Mathf.Lerp(fadeStartColor.a, 0f, percentageComplete);
 
       SetColorAlpha(alpha);
+    }
 
-      if (percentageComplete >= 1.0f)
-        isUpdatingFade = false;
+    if (textUpdater.IsRunning())
+    {
+      if (isFadingTextIn)
+      {
+
+      }
     }
   }
 
@@ -48,6 +56,8 @@ public class LookButton : MonoBehaviour
     // start off hidden
     SetColorAlpha(0);
 
+    labelTextMesh = textLabel.GetComponent<TextMesh>();
+    labelTextMesh.color = Color.clear;
 
     Vector3 ScreenPos = new Vector3(0f, .5f, 1f);  // Camera.main.WorldToScreenPoint(transform.position);
     GUI.Label(new Rect((float)ScreenPos.x, (float)(Screen.height - ScreenPos.y), 100, 20), "Fuck this shit");
@@ -82,9 +92,8 @@ public class LookButton : MonoBehaviour
   {
     fadeStartColor = CurrentColor();
 
-    _timeStartedLerping = Time.time;
+    fadeUpdater.StartUpdater(.5f);
 
-    isUpdatingFade = true;
     isFadingIn = fadeIn;
   }
 
