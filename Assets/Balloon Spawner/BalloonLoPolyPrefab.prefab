@@ -454,7 +454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  balloonMesh: {fileID: 0}
 --- !u!135 &13554026
 SphereCollider:
   m_ObjectHideFlags: 1
