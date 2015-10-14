@@ -60,11 +60,13 @@ public class ButtonRevealPlane : MonoBehaviour
     LookButton[] buttons = gameObject.GetComponentsInChildren<LookButton>();
     for (int i = 0; i < buttons.Length; i++)
     {
-      Renderer[] renderers = buttons[i].GetComponentsInChildren<Renderer>();
-      foreach (Renderer r in renderers)
-      {
-        r.enabled = show;
-      }
+      buttons[i].FadeIn(show);
+
+      //Renderer[] renderers = buttons[i].GetComponentsInChildren<Renderer>();
+      //foreach (Renderer r in renderers)
+      //{
+      //  r.enabled = show;
+      //}
     }
   }
 

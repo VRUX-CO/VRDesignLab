@@ -173,7 +173,6 @@ public class Crosshair3D : MonoBehaviour
   {
     Ray ray;
     RaycastHit hit;
-    LayerMask mask = 0;
 
     // get the camera forward vector and position
     Vector3 cameraPosition = cameraController.centerEyeAnchor.position;

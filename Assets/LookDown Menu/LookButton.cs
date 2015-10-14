@@ -4,32 +4,60 @@ using System.Collections;
 public class LookButton : MonoBehaviour
 {
   public Material mat;
-  float FadeSpeed = 2;
   MeshRenderer buttonRenderer;
-  Color startColor;
+  Color defaultColor;
+  Color fadeStartColor;
+
+  public float fadeDuration = .5f;
+  private float _timeStartedLerping;
+  bool isUpdatingFade = false;
+  bool isFadingIn = false;
 
   void Update()
   {
-    //  Color c = startColor;
+    if (isUpdatingFade)
+    {
+      float alpha = 1;
+      float timeSinceStarted = Time.time - _timeStartedLerping;
+      float percentageComplete = timeSinceStarted / fadeDuration;
 
-    //  buttonRenderer.material.color = new Color(c.r, c.g, c.b, .3f); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
+      if (isFadingIn)
+        alpha = Mathf.Lerp(fadeStartColor.a, defaultColor.a, percentageComplete);
+      else
+        alpha = Mathf.Lerp(fadeStartColor.a, 0f, percentageComplete);
+
+      SetColorAlpha(alpha);
+
+      if (percentageComplete >= 1.0f)
+        isUpdatingFade = false;
+    }
   }
 
   // Use this for initialization
   void Start()
   {
     buttonRenderer = gameObject.AddComponent<MeshRenderer>();
-    startColor = buttonRenderer.material.color;
+    defaultColor = CurrentColor();
+    defaultColor.r = .5f;
+    defaultColor.g = .5f;
+    defaultColor.b = .5f;
 
     MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
 
-    mat.SetColor("_TintColor", new Color(1, 0, 0, .1f)); // Mathf.Lerp(c.a, 0.2f, (Time.deltaTime * FadeSpeed)));
-
     buttonRenderer.material = mat;
-    Debug.Log(string.Format("{0} {1}", mat.color, " fuck"));
 
     // start off hidden
-    buttonRenderer.enabled = false;
+    SetColorAlpha(0);
+  }
+
+  void SetColorAlpha(float alpha)
+  {
+    buttonRenderer.material.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, alpha);
+  }
+
+  Color CurrentColor()
+  {
+    return buttonRenderer.material.GetColor("_Color");
   }
 
   public void OnClick()
@@ -39,27 +67,22 @@ public class LookButton : MonoBehaviour
 
   public void OnHoverStart()
   {
-    Debug.Log("Start");
-
     transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
   }
 
   public void OnHoverEnd()
   {
-    Debug.Log("End");
     transform.localScale = new Vector3(1f, 1f, 1f);
   }
 
   public void FadeIn(bool fadeIn)
   {
-    if (fadeIn)
-    {
+    fadeStartColor = CurrentColor();
 
-    }
-    else
-    {
+    _timeStartedLerping = Time.time;
 
-    }
+    isUpdatingFade = true;
+    isFadingIn = fadeIn;
   }
 
 }
