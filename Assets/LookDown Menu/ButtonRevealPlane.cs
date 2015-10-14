@@ -42,7 +42,7 @@ public class ButtonRevealPlane : MonoBehaviour
   void MoveInfrontOfCamera()
   {
     Vector3 pos = Camera.main.transform.position;
-    pos.z += .3f;
+    pos.z += .5f;
     pos.y = .1f;
 
     transform.position = pos;

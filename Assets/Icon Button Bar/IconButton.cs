@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LookButton : MonoBehaviour
+public class IconButton : MonoBehaviour
 {
   public string buttonID = "none";
   public Material mat;
@@ -14,10 +14,7 @@ public class LookButton : MonoBehaviour
   bool isFadingIn = false;
 
   TextMesh labelTextMesh;
-  bool isFadingTextIn = false;
   AnimationUpdater fadeUpdater = new AnimationUpdater();
-  AnimationUpdater textUpdater = new AnimationUpdater();
-
 
   void Update()
   {
@@ -34,18 +31,7 @@ public class LookButton : MonoBehaviour
       SetColorAlpha(alpha);
     }
 
-    if (textUpdater.IsRunning())
-    {
-      float alpha = 1;
-      float percentageComplete = textUpdater.PercentageComplete();
 
-      if (isFadingTextIn)
-        alpha = Mathf.Lerp(0, 1, percentageComplete);
-      else
-        alpha = Mathf.Lerp(1, 0f, percentageComplete);
-
-      labelTextMesh.color = new Color(0, 0, 0, alpha);
-    }
   }
 
   // Use this for initialization
@@ -59,10 +45,10 @@ public class LookButton : MonoBehaviour
     MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
 
     // start off hidden
-    SetColorAlpha(0);
+    // SetColorAlpha(0);
 
     labelTextMesh = textLabel.GetComponent<TextMesh>();
-    labelTextMesh.color = Color.clear;
+    labelTextMesh.color = new Color(0f, 0f, 0f, .9f);
   }
 
   void SetColorAlpha(float alpha)
@@ -86,15 +72,11 @@ public class LookButton : MonoBehaviour
 
     // play click sound
     if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
-
-    FadeInText(true);
   }
 
   public void OnHoverEnd()
   {
     transform.localScale = new Vector3(1f, 1f, 1f);
-
-    FadeInText(false);
   }
 
   public void FadeIn(bool fadeIn)
@@ -106,11 +88,5 @@ public class LookButton : MonoBehaviour
     isFadingIn = fadeIn;
   }
 
-  public void FadeInText(bool fadeIn)
-  {
-    textUpdater.StartUpdater(.5f);
-
-    isFadingTextIn = fadeIn;
-  }
 
 }
