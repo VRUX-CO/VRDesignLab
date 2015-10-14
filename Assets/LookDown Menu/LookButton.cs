@@ -36,10 +36,15 @@ public class LookButton : MonoBehaviour
 
     if (textUpdater.IsRunning())
     {
-      if (isFadingTextIn)
-      {
+      float alpha = 1;
+      float percentageComplete = textUpdater.PercentageComplete();
 
-      }
+      if (isFadingTextIn)
+        alpha = Mathf.Lerp(0, 1, percentageComplete);
+      else
+        alpha = Mathf.Lerp(1, 0f, percentageComplete);
+
+      labelTextMesh.color = new Color(0, 0, 0, alpha);
     }
   }
 
@@ -81,11 +86,18 @@ public class LookButton : MonoBehaviour
   public void OnHoverStart()
   {
     transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+
+    // play click sound
+    if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
+
+    FadeInText(true);
   }
 
   public void OnHoverEnd()
   {
     transform.localScale = new Vector3(1f, 1f, 1f);
+
+    FadeInText(false);
   }
 
   public void FadeIn(bool fadeIn)
@@ -95,6 +107,13 @@ public class LookButton : MonoBehaviour
     fadeUpdater.StartUpdater(.5f);
 
     isFadingIn = fadeIn;
+  }
+
+  public void FadeInText(bool fadeIn)
+  {
+    textUpdater.StartUpdater(.5f);
+
+    isFadingTextIn = fadeIn;
   }
 
 }
