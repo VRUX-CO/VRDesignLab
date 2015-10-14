@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LookButton : MonoBehaviour
+public class LookButton : MonoBehaviour, CrosshairTargetable
 {
   public string buttonID = "none";
   public Material mat;
@@ -113,4 +113,8 @@ public class LookButton : MonoBehaviour
     isFadingTextIn = fadeIn;
   }
 
+  bool CrosshairTargetable.IsTargetable()
+  {
+    return true;
+  }
 }

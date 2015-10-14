@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IconButton : MonoBehaviour
+public class IconButton : MonoBehaviour, CrosshairTargetable
 {
   public string buttonID = "none";
   public Material mat;
@@ -89,4 +89,9 @@ public class IconButton : MonoBehaviour
   }
 
 
+
+  bool CrosshairTargetable.IsTargetable()
+  {
+    return true;
+  }
 }

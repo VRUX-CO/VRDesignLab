@@ -187,10 +187,8 @@ public class Crosshair3D : MonoBehaviour
 
         hit.transform.gameObject.SendMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
 
-                if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
-                //if (hit.collider.gameObject.GetComponent<CrosshairTargetable>() != null)
-                //if (hit.collider.tag == "Balloon")
-                {
+        if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
+        {
           _animatedCrosshair.Play(true);
         }
 
