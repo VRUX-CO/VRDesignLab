@@ -3,10 +3,12 @@ using System.Collections;
 
 public class LookButton : MonoBehaviour
 {
+  public string buttonID = "none";
   public Material mat;
   MeshRenderer buttonRenderer;
   Color defaultColor;
   Color fadeStartColor;
+  public ButtonRevealPlane revealPlane;
 
   public float fadeDuration = .5f;
   private float _timeStartedLerping;
@@ -59,12 +61,12 @@ public class LookButton : MonoBehaviour
 
   public void OnClick()
   {
-    Debug.Log("clicked button");
+    revealPlane.OnLookButtonClick(buttonID);
   }
 
   public void OnHoverStart()
   {
-    transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+    transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
   }
 
   public void OnHoverEnd()

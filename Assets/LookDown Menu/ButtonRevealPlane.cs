@@ -4,13 +4,29 @@ using System.Collections;
 public class ButtonRevealPlane : MonoBehaviour
 {
   Camera m_Camera;
+  LookButton[] buttons;
+
+  // called only from LookButton when it's clicked
+  public void OnLookButtonClick(string buttonID)
+  {
+    Debug.Log(buttonID);
+    ShowButtons(false);
+
+  }
 
   // Use this for initialization
   void Start()
   {
-    m_Camera = Camera.main;
+    buttons = gameObject.GetComponentsInChildren<LookButton>();
+
+    // clicks from buttons are sent from the button to OnLookButtonClick()
+    foreach (LookButton button in buttons)
+      button.revealPlane = this;
 
     MeshUtilities.AddMeshComponent(gameObject, 1f, 2.5f);
+
+    // m_Camera = Camera.main;
+
     // StartCoroutine(Dupdate(0));
   }
 
@@ -26,7 +42,7 @@ public class ButtonRevealPlane : MonoBehaviour
   void MoveInfrontOfCamera()
   {
     Vector3 pos = Camera.main.transform.position;
-    pos.z += .15f;
+    pos.z += .2f;
     pos.y = .1f;
 
     transform.position = pos;
@@ -57,18 +73,9 @@ public class ButtonRevealPlane : MonoBehaviour
 
   public void ShowButtons(bool show)
   {
-    LookButton[] buttons = gameObject.GetComponentsInChildren<LookButton>();
     for (int i = 0; i < buttons.Length; i++)
     {
       buttons[i].FadeIn(show);
-
-      //Renderer[] renderers = buttons[i].GetComponentsInChildren<Renderer>();
-      //foreach (Renderer r in renderers)
-      //{
-      //  r.enabled = show;
-      //}
     }
   }
-
-
 }
