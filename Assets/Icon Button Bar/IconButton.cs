@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IconButton : MonoBehaviour, CrosshairTargetable
+public class IconButton : MonoBehaviour
 {
   public string buttonID = "none";
   public Material mat;
@@ -37,6 +37,8 @@ public class IconButton : MonoBehaviour, CrosshairTargetable
   // Use this for initialization
   void Start()
   {
+    gameObject.tag = Crosshair3D.kCrosshairTargetable;
+
     buttonRenderer = gameObject.AddComponent<MeshRenderer>();
     buttonRenderer.material = mat;
 
@@ -86,12 +88,5 @@ public class IconButton : MonoBehaviour, CrosshairTargetable
     fadeUpdater.StartUpdater(.5f);
 
     isFadingIn = fadeIn;
-  }
-
-
-
-  bool CrosshairTargetable.IsTargetable()
-  {
-    return true;
   }
 }

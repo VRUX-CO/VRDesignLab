@@ -2,11 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public interface CrosshairTargetable
-{
-  bool IsTargetable();
-}
-
 public class AnimateTiledTexture : MonoBehaviour
 {
   public int _columns = 2;                        // The number of columns of the texture

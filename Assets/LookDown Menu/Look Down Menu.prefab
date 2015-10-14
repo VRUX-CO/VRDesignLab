@@ -462,7 +462,7 @@ MonoBehaviour:
   buttonID: Next
   mat: {fileID: 2100000, guid: 4860b3b0797c35a4e8b58fef16f3c63d, type: 2}
   revealPlane: {fileID: 0}
-  fadeDuration: .5
+  textLabel: {fileID: 0}
 --- !u!114 &11438634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,7 +477,7 @@ MonoBehaviour:
   buttonID: Reset
   mat: {fileID: 2100000, guid: 5b012a8261b3be149b181efd474c442b, type: 2}
   revealPlane: {fileID: 0}
-  fadeDuration: .5
+  textLabel: {fileID: 0}
 --- !u!114 &11455390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
   buttonID: Home
   mat: {fileID: 2100000, guid: d93c8010725a3f64cab2799fb696dec0, type: 2}
   revealPlane: {fileID: 0}
-  fadeDuration: .5
+  textLabel: {fileID: 0}
 --- !u!114 &11460868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,7 +510,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105362}

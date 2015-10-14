@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LookButton : MonoBehaviour, CrosshairTargetable
+public class LookButton : MonoBehaviour
 {
   public string buttonID = "none";
   public Material mat;
@@ -51,6 +51,8 @@ public class LookButton : MonoBehaviour, CrosshairTargetable
   // Use this for initialization
   void Start()
   {
+    gameObject.tag = Crosshair3D.kCrosshairTargetable;
+
     buttonRenderer = gameObject.AddComponent<MeshRenderer>();
     buttonRenderer.material = mat;
 
@@ -111,10 +113,5 @@ public class LookButton : MonoBehaviour, CrosshairTargetable
     textUpdater.StartUpdater(.5f);
 
     isFadingTextIn = fadeIn;
-  }
-
-  bool CrosshairTargetable.IsTargetable()
-  {
-    return true;
   }
 }

@@ -128,6 +128,10 @@ Prefab:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 832801196}
+    - target: {fileID: 11479300, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+      propertyPath: mode
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
   m_IsPrefabParent: 0
@@ -1141,6 +1145,18 @@ Prefab:
     - target: {fileID: 428948, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
       propertyPath: m_LocalPosition.z
       value: .119999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 103428, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 156768, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 117460, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}

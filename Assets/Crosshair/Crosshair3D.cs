@@ -18,6 +18,8 @@ using System.Collections;
 
 public class Crosshair3D : MonoBehaviour
 {
+  static public string kCrosshairTargetable = "targetable";
+
   // NOTE: three different crosshair methods are shown here.  The most comfortable for the
   // user is going to be when the crosshair is located in the world (or slightly in front of)
   // the position where the user's gaze is.  Positioning the cursor a fixed distance from the
@@ -160,13 +162,14 @@ public class Crosshair3D : MonoBehaviour
     {
       previousHitGameObject.SendMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
 
-      if (previousHitGameObject.GetComponent<CrosshairTargetable>() != null)
+      if (previousHitGameObject.tag == kCrosshairTargetable)
       {
         _animatedCrosshair.Play(false);
       }
 
       previousHitGameObject = null;
     }
+
   }
 
   void UpdateHoverState()
@@ -187,7 +190,7 @@ public class Crosshair3D : MonoBehaviour
 
         hit.transform.gameObject.SendMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
 
-        if (hit.transform.gameObject.GetComponent<CrosshairTargetable>() != null)
+        if (hit.transform.gameObject.tag == kCrosshairTargetable)
         {
           _animatedCrosshair.Play(true);
         }
