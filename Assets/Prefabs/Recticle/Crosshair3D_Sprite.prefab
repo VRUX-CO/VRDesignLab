@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 193910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.70000005, z: .5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,15 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _columns: 4
   _rows: 4
-  _scale: {x: 1, y: 1}
-  _offset: {x: 0, y: 0}
-  _buffer: {x: 0, y: 0}
-  _framesPerSecond: 10
-  _playOnce: 0
-  _disableUponCompletion: 0
-  _enableEvents: 1
-  _playOnEnable: 1
-  _newMaterialInstance: 0
+  _maxRows: 8
 --- !u!114 &11479300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5ef86653ef94b7db287c234f437cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 0
+  mode: 2
   objectLayer: 8
   offsetFromObjects: .100000001
   fixedDepth: 3

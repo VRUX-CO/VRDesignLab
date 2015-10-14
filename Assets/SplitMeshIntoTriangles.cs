@@ -55,12 +55,16 @@ public class SplitMeshIntoTriangles : MonoBehaviour
         Time.timeScale = 1.0f;
         Destroy(gameObject);
     }
-
-    //void Update()
-    public void OnClick()
+    public void SplitBalloon()
     {
         //if (Input.GetKeyDown("space"))
             StartCoroutine(SplitMesh());
-
     }
+    //void Update()
+    //public void OnClick()
+    //public void SplitBalloon()
+    /*{
+        //if (Input.GetKeyDown("space"))
+            StartCoroutine(SplitMesh());
+    }*/
 }
