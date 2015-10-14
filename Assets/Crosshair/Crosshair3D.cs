@@ -97,6 +97,7 @@ public class Crosshair3D : MonoBehaviour
 #endif
     Ray ray;
     RaycastHit hit;
+    bool cursorSet = false;
 
     // get the camera forward vector and position
     Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
@@ -114,8 +115,11 @@ public class Crosshair3D : MonoBehaviour
         {
           //distance = hit.distance;
           thisTransform.position = hit.point + (-cameraForward * offsetFromObjects);
+
           thisTransform.forward = -cameraForward;
           // thisTransform.localScale = originalScale * distance;
+
+          cursorSet = true;
         }
         break;
       case CrosshairMode.DynamicObjects:
@@ -131,14 +135,21 @@ public class Crosshair3D : MonoBehaviour
           {
             thisTransform.position = hit.point + (-cameraForward * offsetFromObjects);
             thisTransform.forward = -cameraForward;
+
+            cursorSet = true;
           }
         }
         break;
       case CrosshairMode.FixedDepth:
-        // cursor positions itself based on camera forward and draws at a fixed depth
-        thisTransform.position = cameraPosition + (cameraForward * fixedDepth);
-        thisTransform.forward = -cameraForward;
+        // gets set below as the default mode when fixed or nothing hit
         break;
+    }
+
+
+    if (!cursorSet)
+    {
+      thisTransform.position = cameraPosition + (cameraForward * fixedDepth);
+      thisTransform.forward = -cameraForward;
     }
 
     // I don't fully understand how this works, but to get Button A working on XBox controller, had to add Button A
