@@ -37,14 +37,11 @@ public class LookButton : MonoBehaviour
   void Start()
   {
     buttonRenderer = gameObject.AddComponent<MeshRenderer>();
+    buttonRenderer.material = mat;
+
     defaultColor = CurrentColor();
-    defaultColor.r = .5f;
-    defaultColor.g = .5f;
-    defaultColor.b = .5f;
 
     MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
-
-    buttonRenderer.material = mat;
 
     // start off hidden
     SetColorAlpha(0);
