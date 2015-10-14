@@ -8,7 +8,7 @@ public class IconButton : MonoBehaviour
   MeshRenderer buttonRenderer;
   Color defaultColor;
   Color fadeStartColor;
-  public ButtonRevealPlane revealPlane;
+  public IconButtonBar buttonBar;
   public GameObject textLabel;
 
   bool isFadingIn = false;
@@ -65,7 +65,7 @@ public class IconButton : MonoBehaviour
 
   public void OnClick()
   {
-    revealPlane.OnLookButtonClick(buttonID);
+    buttonBar.OnButtonClick(buttonID);
   }
 
   public void OnHoverStart()

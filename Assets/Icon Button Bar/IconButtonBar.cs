@@ -26,4 +26,8 @@ public class IconButtonBar : MonoBehaviour
     transform.position = pos;
   }
 
+  public void OnButtonClick(string buttonID)
+  {
+    Debug.Log(buttonID);
+  }
 }

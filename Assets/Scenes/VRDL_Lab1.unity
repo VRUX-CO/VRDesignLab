@@ -412,7 +412,7 @@ Transform:
   - {fileID: 1915515957}
   - {fileID: 1006686043}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &294276001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,9 +577,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f497eda6cc9568c4d825625cf51ce81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: Next
+  buttonID: Immersion
   mat: {fileID: 2100000, guid: f4c1fdcb42b2de148acb76f14d20230d, type: 2}
-  revealPlane: {fileID: 0}
+  buttonBar: {fileID: 294276001}
   textLabel: {fileID: 499216786}
 --- !u!1001 &447960316
 Prefab:
@@ -894,9 +894,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f497eda6cc9568c4d825625cf51ce81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: Next
+  buttonID: Foundation
   mat: {fileID: 2100000, guid: 4e8ddcaf23120af4296be9b11dcc7230, type: 2}
-  revealPlane: {fileID: 0}
+  buttonBar: {fileID: 294276001}
   textLabel: {fileID: 131196694}
 --- !u!1 &1006686042
 GameObject:

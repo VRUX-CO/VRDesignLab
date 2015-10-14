@@ -2,6 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum ReticleState
+{
+  kUnknown,
+  kOpen,
+  kClosed,
+};
+
 public class AnimateTiledTexture : MonoBehaviour
 {
   public int _columns = 2;                        // The number of columns of the texture
@@ -11,18 +18,21 @@ public class AnimateTiledTexture : MonoBehaviour
   private Vector2 _scale = new Vector3(1f, 1f);    // Scale the texture. This must be a non-zero number. negative scale flips the image
   private int _index = 0;                         // Keeps track of the current frame 
   private Vector2 _textureSize = Vector2.zero;    // Keeps track of the texture scale 
-  private bool _forwards = true;    // set to backwards to animate in reverse
   private long _currentCoroutineIndex = 0;
   private float _framesPerSecond = 60f;
+  private ReticleState _reticleState = ReticleState.kUnknown;
 
-  public void Play(bool openReticle)
+  public void SetState(ReticleState newState)
   {
-    _forwards = openReticle;
+    if (_reticleState != newState)
+    {
+      _reticleState = newState;
 
-    _currentCoroutineIndex++;
+      _currentCoroutineIndex++;
 
-    // Start the update tiling coroutine
-    StartCoroutine(updateTiling());
+      // Start the update tiling coroutine
+      StartCoroutine(updateTiling());
+    }
   }
 
   private void Awake()
@@ -77,18 +87,17 @@ public class AnimateTiledTexture : MonoBehaviour
 
         int newIndex = _index;
 
-        if (_forwards)
-          newIndex++;
-        else
-          newIndex--;
-
-        if (_forwards)
+        if (_reticleState == ReticleState.kOpen)
         {
+          newIndex++;
+
           if (newIndex >= maxIndex)
             breakOutLoop = true;
         }
         else
         {
+          newIndex--;
+
           if (newIndex < 0)
             breakOutLoop = true;
         }

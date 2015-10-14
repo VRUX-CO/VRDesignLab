@@ -161,15 +161,11 @@ public class Crosshair3D : MonoBehaviour
     if (previousHitGameObject != null)
     {
       previousHitGameObject.SendMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
-
-      if (previousHitGameObject.tag == kCrosshairTargetable)
-      {
-        _animatedCrosshair.Play(false);
-      }
-
       previousHitGameObject = null;
     }
 
+    // it's save to call this every time.  sometimes previousHitGameObject becomes null and testing previousHitGameObject.tag == kCrosshairTargetable fails?
+    _animatedCrosshair.SetState(ReticleState.kClosed);
   }
 
   void UpdateHoverState()
@@ -192,7 +188,7 @@ public class Crosshair3D : MonoBehaviour
 
         if (hit.transform.gameObject.tag == kCrosshairTargetable)
         {
-          _animatedCrosshair.Play(true);
+          _animatedCrosshair.SetState(ReticleState.kOpen);
         }
 
         previousHitGameObject = hit.transform.gameObject;
