@@ -47,6 +47,10 @@ public class LookButton : MonoBehaviour
 
     // start off hidden
     SetColorAlpha(0);
+
+
+    Vector3 ScreenPos = new Vector3(0f, .5f, 1f);  // Camera.main.WorldToScreenPoint(transform.position);
+    GUI.Label(new Rect((float)ScreenPos.x, (float)(Screen.height - ScreenPos.y), 100, 20), "Fuck this shit");
   }
 
   void SetColorAlpha(float alpha)
