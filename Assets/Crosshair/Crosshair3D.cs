@@ -50,8 +50,15 @@ public class Crosshair3D : MonoBehaviour
     if (cameraController == null)
     {
       Debug.LogError("ERROR: missing camera controller object on " + name);
-      enabled = false;
-      return;
+
+
+
+
+
+
+
+      //    enabled = false;
+      //    return;
     }
 
     // not required
@@ -99,9 +106,9 @@ public class Crosshair3D : MonoBehaviour
     RaycastHit hit;
     bool cursorSet = false;
 
-    // get the camera forward vector and position
-    Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
-    Vector3 cameraForward = cameraController.centerEyeAnchor.forward;
+    Ray camRay = CameraRay();
+    Vector3 cameraPosition = camRay.origin;
+    Vector3 cameraForward = camRay.direction;
 
     GetComponent<Renderer>().enabled = true;
 
@@ -168,6 +175,31 @@ public class Crosshair3D : MonoBehaviour
     UpdateButtonRevealer();
   }
 
+  Ray CameraRay()
+  {
+
+    Vector3 cameraPosition;
+    Vector3 cameraForward;
+
+    if (cameraController.centerEyeAnchor == null)
+    {
+      StereoController controller = Cardboard.Controller;
+
+      Ray gaze = controller.Head.Gaze;
+
+      cameraPosition = gaze.origin;
+      cameraForward = gaze.direction;
+    }
+    else
+    {
+      // get the camera forward vector and position
+      cameraPosition = cameraController.centerEyeAnchor.position;
+      cameraForward = cameraController.centerEyeAnchor.forward;
+    }
+
+    return new Ray(cameraPosition, cameraForward);
+  }
+
   void EndHover()
   {
     if (previousHitGameObject != null)
@@ -186,8 +218,9 @@ public class Crosshair3D : MonoBehaviour
     RaycastHit hit;
 
     // get the camera forward vector and position
-    Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
-    Vector3 cameraForward = cameraController.centerEyeAnchor.forward;
+    Ray camRay = CameraRay();
+    Vector3 cameraPosition = camRay.origin;
+    Vector3 cameraForward = camRay.direction;
 
     ray = new Ray(cameraPosition, cameraForward);
     if (Physics.Raycast(ray, out hit))
@@ -218,8 +251,9 @@ public class Crosshair3D : MonoBehaviour
     RaycastHit hit;
 
     // get the camera forward vector and position
-    Vector3 cameraPosition = cameraController.centerEyeAnchor.position;
-    Vector3 cameraForward = cameraController.centerEyeAnchor.forward;
+    Ray camRay = CameraRay();
+    Vector3 cameraPosition = camRay.origin;
+    Vector3 cameraForward = camRay.direction;
 
     ray = new Ray(cameraPosition, cameraForward);
 
