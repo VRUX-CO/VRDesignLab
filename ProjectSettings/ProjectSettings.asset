@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Oculus VR
-  productName: SDKExamples
+  productName: VRUX Design Lab
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -85,7 +85,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.oculussdk.sdkexamples
+  bundleIdentifier: com.oculussdk.vruxdesignlab
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
