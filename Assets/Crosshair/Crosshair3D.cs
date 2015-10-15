@@ -176,12 +176,16 @@ public class Crosshair3D : MonoBehaviour
 
     if (cameraController.centerEyeAnchor == null)
     {
-      StereoController controller = Cardboard.Controller;
+      //StereoController controller = Cardboard.Controller;
 
-      Ray gaze = controller.Head.Gaze;
+      //Ray gaze = controller.Head.Gaze;
 
-      cameraPosition = gaze.origin;
-      cameraForward = gaze.direction;
+      //cameraPosition = gaze.origin;
+      //cameraForward = gaze.direction;
+
+      cameraPosition = Camera.main.transform.position;
+      cameraForward = Camera.main.transform.forward;
+
     }
     else
     {
@@ -189,8 +193,6 @@ public class Crosshair3D : MonoBehaviour
       cameraPosition = cameraController.centerEyeAnchor.position;
       cameraForward = cameraController.centerEyeAnchor.forward;
     }
-
-    Debug.Log(string.Format("cameraPosition: {0}, cameraForward: {1}", cameraPosition, cameraForward));
 
     return new Ray(cameraPosition, cameraForward);
   }
