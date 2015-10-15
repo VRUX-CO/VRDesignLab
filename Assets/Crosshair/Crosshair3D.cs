@@ -49,13 +49,7 @@ public class Crosshair3D : MonoBehaviour
     thisTransform = transform;
     if (cameraController == null)
     {
-      Debug.LogError("ERROR: missing camera controller object on " + name);
-
-
-
-
-
-
+      // Debug.LogError("ERROR: missing camera controller object on " + name);
 
       //    enabled = false;
       //    return;
@@ -177,7 +171,6 @@ public class Crosshair3D : MonoBehaviour
 
   Ray CameraRay()
   {
-
     Vector3 cameraPosition;
     Vector3 cameraForward;
 
@@ -196,6 +189,8 @@ public class Crosshair3D : MonoBehaviour
       cameraPosition = cameraController.centerEyeAnchor.position;
       cameraForward = cameraController.centerEyeAnchor.forward;
     }
+
+    Debug.Log(string.Format("cameraPosition: {0}, cameraForward: {1}", cameraPosition, cameraForward));
 
     return new Ray(cameraPosition, cameraForward);
   }
