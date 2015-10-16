@@ -10,7 +10,9 @@ public class LevelMenu : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    Vector3 position = new Vector3(0, 0, 0);
+    Vector3 position = gameObject.transform.position;
+
+    position.z += 1f;
 
     foreach (string name in LevelNames)
     {

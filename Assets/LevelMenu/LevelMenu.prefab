@@ -55,6 +55,10 @@ Prefab:
       propertyPath: itemPrefab
       value: 
       objectReference: {fileID: 109556, guid: d3bd38b300b551b41aab700e5713370c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123144}
