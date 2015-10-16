@@ -16,7 +16,7 @@ public class LevelMenu : MonoBehaviour
 
     foreach (string name in LevelNames)
     {
-      GameObject item = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
+      GameObject item = Instantiate(itemPrefab, position, Quaternion.Euler(-90.0f, 0f, 0.0f)) as GameObject;
       item.transform.parent = gameObject.transform;
 
       position.y += .3f;

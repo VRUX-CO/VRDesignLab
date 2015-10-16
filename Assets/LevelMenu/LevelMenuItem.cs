@@ -19,7 +19,7 @@ public class LevelMenuItem : MonoBehaviour
 
     material = new Material(material);  // copy it so they are all independent materials
 
-    MeshUtilities.AddMeshComponent(gameObject, .2f, .1f);
+    MeshUtilities.AddMeshComponent(gameObject, .1f, .1f);
 
     MeshRenderer buttonRenderer = gameObject.AddComponent<MeshRenderer>();
     buttonRenderer.material = material;
