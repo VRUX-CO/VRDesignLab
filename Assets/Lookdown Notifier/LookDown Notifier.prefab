@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downArrow: {fileID: 163216}
-  sign: {fileID: 0}
+  sign: {fileID: 112842}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
