@@ -22,9 +22,9 @@ public class BalloonSpawner : MonoBehaviour
     yield return new WaitForSeconds(1.0f);
 
     Vector3 spawnPosition = new Vector3(
-      transform.position.x + Random.Range(-2f, 2f),
+      transform.position.x + Random.Range(1f, 1.5f),
       transform.position.y,
-      transform.position.z + Random.Range(-1f, 1f)
+      transform.position.z + Random.Range(0f, 1f)
     );
 
     GameObject balloon = Instantiate(balloonPrefab, spawnPosition, Quaternion.identity) as GameObject;
