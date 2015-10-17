@@ -11,21 +11,26 @@ public class LevelMenu : MonoBehaviour
   void Start()
   {
     Vector3 position = gameObject.transform.position;
+    int index = 0;
 
-    position.z += 1f;
-
+    LevelNames.Reverse();
     foreach (string name in LevelNames)
     {
-      GameObject item = Instantiate(itemPrefab, position, Quaternion.Euler(-90.0f, 0f, 0.0f)) as GameObject;
+      // Quaternion.Euler(0.0f, 0f, 0.0f)
+      GameObject item = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
       item.transform.parent = gameObject.transform;
 
-      position.y += .3f;
+      LevelMenuItem menuItem = item.GetComponent<LevelMenuItem>() as LevelMenuItem;
+
+      menuItem.SetupItem(name, index++, this);
+
+      position.y += .15f;
     }
   }
 
-  // Update is called once per frame
-  void Update()
+  public void ButtonWasClicked(int buttonIndex)
   {
-
+    Debug.Log(string.Format("{0}", buttonIndex));
   }
+
 }

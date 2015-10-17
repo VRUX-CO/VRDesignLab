@@ -4,8 +4,9 @@ using System.Collections;
 public class LevelMenuItem : MonoBehaviour
 {
   public Material material;
-
-  string itemName;
+  public GameObject backgroundObject;
+  public GameObject textObject;
+  public LevelMenu levelMenu;
   int itemIdentifier;
 
   // Use this for initialization
@@ -19,39 +20,29 @@ public class LevelMenuItem : MonoBehaviour
 
     material = new Material(material);  // copy it so they are all independent materials
 
-    MeshUtilities.AddMeshComponent(gameObject, .1f, .1f);
-
-    MeshRenderer buttonRenderer = gameObject.AddComponent<MeshRenderer>();
-    buttonRenderer.material = material;
-
-    //  gameObject.transform.forward = Camera.main.transform.forward;
-
+    backgroundObject.GetComponent<MeshRenderer>().material = material;
   }
 
-  public void SetupItem(string name, int identifier)
+  public void SetupItem(string name, int identifier, LevelMenu menu)
   {
-    itemName = name;
+    textObject.GetComponent<TextMesh>().text = name;
     itemIdentifier = identifier;
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
+    levelMenu = menu;
   }
 
   public void OnHoverStart()
   {
-    material.color = new Color(1f, 0f, 0f, .3f);
+    material.color = new Color(0f, 0f, 0f, .2f);
   }
 
   public void OnHoverEnd()
   {
-    material.color = new Color(1f, 1f, 0f, .3f);
+    material.color = new Color(0f, 0f, 0f, 0f);
   }
 
   public void OnClick()
   {
-    Debug.Log("sdf");
+    levelMenu.ButtonWasClicked(itemIdentifier);
   }
 
 }
