@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.44099998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,9 +40,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelNames:
-  - Fuck
-  - 'This '
-  - Shit
+  - 1. Using a Reticle
+  - 2. UI Depth & Eye Strain
+  - 3. Using Constant Velocity
+  - 4. Keep the User Grounded
+  - 5. Maintaining Head Tracking
+  - < Go Back
   itemPrefab: {fileID: 109556, guid: d3bd38b300b551b41aab700e5713370c, type: 2}
 --- !u!1001 &100100000
 Prefab:
