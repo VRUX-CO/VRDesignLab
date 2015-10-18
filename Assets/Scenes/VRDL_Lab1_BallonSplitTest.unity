@@ -253,7 +253,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11454286, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
       propertyPath: LevelNames.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 428156, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
       propertyPath: m_LocalPosition.x
@@ -318,6 +318,10 @@ Prefab:
     - target: {fileID: 428156, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454286, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
+      propertyPath: LevelNames.Array.data[5]
+      value: < Go Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}

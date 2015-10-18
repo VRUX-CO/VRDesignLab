@@ -7,7 +7,10 @@ public class LevelMenuItem : MonoBehaviour
   public GameObject backgroundObject;
   public GameObject textObject;
   public LevelMenu levelMenu;
+
   int itemIdentifier;
+  float scaleTime = .5f;
+  float scaleBy = 1.05f;
 
   // Use this for initialization
   void Start()
@@ -32,17 +35,14 @@ public class LevelMenuItem : MonoBehaviour
 
   public void OnHoverStart()
   {
-    float time = .5f;
-    float scaleBy = 1.05f;
-
     material.color = new Color(0f, 0f, 0f, .2f);
-    iTween.ScaleTo(gameObject, scaleBy * Vector3.one, time);
+    iTween.ScaleTo(gameObject, scaleBy * Vector3.one, scaleTime);
   }
 
   public void OnHoverEnd()
   {
     material.color = new Color(0f, 0f, 0f, 0f);
-    transform.localScale = new Vector3(1f, 1f, 1f);
+    iTween.ScaleTo(gameObject, Vector3.one, scaleTime);
   }
 
   public void OnClick()
