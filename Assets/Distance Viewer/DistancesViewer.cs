@@ -21,13 +21,10 @@ public class DistancesViewer : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)OVRGamepadController.Button.A]) ||  // "Desktop_Button A"
-  Input.GetButtonDown("Button A") ||
-  Cardboard.SDK.Triggered)
+    if (Utilities.UserClicked())
     {
       Next();
     }
-
   }
 
   void Next()
