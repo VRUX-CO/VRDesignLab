@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WhiteRoom_mat
-  m_Shader: {fileID: 4800000, guid: 3cbc1ecec2d954f5ba5d88c1704f5268, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _SUNDISK_HIGH_QUALITY
+  m_Name: Wall_mat
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -33,13 +33,6 @@ Material:
       data:
         first:
           name: _DetailNormalMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Tex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -108,22 +101,6 @@ Material:
         second: .5
       data:
         first:
-          name: _Exposure
-        second: 1.29999995
-      data:
-        first:
-          name: _SunSize
-        second: .0399999991
-      data:
-        first:
-          name: _AtmosphereThickness
-        second: 1
-      data:
-        first:
-          name: _SunDisk
-        second: 2
-      data:
-        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -133,7 +110,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -158,34 +135,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _Rotation
-        second: 0
-      data:
-        first:
-          name: _Stencil
-        second: 0
-      data:
-        first:
-          name: _StencilComp
-        second: 8
-      data:
-        first:
-          name: _StencilOp
-        second: 0
-      data:
-        first:
-          name: _StencilReadMask
-        second: 255
-      data:
-        first:
-          name: _StencilWriteMask
-        second: 255
-      data:
-        first:
-          name: _ColorMask
-        second: 15
     m_Colors:
       data:
         first:
@@ -199,19 +148,3 @@ Material:
         first:
           name: _SpecColor
         second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _SkyTint
-        second: {r: .5, g: .5, b: .5, a: 1}
-      data:
-        first:
-          name: _GroundColor
-        second: {r: .368999988, g: .349000007, b: .340999991, a: 1}
-      data:
-        first:
-          name: _TintColor
-        second: {r: 1, g: 1, b: 1, a: .365999997}
-      data:
-        first:
-          name: _Tint
-        second: {r: .5, g: .5, b: .5, a: .5}
