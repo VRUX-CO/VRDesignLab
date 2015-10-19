@@ -5,25 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Startup_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/FirstPerson_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/Box_Room.unity
-  - enabled: 0
-    path: Assets/Scenes/Crosshair_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/Menu_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/MoviePlayer_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/30Hz_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/MultiCamera_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/GlobalMenu_Sample.unity
-  - enabled: 0
-    path: Assets/Scenes/SaveState_Sample.unity
   - enabled: 1
     path: Assets/Scenes/VRDL_Lab1.unity
+  - enabled: 1
+    path: Assets/Scenes/VRDL_Lab1_BallonSplitTest.unity

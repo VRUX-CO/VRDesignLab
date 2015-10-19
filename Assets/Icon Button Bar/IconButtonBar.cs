@@ -3,18 +3,10 @@ using System.Collections;
 
 public class IconButtonBar : MonoBehaviour
 {
-
-  // Use this for initialization
-  void Start()
-  {
-
-  }
-
   // Update is called once per frame
   void Update()
   {
     MoveInfrontOfCamera();
-
   }
 
   void MoveInfrontOfCamera()
@@ -29,5 +21,7 @@ public class IconButtonBar : MonoBehaviour
   public void OnButtonClick(string buttonID)
   {
     Debug.Log(buttonID);
+
+    Application.LoadLevelAsync("VRDL_Lab1_BallonSplitTest");
   }
 }
