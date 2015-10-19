@@ -40,44 +40,60 @@ public class DistancesViewer : MonoBehaviour
       Vector3 position = currentSign.transform.position;
       position.y += 12f;
 
-      iTween.MoveTo(currentSign, iTween.Hash("position", position, "time", .5f, "easeType", iTween.EaseType.easeInExpo, "oncomplete", "OnCompleteCallback", "oncompleteparams", currentSign));
+      iTween.MoveTo(currentSign, iTween.Hash("position", position, "time", .5f, "easeType", iTween.EaseType.easeInExpo, "oncomplete", "OnCompleteOutCallback", "oncompleteparams", currentSign));
 
       currentSign = null;
     }
 
-    switch (index)
+    if (index < 6)
     {
-      case 0:
-        signToShow = HalfMeterMessage;
-        distance = .5f;
-        break;
-      case 1:
-        signToShow = OneMeterMessage;
-        distance = 1f;
-        break;
-      case 2:
-        signToShow = OneHalfMeterMessage;
-        distance = 1.5f;
-        break;
-      case 3:
-        signToShow = ThreeMeterMessage;
-        distance = 3f;
-        break;
-      case 4:
-      default:
-        signToShow = FiveMeterMessage;
-        distance = 5f;
+      switch (index)
+      {
+        case 0:
+          signToShow = HalfMeterMessage;
+          distance = .5f;
+          break;
+        case 1:
+          signToShow = OneMeterMessage;
+          distance = 1f;
+          break;
+        case 2:
+          signToShow = OneHalfMeterMessage;
+          distance = 1.5f;
+          break;
+        case 3:
+          signToShow = ThreeMeterMessage;
+          distance = 3f;
+          break;
+        case 4:
+          signToShow = FiveMeterMessage;
+          distance = 5f;
 
-        break;
+          break;
+        case 5:
+        default:
+          signToShow = FiveMeterMessage;
+          distance = 12f;
+
+          break;
+      }
+
+      Vector3 newPosition = new Vector3(0, -22f, distance);
+      currentSign = Instantiate(signToShow, newPosition, Quaternion.identity) as GameObject;
+
+      newPosition = new Vector3(0, 1f, distance);
+      iTween.MoveTo(currentSign, iTween.Hash("position", newPosition, "time", .5f, "easeType", iTween.EaseType.easeInExpo, "oncomplete", "OnCompleteInCallback", "oncompleteparams", currentSign));
     }
 
-    Vector3 newPosition = new Vector3(0, 1, distance);
-    currentSign = Instantiate(signToShow, newPosition, Quaternion.identity) as GameObject;
 
     index++;
   }
 
-  void OnCompleteCallback(GameObject sign)
+  void OnCompleteInCallback(GameObject sign)
+  {
+  }
+
+  void OnCompleteOutCallback(GameObject sign)
   {
     Destroy(sign);
   }
