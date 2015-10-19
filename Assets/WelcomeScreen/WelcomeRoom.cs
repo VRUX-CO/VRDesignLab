@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WelcomeHelper : MonoBehaviour
+public class WelcomeRoom : MonoBehaviour
 {
   public GameObject proceduralRoomPrefab;
   public GameObject welcomeSignPrefab;
@@ -13,7 +13,7 @@ public class WelcomeHelper : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    Vector3 roomPosition = new Vector3(0, 1.2f, -8);
+    Vector3 roomPosition = new Vector3(0, 0f, -3);
     Vector3 signPosition = new Vector3(0, 1.2f, 1);
 
     proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
