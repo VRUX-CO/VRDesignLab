@@ -19,6 +19,9 @@ public class WelcomeHelper : MonoBehaviour
     whiteRoom = Instantiate(whiteRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
     welcomeSign = Instantiate(welcomeSignPrefab, signPosition, Quaternion.identity) as GameObject;
 
+    whiteRoom.transform.localScale = new Vector3(5, 5, 5);
+    Utilities.ReverseNormals(whiteRoom);
+
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
     whiteRoomMaterial = whiteRoom.GetComponent<MeshRenderer>().material;
   }
