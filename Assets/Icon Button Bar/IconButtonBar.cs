@@ -22,6 +22,20 @@ public class IconButtonBar : MonoBehaviour
   {
     Debug.Log(buttonID);
 
-    LevelManager.LM.LoadLevel("VRDL_Lab1_BallonSplitTest");
+    if (buttonID.Equals("Immersion"))
+    {
+      Application.LoadLevelAdditive("negro");
+      Application.UnloadLevel("honkey");
+
+    }
+    else if (buttonID.Equals("Foundation"))
+    {
+      Application.LoadLevelAdditive("honkey");
+      Application.UnloadLevel("negro");
+
+    }
+
+
+    // LevelManager.LM.LoadLevel("VRDL_Lab1_BallonSplitTest");
   }
 }
