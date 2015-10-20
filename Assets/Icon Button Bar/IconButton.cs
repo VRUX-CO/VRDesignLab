@@ -14,25 +14,6 @@ public class IconButton : MonoBehaviour
   bool isFadingIn = false;
 
   TextMesh labelTextMesh;
-  AnimationUpdater fadeUpdater = new AnimationUpdater();
-
-  void Update()
-  {
-    if (fadeUpdater.IsRunning())
-    {
-      float alpha = 1;
-      float percentageComplete = fadeUpdater.PercentageComplete();
-
-      if (isFadingIn)
-        alpha = Mathf.Lerp(fadeStartColor.a, defaultColor.a, percentageComplete);
-      else
-        alpha = Mathf.Lerp(fadeStartColor.a, 0f, percentageComplete);
-
-      SetColorAlpha(alpha);
-    }
-
-
-  }
 
   // Use this for initialization
   void Start()
@@ -83,10 +64,21 @@ public class IconButton : MonoBehaviour
 
   public void FadeIn(bool fadeIn)
   {
-    fadeStartColor = CurrentColor();
+    float start = 1f;
+    float end = 0f;
 
-    fadeUpdater.StartUpdater(.5f);
+    if (fadeIn)
+    {
+      start = 0f;
+      end = 1f;
+    }
 
-    isFadingIn = fadeIn;
+    iTween.ValueTo(gameObject, iTween.Hash("from", start, "to", end, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeUpdate", "time", .5f));
   }
+
+  void FadeUpdate(float alpha)
+  {
+    SetColorAlpha(alpha);
+  }
+
 }

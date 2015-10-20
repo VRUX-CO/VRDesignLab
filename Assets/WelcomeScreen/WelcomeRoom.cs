@@ -5,20 +5,33 @@ public class WelcomeRoom : MonoBehaviour
 {
   public GameObject proceduralRoomPrefab;
   public GameObject welcomeSignPrefab;
+  public GameObject iconButtonBarPrefab;
+  public GameObject levelMenuPrefab;
 
-  GameObject proceduralRoom, welcomeSign;
+  GameObject proceduralRoom, welcomeSign, iconButtonBar, levelMenu;
 
   Material signMaterial;
   bool dismissedSign = false;
+  int step = 0;
 
   // Use this for initialization
   void Start()
   {
     Vector3 roomPosition = new Vector3(0, 0f, -3);
-    Vector3 signPosition = new Vector3(0, 1.2f, 1);
+    Vector3 contentPosition = new Vector3(0, 1.2f, 1);
 
     proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
-    welcomeSign = Instantiate(welcomeSignPrefab, signPosition, Quaternion.identity) as GameObject;
+    welcomeSign = Instantiate(welcomeSignPrefab, contentPosition, Quaternion.identity) as GameObject;
+    iconButtonBar = Instantiate(iconButtonBarPrefab, contentPosition, Quaternion.identity) as GameObject;
+    levelMenu = Instantiate(levelMenuPrefab, contentPosition, Quaternion.identity) as GameObject;
+
+    // these prefabs start off inactive, so turn them on as needed
+    welcomeSign.SetActive(true);
+
+    // setup callback for button bar
+    IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
+    btnBar.clickDelegate = gameObject;
+    btnBar.clickCallback = "ButtonBarClickCallback";
 
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
@@ -28,49 +41,87 @@ public class WelcomeRoom : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
-      if (!dismissedSign)
+      switch (step)
       {
-        dismissedSign = true;
-        StartCoroutine(FadeOutAndDestroy(0));
+        case 0:  // showing welcome sign
+          FadeOutSign();
+          break;
+        case 1:  // showing icon bar
+          break;
+        case 2:  // showing level menu
+          break;
       }
     }
   }
 
-  IEnumerator FadeOutAndDestroy(float delay)
-  {
-    yield return new WaitForSeconds(delay);
+  // -----------------------------------------------------
 
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", .5f, "oncomplete", "FadeOutDoneCallback"));
+  void FadeOutSign()
+  {
+    if (!dismissedSign)
+    {
+      dismissedSign = true;
+      iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutSignUpdate", "time", .5f, "oncomplete", "FadeOutSignDone"));
+    }
   }
 
-  public void FadeOutUpdateCallback(float progress)
+  public void FadeOutSignUpdate(float progress)
   {
     signMaterial.color = new Color(1, 1, 1, progress);
   }
 
-  public void FadeOutDoneCallback()
+  public void FadeOutSignDone()
   {
     Destroy(welcomeSign);
     welcomeSign = null;
-    StartCoroutine(FadeOutAndDestroy2(0));
+
+    // show button bar
+    FadeInButtonBar();
   }
 
-  IEnumerator FadeOutAndDestroy2(float delay)
+  // -----------------------------------------------------
+  void FadeInButtonBar()
   {
-    yield return new WaitForSeconds(delay);
-
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback2", "time", 3.5f, "oncomplete", "FadeOutDoneCallback2"));
+    iconButtonBar.SetActive(true);
+    // iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeInButtonBarUpdate", "time", 3.5f));
   }
 
-  public void FadeOutUpdateCallback2(float progress)
+  public void FadeInButtonBarUpdate(float progress)
+  {
+  }
+
+  // -----------------------------------------------------
+
+  void FadeOutRoom()
+  {
+    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutRoomUpdate", "time", 3.5f, "oncomplete", "FadeOutRoomDone"));
+  }
+
+  public void FadeOutRoomUpdate(float progress)
   {
     proceduralRoom.GetComponent<ProceduralRoom>().SetColor(new Color(1, 1, 1, progress));
   }
 
-  public void FadeOutDoneCallback2()
+  public void FadeOutRoomDone()
   {
     Destroy(proceduralRoom);
     proceduralRoom = null;
+  }
+
+  // -----------------------------------------------------
+
+
+  void ButtonBarClickCallback(string buttonID)
+  {
+    Debug.Log(buttonID);
+
+    if (buttonID.Equals("Immersion"))
+    {
+
+    }
+    else if (buttonID.Equals("Foundation"))
+    {
+    }
   }
 
 }

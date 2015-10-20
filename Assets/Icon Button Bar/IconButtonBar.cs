@@ -3,10 +3,18 @@ using System.Collections;
 
 public class IconButtonBar : MonoBehaviour
 {
+  public GameObject clickDelegate;
+  public string clickCallback;
+
+  void Start()
+  {
+    MoveInfrontOfCamera();
+  }
+
   // Update is called once per frame
   void Update()
   {
-    MoveInfrontOfCamera();
+    Utilities.RotateToFaceCamera(transform, Camera.main);
   }
 
   void MoveInfrontOfCamera()
@@ -18,13 +26,18 @@ public class IconButtonBar : MonoBehaviour
     transform.position = pos;
   }
 
+  public void FadeIn(bool fadeIn)
+  {
+
+  }
+
   public void OnButtonClick(string buttonID)
   {
-    if (buttonID.Equals("Immersion"))
+    if (clickDelegate != null)
     {
+      clickDelegate.transform.gameObject.SendMessage(clickCallback, buttonID, SendMessageOptions.DontRequireReceiver);
     }
-    else if (buttonID.Equals("Foundation"))
-    {
-    }
+    else
+      Debug.Log("icon button bar has no click delegate");
   }
 }
