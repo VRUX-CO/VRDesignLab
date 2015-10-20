@@ -45,6 +45,7 @@ public class AppBootStrap : MonoBehaviour
     if (buildForCardboard)
     {
       Instantiate(cardboardCameraPrefab, new Vector3(0, 1.2f, 2f), Quaternion.identity);
+      isCardboard = true;
     }
     else
     {
