@@ -7,23 +7,12 @@ public class Utilities : MonoBehaviour
   {
     if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)OVRGamepadController.Button.A]) ||   // "Desktop_Button A"
 Input.GetButtonDown("Button A") ||
-Cardboard.SDK.Triggered)
+AppBootStrap.APP.CardboardClickEvent())
     {
       return true;
     }
 
     return false;
-  }
-  // Use this for initialization
-  void Start()
-  {
-
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-
   }
 
   public static void ReverseNormals(GameObject gameObject)
@@ -51,4 +40,12 @@ Cardboard.SDK.Triggered)
       }
     }
   }
+
+  public static void RotateToFaceCamera(Transform transform, Camera camera)
+  {
+    transform.LookAt(transform.position + camera.transform.rotation * Vector3.forward,
+        camera.transform.rotation * Vector3.up);
+  }
+
+
 }

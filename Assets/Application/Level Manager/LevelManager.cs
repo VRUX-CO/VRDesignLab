@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
   // private
   static LevelManager lm = null;
   GameObject cameraFadeScreenPrefab;
+  string levelToLoad = null;
 
   // singleton access
   public static LevelManager LM
@@ -40,13 +41,16 @@ public class LevelManager : MonoBehaviour
 
   public void LoadLevel(string levelName)
   {
-    FadeOut();
+    levelToLoad = levelName;
+    GetFadeScreen().FadeOut("FadeOutDone");
+  }
 
-    Debug.Log(levelName);
+  public void FadeOutDone()
+  {
+    // synchronous
+    Application.LoadLevel(levelToLoad);
 
-    Application.LoadLevel(levelName);
-
-    FadeIn();
+    GetFadeScreen().FadeIn();
   }
 
   private CameraFadeScreen GetFadeScreen()
@@ -59,7 +63,6 @@ public class LevelManager : MonoBehaviour
     if (fadeScreens.Length > 0)
     {
       result = fadeScreens[0];
-      Debug.Log("already there");
     }
     else
     {
@@ -70,22 +73,10 @@ public class LevelManager : MonoBehaviour
       fadeScreen.transform.localPosition = new Vector3(0, 0, .4f);
 
       result = fadeScreen.GetComponent<CameraFadeScreen>();
+
+      result.levelManager = this;
     }
 
     return result;
-  }
-
-  public void FadeOut()
-  {
-    CameraFadeScreen fadeScreen = GetFadeScreen();
-
-    fadeScreen.FadeOut();
-  }
-
-  public void FadeIn()
-  {
-    CameraFadeScreen fadeScreen = GetFadeScreen();
-
-    fadeScreen.FadeIn();
   }
 }

@@ -148,11 +148,7 @@ public class Crosshair3D : MonoBehaviour
     // keeps the sprite pointed towards camera
     thisTransform.forward = cameraForward;
 
-
-    // I don't fully understand how this works, but to get Button A working on XBox controller, had to add Button A
-    if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)OVRGamepadController.Button.A]) ||  // "Desktop_Button A"
-      Input.GetButtonDown("Button A") ||
-      AppBootStrap.APP.CardboardClickEvent())
+    if (Utilities.UserClicked())
     {
       ray = new Ray(cameraPosition, cameraForward);
       if (Physics.Raycast(ray, out hit))
