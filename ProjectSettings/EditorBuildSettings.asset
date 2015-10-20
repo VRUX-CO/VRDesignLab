@@ -8,8 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VRDL_Lab1.unity
   - enabled: 1
-    path: Assets/Scenes/VRDL_Lab1_BallonSplitTest.unity
-  - enabled: 1
-    path: Assets/Scenes/negro.unity
-  - enabled: 1
-    path: Assets/Scenes/honkey.unity
+    path: Assets/WelcomeScreen/VRDL_Welcome.unity

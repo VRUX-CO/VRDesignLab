@@ -9,6 +9,7 @@ public class WelcomeRoom : MonoBehaviour
   GameObject proceduralRoom, welcomeSign;
 
   Material signMaterial;
+  bool dismissedSign = false;
 
   // Use this for initialization
   void Start()
@@ -27,7 +28,11 @@ public class WelcomeRoom : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
-      StartCoroutine(FadeOutAndDestroy(0));
+      if (!dismissedSign)
+      {
+        dismissedSign = true;
+        StartCoroutine(FadeOutAndDestroy(0));
+      }
     }
   }
 
@@ -46,6 +51,7 @@ public class WelcomeRoom : MonoBehaviour
   public void FadeOutDoneCallback()
   {
     Destroy(welcomeSign);
+    welcomeSign = null;
     StartCoroutine(FadeOutAndDestroy2(0));
   }
 
@@ -64,6 +70,7 @@ public class WelcomeRoom : MonoBehaviour
   public void FadeOutDoneCallback2()
   {
     Destroy(proceduralRoom);
+    proceduralRoom = null;
   }
 
 }

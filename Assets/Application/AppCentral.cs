@@ -42,12 +42,12 @@ public class AppCentral : MonoBehaviour
     // install camera for platform
     if (buildForCardboard)
     {
-      Instantiate(cardboardCameraPrefab, new Vector3(0, 1.2f, 2f), Quaternion.identity);
+      Instantiate(cardboardCameraPrefab, new Vector3(0, 1.2f, 0f), Quaternion.identity);
       isCardboard = true;
     }
     else
     {
-      Instantiate(oculusCameraPrefab, new Vector3(0, 1.2f, 2f), Quaternion.identity);
+      Instantiate(oculusCameraPrefab, new Vector3(0, 1.2f, 0f), Quaternion.identity);
     }
 
     // must create reticle after cameras since it trys to access them
