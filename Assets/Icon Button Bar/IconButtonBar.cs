@@ -22,6 +22,6 @@ public class IconButtonBar : MonoBehaviour
   {
     Debug.Log(buttonID);
 
-    Application.LoadLevelAsync("VRDL_Lab1_BallonSplitTest");
+    LevelManager.LM.LoadLevel("VRDL_Lab1_BallonSplitTest");
   }
 }

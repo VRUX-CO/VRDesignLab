@@ -35,7 +35,6 @@ public class Crosshair3D : MonoBehaviour
   public int objectLayer = 8;
   public float offsetFromObjects = 0.1f;
   public float fixedDepth = 3.0f;
-  public OVRCameraRig cameraController = null;
 
   private Transform thisTransform = null;
   private Material crosshairMaterial = null;
@@ -43,17 +42,13 @@ public class Crosshair3D : MonoBehaviour
   private GameObject previousHitGameObject;
   private GameObject previousHitButtonRevealer;
   private AnimateTiledTexture _animatedCrosshair;
+  OVRCameraRig cameraController = null;
 
   void Awake()
   {
     thisTransform = transform;
-    if (cameraController == null)
-    {
-      // Debug.LogError("ERROR: missing camera controller object on " + name);
 
-      //    enabled = false;
-      //    return;
-    }
+    cameraController = FindObjectOfType<OVRCameraRig>();
 
     // not required
     _animatedCrosshair = GetComponent<AnimateTiledTexture>();
@@ -157,7 +152,7 @@ public class Crosshair3D : MonoBehaviour
     // I don't fully understand how this works, but to get Button A working on XBox controller, had to add Button A
     if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)OVRGamepadController.Button.A]) ||  // "Desktop_Button A"
       Input.GetButtonDown("Button A") ||
-      Cardboard.SDK.Triggered)
+      AppBootStrap.APP.CardboardClickEvent())
     {
       ray = new Ray(cameraPosition, cameraForward);
       if (Physics.Raycast(ray, out hit))
@@ -175,7 +170,7 @@ public class Crosshair3D : MonoBehaviour
     Vector3 cameraPosition;
     Vector3 cameraForward;
 
-    if (cameraController.centerEyeAnchor == null)
+    if (cameraController == null)
     {
       //StereoController controller = Cardboard.Controller;
 
