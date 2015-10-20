@@ -5,6 +5,7 @@ public class BalloonClick : MonoBehaviour
 {
   public BalloonSpawner spawner;
   public SplitMeshIntoTriangles balloonsplit;
+  
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class BalloonClick : MonoBehaviour
       Destroy(child.gameObject, destroyDelay);
     }
     Destroy(this, destroyDelay);*/
+
     Destroy(gameObject);
   }
 
