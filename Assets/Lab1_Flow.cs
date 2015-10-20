@@ -2,7 +2,11 @@
 using System.Collections;
 
 public class Lab1_Flow : MonoBehaviour {
-    private int ballooncount;
+    public GameObject Card1;
+    public GameObject Card2;
+
+    private int balloonpop;
+    
 	// Use this for initialization
 	void Start () {
         
@@ -12,9 +16,11 @@ public class Lab1_Flow : MonoBehaviour {
             // Do Something
         }*/
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+    // Update is called once per frame
+    public void PoppedBalloon()
+    {
+        Destroy(Card1);
+        Instantiate(Card2, Card2.transform.position, Card2.transform.rotation);
 	}
 }

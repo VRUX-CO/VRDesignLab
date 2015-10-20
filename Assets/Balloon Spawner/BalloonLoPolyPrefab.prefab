@@ -46,7 +46,7 @@ GameObject:
   - 82: {fileID: 8225378}
   m_Layer: 0
   m_Name: BalloonLoPolyPrefab
-  m_TagString: Balloon
+  m_TagString: targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   balloonsplit: {fileID: 11408284}
+  flow: {fileID: 0}
 --- !u!114 &11461162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +327,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Balloon
+      value: targetable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

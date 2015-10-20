@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 461250}
   m_Layer: 0
-  m_Name: Lab_Card_prefab
+  m_Name: Lab_Card_prefab2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.63999999, z: 2.66000009}
+  m_LocalPosition: {x: 1.61099994, y: 1.63999999, z: 3.09500003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400506}
@@ -149,7 +149,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 14fded489e9c74e499df9225645ba6e9, type: 2}
+  - {fileID: 2100000, guid: 6ca637c5756c6a24b9d820c2fb313ed2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
