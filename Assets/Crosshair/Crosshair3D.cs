@@ -1,16 +1,4 @@
-﻿/************************************************************************************
-
-Filename    :   Crosshair3D.cs
-Content     :   An example of a 3D cursor in the world based on player view
-Created     :   June 30, 2014
-Authors     :   Andrew Welch
-
-Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
-
-
-************************************************************************************/
-
-// uncomment this to test the different modes.
+﻿// uncomment this to test the different modes.
 // #define CROSSHAIR_TESTING
 
 using UnityEngine;
@@ -32,9 +20,6 @@ public class Crosshair3D : MonoBehaviour
   public float offsetFromObjects = 0.1f;
   public float fixedDepth = 3.0f;
 
-  Transform thisTransform = null;
-  Material crosshairMaterial = null;
-  Vector3 originalScale;
   GameObject previousHitGameObject;
   GameObject previousHitButtonRevealer;
   AnimateTiledTexture _animatedCrosshair;
@@ -43,54 +28,19 @@ public class Crosshair3D : MonoBehaviour
 
   void Awake()
   {
-    thisTransform = transform;
-
     cameraController = FindObjectOfType<OVRCameraRig>();
 
     // not required
     _animatedCrosshair = GetComponent<AnimateTiledTexture>();
-
-    // clone the crosshair material
-    crosshairMaterial = GetComponent<Renderer>().material;
-  }
-
-  void OnDestroy()
-  {
-    if (crosshairMaterial != null)
-    {
-      Destroy(crosshairMaterial);
-    }
   }
 
   void LateUpdate()
   {
-#if CROSSHAIR_TESTING
-    if (Input.GetButtonDown("RightShoulder"))
-    {
-      //*************************
-      // toggle the crosshair mode .. dynamic -> dynamic objects -> fixed depth
-      //*************************
-      switch (mode)
-      {
-        case CrosshairMode.Dynamic:
-          mode = CrosshairMode.DynamicObjects;
-          crosshairMaterial.color = Color.red;
-          break;
-        case CrosshairMode.DynamicObjects:
-          mode = CrosshairMode.FixedDepth;
-          crosshairMaterial.color = Color.blue;
-          break;
-        case CrosshairMode.FixedDepth:
-          mode = CrosshairMode.Dynamic;
-          crosshairMaterial.color = Color.white;
-          break;
-      }
-      Debug.Log("Mode: " + mode);
-    }
-#endif
     Ray ray;
     RaycastHit hit;
     bool cursorSet = false;
+
+    CrosshairTesting();
 
     Ray camRay = CameraRay();
     Vector3 cameraPosition = camRay.origin;
@@ -106,10 +56,8 @@ public class Crosshair3D : MonoBehaviour
         ray = new Ray(cameraPosition, cameraForward);
         if (Physics.Raycast(ray, out hit))
         {
-          //distance = hit.distance;
-          thisTransform.position = hit.point + (-cameraForward * offsetFromObjects);
-
-          // thisTransform.localScale = originalScale * distance;
+          // distance = hit.distance;
+          transform.position = hit.point + (-cameraForward * offsetFromObjects);
 
           cursorSet = true;
         }
@@ -125,7 +73,7 @@ public class Crosshair3D : MonoBehaviour
           }
           else
           {
-            thisTransform.position = hit.point + (-cameraForward * offsetFromObjects);
+            transform.position = hit.point + (-cameraForward * offsetFromObjects);
 
             cursorSet = true;
           }
@@ -136,14 +84,13 @@ public class Crosshair3D : MonoBehaviour
         break;
     }
 
-
     if (!cursorSet)
     {
-      thisTransform.position = cameraPosition + (cameraForward * fixedDepth);
+      transform.position = cameraPosition + (cameraForward * fixedDepth);
     }
 
     // keeps the sprite pointed towards camera
-    thisTransform.forward = cameraForward;
+    transform.forward = cameraForward;
 
     if (Utilities.UserClicked())
     {
@@ -265,19 +212,57 @@ public class Crosshair3D : MonoBehaviour
     }
   }
 
+  void CrosshairTesting()
+  {
+#if CROSSHAIR_TESTING
+    if (Input.GetButtonDown("RightShoulder"))
+    {
+      Material crosshairMaterial = GetComponent<Renderer>().material;
+
+      switch (mode)
+      {
+        case CrosshairMode.Dynamic:
+          mode = CrosshairMode.DynamicObjects;
+          crosshairMaterial.color = Color.red;
+          break;
+        case CrosshairMode.DynamicObjects:
+          mode = CrosshairMode.FixedDepth;
+          crosshairMaterial.color = Color.blue;
+          break;
+        case CrosshairMode.FixedDepth:
+          mode = CrosshairMode.Dynamic;
+          crosshairMaterial.color = Color.white;
+          break;
+      }
+      Debug.Log("Mode: " + mode);
+    }
+#endif
+  }
+
   public void ShowReticleOnClick(bool showOnClick)
   {
     showOnClickOnly = showOnClick;
+
+    _animatedCrosshair.SetVisible(!showOnClickOnly);
   }
 
-  void FadeOutCrosshair()
+  void UpdateCrosshairOnClick()
   {
-    StartCoroutine(FadeOutCrosshair(1));
+    if (showOnClickOnly)
+    {
+      _animatedCrosshair.SetVisible(true);
+      StartCoroutine(FadeOutCrosshair(1));
+    }
   }
 
   IEnumerator FadeOutCrosshair(float delay)
   {
-    yield return null;
+    yield return new WaitForSeconds(delay);
+
+    if (showOnClickOnly)
+    {
+      _animatedCrosshair.SetVisible(false);
+    }
   }
 
 }

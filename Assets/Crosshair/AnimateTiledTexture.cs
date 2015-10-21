@@ -15,12 +15,12 @@ public class AnimateTiledTexture : MonoBehaviour
   public int _rows = 2;                           // The number of rows of the texture
   public int _maxRows = 0;                        // keep 0 if you want rows*cols.  If you have less frames than rows*cols, set it here
 
-  private Vector2 _scale = new Vector3(1f, 1f);    // Scale the texture. This must be a non-zero number. negative scale flips the image
-  private int _index = 0;                         // Keeps track of the current frame 
-  private Vector2 _textureSize = Vector2.zero;    // Keeps track of the texture scale 
-  private long _currentCoroutineIndex = 0;
-  private float _framesPerSecond = 60f;
-  private ReticleState _reticleState = ReticleState.kUnknown;
+  int _index = 0;                         // Keeps track of the current frame 
+  Vector2 _textureSize = Vector2.zero;    // Keeps track of the texture scale 
+  long _currentCoroutineIndex = 0;
+  float _framesPerSecond = 60f;
+  ReticleState _reticleState = ReticleState.kUnknown;
+  bool visible = true;
 
   public void SetState(ReticleState newState)
   {
@@ -37,7 +37,7 @@ public class AnimateTiledTexture : MonoBehaviour
 
   private void Awake()
   {
-    GetComponent<Renderer>().enabled = true;
+    GetComponent<Renderer>().enabled = visible;
 
     // Create the material instance, if needed. else, just use this function to recalc the texture size
     CalcTextureSize();
@@ -49,14 +49,20 @@ public class AnimateTiledTexture : MonoBehaviour
     ApplyOffset();
   }
 
+  public void SetVisible(bool inVisible)
+  {
+    if (visible != inVisible)
+    {
+      visible = inVisible;
+
+      GetComponent<Renderer>().enabled = visible;
+    }
+  }
+
   private void CalcTextureSize()
   {
     //set the tile size of the texture (in UV units), based on the rows and columns
     _textureSize = new Vector2(1f / _columns, 1f / _rows);
-
-    // Add in the scale
-    _textureSize.x = _textureSize.x / _scale.x;
-    _textureSize.y = _textureSize.y / _scale.y;
   }
 
   // The main update function of this script
