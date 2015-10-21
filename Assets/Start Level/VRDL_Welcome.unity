@@ -128,6 +128,10 @@ Prefab:
       propertyPath: mainScenePrefab
       value: 
       objectReference: {fileID: 194122, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
+    - target: {fileID: 11462928, guid: bf8b73224e6f5b94c8583673e2ff2720, type: 2}
+      propertyPath: isMainScene
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf8b73224e6f5b94c8583673e2ff2720, type: 2}
   m_IsPrefabParent: 0

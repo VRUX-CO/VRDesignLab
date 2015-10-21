@@ -1,7 +1,4 @@
-﻿// uncomment this to test the different modes.
-// #define CROSSHAIR_TESTING
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Crosshair3D : MonoBehaviour
@@ -39,14 +36,9 @@ public class Crosshair3D : MonoBehaviour
     Ray ray;
     RaycastHit hit;
     bool cursorSet = false;
-
-    CrosshairTesting();
-
     Ray camRay = CameraRay();
     Vector3 cameraPosition = camRay.origin;
     Vector3 cameraForward = camRay.direction;
-
-    GetComponent<Renderer>().enabled = true;
 
     switch (mode)
     {
@@ -62,23 +54,7 @@ public class Crosshair3D : MonoBehaviour
           cursorSet = true;
         }
         break;
-      case CrosshairMode.DynamicObjects:
-        // similar to Dynamic but cursor is only visible for objects in a specific layer
-        ray = new Ray(cameraPosition, cameraForward);
-        if (Physics.Raycast(ray, out hit))
-        {
-          if (hit.transform.gameObject.layer != objectLayer)
-          {
-            GetComponent<Renderer>().enabled = false;
-          }
-          else
-          {
-            transform.position = hit.point + (-cameraForward * offsetFromObjects);
 
-            cursorSet = true;
-          }
-        }
-        break;
       case CrosshairMode.FixedDepth:
         // gets set below as the default mode when fixed or nothing hit
         break;
@@ -99,6 +75,9 @@ public class Crosshair3D : MonoBehaviour
       {
         hit.transform.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
       }
+
+      // show cross hair temporarily if in the showOnClickOnly mode
+      UpdateCrosshairOnClick();
     }
 
     UpdateHoverState();
@@ -212,33 +191,6 @@ public class Crosshair3D : MonoBehaviour
     }
   }
 
-  void CrosshairTesting()
-  {
-#if CROSSHAIR_TESTING
-    if (Input.GetButtonDown("RightShoulder"))
-    {
-      Material crosshairMaterial = GetComponent<Renderer>().material;
-
-      switch (mode)
-      {
-        case CrosshairMode.Dynamic:
-          mode = CrosshairMode.DynamicObjects;
-          crosshairMaterial.color = Color.red;
-          break;
-        case CrosshairMode.DynamicObjects:
-          mode = CrosshairMode.FixedDepth;
-          crosshairMaterial.color = Color.blue;
-          break;
-        case CrosshairMode.FixedDepth:
-          mode = CrosshairMode.Dynamic;
-          crosshairMaterial.color = Color.white;
-          break;
-      }
-      Debug.Log("Mode: " + mode);
-    }
-#endif
-  }
-
   public void ShowReticleOnClick(bool showOnClick)
   {
     showOnClickOnly = showOnClick;
@@ -251,7 +203,7 @@ public class Crosshair3D : MonoBehaviour
     if (showOnClickOnly)
     {
       _animatedCrosshair.SetVisible(true);
-      StartCoroutine(FadeOutCrosshair(1));
+      StartCoroutine(FadeOutCrosshair(.5f));
     }
   }
 
