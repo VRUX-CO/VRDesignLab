@@ -134,13 +134,13 @@ public class WelcomeRoom : MonoBehaviour
 
     if (buttonID.Equals("Foundation"))
     {
-      BuildMenuItems(1);
+      BuildMenuItems(0);
 
       levelMenu.SetActive(true);
     }
     else if (buttonID.Equals("Immersion"))
     {
-      BuildMenuItems(0);
+      BuildMenuItems(1);
 
       levelMenu.SetActive(true);
     }
