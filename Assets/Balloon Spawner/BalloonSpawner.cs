@@ -69,7 +69,7 @@ public class BalloonSpawner : MonoBehaviour
     }
     SpawnBalloon();
 
-    if (balloonpop == 5)
+    if (balloonpop == 4)
     {
       AppCentral.APP.ShowLookdownNotifier();
     }
