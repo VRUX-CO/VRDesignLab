@@ -29,11 +29,8 @@ public class AppBootStrap : MonoBehaviour
       app.reticlePrefab = reticlePrefab;
       app.lookdownMenuPrefab = lookdownMenuPrefab;
       app.lookdownNotifierPrefab = lookdownNotifierPrefab;
+      app.cameraFadeScreenPrefab = cameraFadeScreenPrefab;
       app.Initialize();
-
-      // add level manager to app
-      LevelManager lm = appGameObj.AddComponent<LevelManager>();
-      lm.Initialize(cameraFadeScreenPrefab);
     }
 
     // we are done

@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
   static LevelManager lm = null;
   GameObject cameraFadeScreenPrefab;
   string levelToLoad = null;
-  string loadedLevel = null;
+  string currentLoadedLevel = null;
 
   void Awake()
   {
@@ -20,6 +20,17 @@ public class LevelManager : MonoBehaviour
     cameraFadeScreenPrefab = fadeScreenPrefab;
   }
 
+  // pass null to remove the current Loaded Level
+  public void UnloadLevel(string levelName)
+  {
+    // unload previous level
+    if (currentLoadedLevel != null)
+    {
+      Application.UnloadLevel(currentLoadedLevel);
+      currentLoadedLevel = null;
+    }
+  }
+
   public void LoadLevel(string levelName)
   {
     levelToLoad = levelName;
@@ -28,16 +39,11 @@ public class LevelManager : MonoBehaviour
 
   public void FadeOutDone()
   {
-    // unload previous level
-    if (loadedLevel != null)
-    {
-      Application.UnloadLevel(loadedLevel);
-      loadedLevel = null;
-    }
+    UnloadLevel(null); // null unloads currentLoadedLevel
 
     // synchronous
     Application.LoadLevelAdditive(levelToLoad);
-    loadedLevel = levelToLoad;
+    currentLoadedLevel = levelToLoad;
 
     GetFadeScreen().FadeIn();
   }

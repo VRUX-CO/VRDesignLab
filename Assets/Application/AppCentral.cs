@@ -9,7 +9,10 @@ public class AppCentral : MonoBehaviour
   public GameObject reticlePrefab;
   public GameObject lookdownMenuPrefab;
   public GameObject lookdownNotifierPrefab;
+  public GameObject cameraFadeScreenPrefab;
+
   bool isCardboard = false;
+  LevelManager levelManager;
 
   static AppCentral app = null;
 
@@ -54,11 +57,15 @@ public class AppCentral : MonoBehaviour
 
     Instantiate(lookdownMenuPrefab);
     Instantiate(lookdownNotifierPrefab);
+
+    // add level manager to app
+    levelManager = gameObject.AddComponent<LevelManager>();
+    levelManager.Initialize(cameraFadeScreenPrefab);
   }
 
   public void LoadLevel(string levelName)
   {
-    GetComponent<LevelManager>().LoadLevel(levelName);
+    levelManager.LoadLevel(levelName);
   }
 
   public void HandleNavigation(string navigationID)
@@ -70,6 +77,7 @@ public class AppCentral : MonoBehaviour
         break;
       case "Home":
         Debug.Log("home");
+        levelManager.UnloadLevel(null);
         break;
       case "Next":
         Debug.Log("next");
