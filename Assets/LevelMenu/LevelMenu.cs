@@ -33,6 +33,9 @@ public class LevelMenu : MonoBehaviour
   public void ButtonWasClicked(int buttonIndex)
   {
     clickDelegate.SendMessage(clickCallback, buttonIndex, SendMessageOptions.DontRequireReceiver);
+
+    // hide the menu
+    gameObject.SetActive(false);
   }
 
 }
