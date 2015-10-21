@@ -10,10 +10,12 @@ public class AppCentral : MonoBehaviour
   public GameObject lookdownMenuPrefab;
   public GameObject lookdownNotifierPrefab;
   public GameObject cameraFadeScreenPrefab;
+  public GameObject mainScenePrefab;
 
   bool isCardboard = false;
   LevelManager levelManager;
   GameObject lookdownNotifier;
+  WelcomeRoom mainScene;
 
   static AppCentral app = null;
 
@@ -58,6 +60,7 @@ public class AppCentral : MonoBehaviour
 
     Instantiate(lookdownMenuPrefab);
     lookdownNotifier = Instantiate(lookdownNotifierPrefab);
+    mainScene = Instantiate(mainScenePrefab).GetComponent<WelcomeRoom>();
 
     // add level manager to app
     levelManager = gameObject.AddComponent<LevelManager>();
@@ -79,6 +82,10 @@ public class AppCentral : MonoBehaviour
       case "Home":
         Debug.Log("home");
         levelManager.UnloadLevel(null);
+
+        // restore state to main icon bar
+        mainScene.ShowHome();
+
         break;
       case "Next":
         Debug.Log("next");

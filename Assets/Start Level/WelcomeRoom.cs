@@ -62,6 +62,15 @@ public class WelcomeRoom : MonoBehaviour
     }
   }
 
+  public void ShowHome()
+  {
+    proceduralRoom.SetActive(true);
+    proceduralRoom.GetComponent<ProceduralRoom>().SetColor(new Color(1, 1, 1, 1));
+
+    FadeInButtonBar();
+  }
+
+
   // -----------------------------------------------------
 
   void FadeOutSign()
@@ -112,8 +121,7 @@ public class WelcomeRoom : MonoBehaviour
 
   public void FadeOutRoomDone()
   {
-    Destroy(proceduralRoom);
-    proceduralRoom = null;
+    proceduralRoom.SetActive(false);
   }
 
   // -----------------------------------------------------
@@ -127,13 +135,10 @@ public class WelcomeRoom : MonoBehaviour
     if (buttonID.Equals("Immersion"))
     {
       levelMenu.SetActive(true);
-
     }
     else if (buttonID.Equals("Foundation"))
     {
       levelMenu.SetActive(true);
-
-
     }
   }
 
@@ -145,16 +150,19 @@ public class WelcomeRoom : MonoBehaviour
         AppCentral.APP.LoadLevel("VRDL_Lab1");
         break;
       case 1:
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        AppCentral.APP.LoadLevel("VRDL_Lab2");
         break;
       case 2:
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        AppCentral.APP.LoadLevel("VRDL_Lab3");
         break;
       case 3:
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        AppCentral.APP.LoadLevel("VRDL_Lab4");
         break;
       case 4:
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        AppCentral.APP.LoadLevel("VRDL_Lab5");
+        break;
+      case 5:  // go back item
+        Debug.Log("go back");
         break;
     }
   }

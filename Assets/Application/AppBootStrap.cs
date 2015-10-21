@@ -10,6 +10,7 @@ public class AppBootStrap : MonoBehaviour
   public GameObject reticlePrefab;
   public GameObject lookdownMenuPrefab;
   public GameObject lookdownNotifierPrefab;
+  public GameObject mainScenePrefab;
 
   // singleton access
   void Awake()
@@ -30,6 +31,7 @@ public class AppBootStrap : MonoBehaviour
       app.lookdownMenuPrefab = lookdownMenuPrefab;
       app.lookdownNotifierPrefab = lookdownNotifierPrefab;
       app.cameraFadeScreenPrefab = cameraFadeScreenPrefab;
+      app.mainScenePrefab = mainScenePrefab;
       app.Initialize();
     }
 
