@@ -13,6 +13,7 @@ public class AppCentral : MonoBehaviour
 
   bool isCardboard = false;
   LevelManager levelManager;
+  GameObject lookdownNotifier;
 
   static AppCentral app = null;
 
@@ -56,7 +57,7 @@ public class AppCentral : MonoBehaviour
     Instantiate(reticlePrefab);
 
     Instantiate(lookdownMenuPrefab);
-    Instantiate(lookdownNotifierPrefab);
+    lookdownNotifier = Instantiate(lookdownNotifierPrefab);
 
     // add level manager to app
     levelManager = gameObject.AddComponent<LevelManager>();
@@ -83,5 +84,10 @@ public class AppCentral : MonoBehaviour
         Debug.Log("next");
         break;
     }
+  }
+
+  public void ShowLookdownNotifier()
+  {
+    lookdownNotifier.SetActive(true);
   }
 }

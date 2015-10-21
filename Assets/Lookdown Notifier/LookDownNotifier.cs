@@ -29,8 +29,6 @@ public class LookDownNotifier : MonoBehaviour
     StartCoroutine(StartAnimation(1));
   }
 
-
-
   IEnumerator StartAnimation(float delay)
   {
     yield return new WaitForSeconds(delay);
@@ -60,14 +58,12 @@ public class LookDownNotifier : MonoBehaviour
     StartCoroutine(FadeOutAndDestroy(3));
   }
 
-
   IEnumerator FadeOutAndDestroy(float delay)
   {
     yield return new WaitForSeconds(delay);
 
     iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", .5f, "oncomplete", "FadeOutDoneCallback"));
   }
-
 
   public void FadeOutUpdateCallback(float progress)
   {
@@ -77,7 +73,6 @@ public class LookDownNotifier : MonoBehaviour
 
   public void FadeOutDoneCallback()
   {
-    Destroy(gameObject);
+    gameObject.SetActive(false);
   }
-
 }

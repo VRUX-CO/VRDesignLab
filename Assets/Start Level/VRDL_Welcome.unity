@@ -164,7 +164,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472222, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11458362, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
       propertyPath: iconButtonBar

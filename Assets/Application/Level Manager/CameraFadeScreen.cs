@@ -7,9 +7,10 @@ public class CameraFadeScreen : MonoBehaviour
   Material material;
   Color baseColor;
 
+  const float fadeTime = .5f;
+
   void Update()
   {
-    //  transform.LookAt(Camera.main.transform);
   }
 
   void Start()
@@ -22,12 +23,12 @@ public class CameraFadeScreen : MonoBehaviour
 
   public void FadeOut(string callback)
   {
-    iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "UpdateCallback", "time", 3.5f, "oncomplete", "FadeOutCallback", "oncompleteparams", callback));
+    iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "UpdateCallback", "time", fadeTime, "oncomplete", "FadeOutCallback", "oncompleteparams", callback));
   }
 
   public void FadeIn()
   {
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "UpdateCallback", "time", 3.5f));
+    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "UpdateCallback", "time", fadeTime));
   }
 
   public void UpdateCallback(float alpha)

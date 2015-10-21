@@ -74,6 +74,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   proceduralRoomPrefab: {fileID: 121732, guid: 9bb0c35d4387c494084ab8a8955148bd, type: 2}
   welcomeSignPrefab: {fileID: 178924, guid: 75d62af271f0f554c847692737e72ceb, type: 2}
+  iconButtonBarPrefab: {fileID: 132538, guid: fb91ed78de4866443ad2e7a2ec2b5f25, type: 2}
+  levelMenuPrefab: {fileID: 123144, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -97,6 +99,14 @@ Prefab:
       propertyPath: m_Intensity
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: iconButtonBarPrefab
+      value: 
+      objectReference: {fileID: 132538, guid: fb91ed78de4866443ad2e7a2ec2b5f25, type: 2}
+    - target: {fileID: 0}
+      propertyPath: levelMenuPrefab
+      value: 
+      objectReference: {fileID: 123144, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194122}
