@@ -4,10 +4,11 @@ using System.Collections;
 public class AppCentral : MonoBehaviour
 {
   public bool buildForCardboard = false;
-  public GameObject cameraFadeScreenPrefab;
   public GameObject cardboardCameraPrefab;
   public GameObject oculusCameraPrefab;
   public GameObject reticlePrefab;
+  public GameObject lookdownMenuPrefab;
+  public GameObject lookdownNotifierPrefab;
   bool isCardboard = false;
 
   static AppCentral app = null;
@@ -37,8 +38,6 @@ public class AppCentral : MonoBehaviour
 
   public void Initialize()
   {
-    LevelManager.LM.Initialize(cameraFadeScreenPrefab);
-
     // install camera for platform
     if (buildForCardboard)
     {
@@ -52,6 +51,13 @@ public class AppCentral : MonoBehaviour
 
     // must create reticle after cameras since it trys to access them
     Instantiate(reticlePrefab);
+
+    Instantiate(lookdownMenuPrefab);
+    Instantiate(lookdownNotifierPrefab);
   }
 
+  public void LoadLevel(string levelName)
+  {
+    GetComponent<LevelManager>().LoadLevel(levelName);
+  }
 }

@@ -46,6 +46,9 @@ MonoBehaviour:
     type: 2}
   oculusCameraPrefab: {fileID: 111590, guid: 7758c03b9ef3cc04a9ce5a419d309793, type: 2}
   reticlePrefab: {fileID: 193910, guid: 7a7cee75c254f2049acccd20cfd1e6d9, type: 2}
+  lookdownMenuPrefab: {fileID: 105362, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
+  lookdownNotifierPrefab: {fileID: 162264, guid: d4a285bf34c4daf43a4f4a313f097c9e,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,6 +8,8 @@ public class AppBootStrap : MonoBehaviour
   public GameObject cardboardCameraPrefab;
   public GameObject oculusCameraPrefab;
   public GameObject reticlePrefab;
+  public GameObject lookdownMenuPrefab;
+  public GameObject lookdownNotifierPrefab;
 
   // singleton access
   void Awake()
@@ -18,14 +20,20 @@ public class AppBootStrap : MonoBehaviour
     if (app == null)
     {
       GameObject appGameObj = new GameObject("AppCentral");
-      app = appGameObj.gameObject.AddComponent<AppCentral>();
+
+      // add appcentral
+      app = appGameObj.AddComponent<AppCentral>();
       app.buildForCardboard = buildForCardboard;
-      app.cameraFadeScreenPrefab = cameraFadeScreenPrefab;
       app.cardboardCameraPrefab = cardboardCameraPrefab;
       app.oculusCameraPrefab = oculusCameraPrefab;
       app.reticlePrefab = reticlePrefab;
-
+      app.lookdownMenuPrefab = lookdownMenuPrefab;
+      app.lookdownNotifierPrefab = lookdownNotifierPrefab;
       app.Initialize();
+
+      // add level manager to app
+      LevelManager lm = appGameObj.AddComponent<LevelManager>();
+      lm.Initialize(cameraFadeScreenPrefab);
     }
 
     // we are done

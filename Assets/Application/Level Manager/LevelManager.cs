@@ -7,26 +7,7 @@ public class LevelManager : MonoBehaviour
   static LevelManager lm = null;
   GameObject cameraFadeScreenPrefab;
   string levelToLoad = null;
-
-  // singleton access
-  public static LevelManager LM
-  {
-    get
-    {
-      if (lm == null)
-      {
-        lm = UnityEngine.Object.FindObjectOfType<LevelManager>();
-      }
-      if (lm == null)
-      {
-        Debug.Log("Creating LevelManager object");
-        var go = new GameObject("LevelManager");
-        lm = go.AddComponent<LevelManager>();
-        go.transform.localPosition = Vector3.zero;
-      }
-      return lm;
-    }
-  }
+  string loadedLevel = null;
 
   void Awake()
   {
@@ -47,8 +28,16 @@ public class LevelManager : MonoBehaviour
 
   public void FadeOutDone()
   {
+    // unload previous level
+    if (loadedLevel != null)
+    {
+      Application.UnloadLevel(loadedLevel);
+      loadedLevel = null;
+    }
+
     // synchronous
-    Application.LoadLevel(levelToLoad);
+    Application.LoadLevelAdditive(levelToLoad);
+    loadedLevel = levelToLoad;
 
     GetFadeScreen().FadeIn();
   }

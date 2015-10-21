@@ -6,6 +6,8 @@ public class LevelMenu : MonoBehaviour
 {
   public List<string> LevelNames;
   public GameObject itemPrefab;
+  public GameObject clickDelegate;
+  public string clickCallback;
 
   // Use this for initialization
   void Start()
@@ -30,7 +32,7 @@ public class LevelMenu : MonoBehaviour
 
   public void ButtonWasClicked(int buttonIndex)
   {
-    Debug.Log(string.Format("{0}", buttonIndex));
+    clickDelegate.SendMessage(clickCallback, buttonIndex, SendMessageOptions.DontRequireReceiver);
   }
 
 }

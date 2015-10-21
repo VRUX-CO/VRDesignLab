@@ -37,6 +37,10 @@ public class WelcomeRoom : MonoBehaviour
     btnBar.clickDelegate = gameObject;
     btnBar.clickCallback = "ButtonBarClickCallback";
 
+    LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
+    menu.clickDelegate = gameObject;
+    menu.clickCallback = "MenuCallback";
+
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
 
@@ -122,10 +126,36 @@ public class WelcomeRoom : MonoBehaviour
 
     if (buttonID.Equals("Immersion"))
     {
+      levelMenu.SetActive(true);
 
     }
     else if (buttonID.Equals("Foundation"))
     {
+      levelMenu.SetActive(true);
+
+
+    }
+  }
+
+  void MenuCallback(int buttonIndex)
+  {
+    switch (buttonIndex)
+    {
+      case 0:
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case 1:
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case 2:
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case 3:
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case 4:
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
     }
   }
 
