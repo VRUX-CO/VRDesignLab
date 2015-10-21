@@ -7,7 +7,7 @@ public class CameraFadeScreen : MonoBehaviour
   Material material;
   Color baseColor;
 
-  const float fadeTime = .5f;
+  const float fadeTime = 1f;
 
   void Start()
   {
