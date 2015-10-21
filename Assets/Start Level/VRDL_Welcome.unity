@@ -178,6 +178,11 @@ Prefab:
       propertyPath: levelMenuPrefab
       value: 
       objectReference: {fileID: 123144, guid: 41a7a74760fa713478efd7b57f8b885f, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 10863748, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 10863748, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
   m_IsPrefabParent: 0

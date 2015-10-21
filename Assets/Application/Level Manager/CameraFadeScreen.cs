@@ -9,10 +9,6 @@ public class CameraFadeScreen : MonoBehaviour
 
   const float fadeTime = .5f;
 
-  void Update()
-  {
-  }
-
   void Start()
   {
     material = GetComponent<MeshRenderer>().material;
