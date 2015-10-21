@@ -14,11 +14,15 @@ public class WelcomeRoom : MonoBehaviour
   bool dismissedSign = false;
   int step = 0;
 
+  // update these if wall size changes
+  const float wallDimension = 12;
+  const float zOffset = wallDimension / 2;
+
   // Use this for initialization
   void Start()
   {
-    Vector3 roomPosition = new Vector3(0, 0f, -3);
-    Vector3 contentPosition = new Vector3(0, 1.2f, 1);
+    Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
+    Vector3 contentPosition = new Vector3(0, 1.2f, 2);
 
     proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
     welcomeSign = Instantiate(welcomeSignPrefab, contentPosition, Quaternion.identity) as GameObject;
@@ -113,7 +117,8 @@ public class WelcomeRoom : MonoBehaviour
 
   void ButtonBarClickCallback(string buttonID)
   {
-    Debug.Log(buttonID);
+    FadeOutRoom();
+    iconButtonBar.SetActive(false);
 
     if (buttonID.Equals("Immersion"))
     {

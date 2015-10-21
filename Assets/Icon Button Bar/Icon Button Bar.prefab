@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 454784}
+  m_Layer: 0
+  m_Name: Rotated
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &118628
 GameObject:
   m_ObjectHideFlags: 1
@@ -19,7 +34,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &125860
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -50,7 +65,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &133542
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -126,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 485636}
   - {fileID: 433830}
-  m_Father: {fileID: 428522}
+  m_Father: {fileID: 454784}
   m_RootOrder: 1
 --- !u!4 &428522
 Transform:
@@ -134,12 +149,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132538}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 470222}
-  - {fileID: 402022}
+  - {fileID: 454784}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &433830
@@ -154,6 +168,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 402022}
   m_RootOrder: 1
+--- !u!4 &454784
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106548}
+  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 470222}
+  - {fileID: 402022}
+  m_Father: {fileID: 428522}
+  m_RootOrder: 0
 --- !u!4 &460366
 Transform:
   m_ObjectHideFlags: 1
@@ -190,7 +218,7 @@ Transform:
   m_Children:
   - {fileID: 465554}
   - {fileID: 460366}
-  m_Father: {fileID: 428522}
+  m_Father: {fileID: 454784}
   m_RootOrder: 0
 --- !u!4 &485636
 Transform:
