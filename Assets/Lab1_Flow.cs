@@ -23,6 +23,7 @@ public class Lab1_Flow : MonoBehaviour
   {
     Destroy(Card1);
     GameObject newCard = Instantiate(Card2, Card2.transform.position, Card2.transform.rotation) as GameObject;
+    
 
     // parent this to gameObject so it gets cleaned up when level is unloaded
     newCard.transform.parent = gameObject.transform;
