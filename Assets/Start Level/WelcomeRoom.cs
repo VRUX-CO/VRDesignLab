@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WelcomeRoom : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class WelcomeRoom : MonoBehaviour
     LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
     menu.clickDelegate = gameObject;
     menu.clickCallback = "MenuCallback";
+
+    BuildMenuItems();
 
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
@@ -142,29 +145,68 @@ public class WelcomeRoom : MonoBehaviour
     }
   }
 
-  void MenuCallback(int buttonIndex)
+  void MenuCallback(string command)
   {
-    switch (buttonIndex)
+    switch (command)
     {
-      case 0:
+      case "reticle":
         AppCentral.APP.LoadLevel("VRDL_Lab1");
         break;
-      case 1:
+      case "depth":
         AppCentral.APP.LoadLevel("VRDL_Lab2");
         break;
-      case 2:
+      case "velocity":
         AppCentral.APP.LoadLevel("VRDL_Lab3");
         break;
-      case 3:
+      case "grounded":
         AppCentral.APP.LoadLevel("VRDL_Lab4");
         break;
-      case 4:
+      case "tracking":
         AppCentral.APP.LoadLevel("VRDL_Lab5");
         break;
-      case 5:  // go back item
+      case "back":  // go back item
         Debug.Log("go back");
         break;
     }
+  }
+
+  void BuildMenuItems()
+  {
+    Dictionary<string, string> newItem;
+    LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
+    List<Dictionary<string, string>> menuItems = new List<Dictionary<string, string>>();
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "1. Using a Reticle";
+    newItem["cmd"] = "reticle";
+    menuItems.Add(newItem);
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "2. UI Depth & Eye Strain";
+    newItem["cmd"] = "depth";
+    menuItems.Add(newItem);
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "3. Using Constant Velocity";
+    newItem["cmd"] = "velocity";
+    menuItems.Add(newItem);
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "4. Keep the User Grounded";
+    newItem["cmd"] = "grounded";
+    menuItems.Add(newItem);
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "5. Maintaining Head Tracking";
+    newItem["cmd"] = "tracking";
+    menuItems.Add(newItem);
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "< Go Back";
+    newItem["cmd"] = "back";
+    menuItems.Add(newItem);
+
+    menu.SetupItems(menuItems);
   }
 
 }

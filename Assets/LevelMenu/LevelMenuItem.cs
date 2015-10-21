@@ -8,7 +8,7 @@ public class LevelMenuItem : MonoBehaviour
   public GameObject textObject;
   public LevelMenu levelMenu;
 
-  int itemIdentifier;
+  string command;
   float scaleTime = .5f;
   float scaleBy = 1.05f;
 
@@ -26,10 +26,10 @@ public class LevelMenuItem : MonoBehaviour
     backgroundObject.GetComponent<MeshRenderer>().material = material;
   }
 
-  public void SetupItem(string name, int identifier, LevelMenu menu)
+  public void SetupItem(string name, string inCommand, LevelMenu menu)
   {
     textObject.GetComponent<TextMesh>().text = name;
-    itemIdentifier = identifier;
+    command = inCommand;
     levelMenu = menu;
   }
 
@@ -47,7 +47,7 @@ public class LevelMenuItem : MonoBehaviour
 
   public void OnClick()
   {
-    levelMenu.ButtonWasClicked(itemIdentifier);
+    levelMenu.ItemWasClicked(command);
   }
 
 }

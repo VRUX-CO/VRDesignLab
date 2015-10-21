@@ -4,36 +4,37 @@ using System.Collections.Generic;
 
 public class LevelMenu : MonoBehaviour
 {
-  public List<string> LevelNames;
   public GameObject itemPrefab;
   public GameObject clickDelegate;
   public string clickCallback;
 
   // Use this for initialization
-  void Start()
+  public void SetupItems(List<Dictionary<string, string>> menuItems)
   {
     Vector3 position = gameObject.transform.position;
     int index = 0;
     const float itemHeight = .15f;
-    int cnt = LevelNames.Count;
     float startY = position.y;
+    int cnt = menuItems.Count;
 
-    foreach (string name in LevelNames)
+    foreach (Dictionary<string, string> item in menuItems)
     {
       position.y = startY + ((cnt - index) * itemHeight);
-      GameObject item = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
+      GameObject itemGO = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
 
-      item.transform.parent = gameObject.transform;
+      itemGO.transform.parent = gameObject.transform;
 
-      LevelMenuItem menuItem = item.GetComponent<LevelMenuItem>() as LevelMenuItem;
+      LevelMenuItem menuItem = itemGO.GetComponent<LevelMenuItem>() as LevelMenuItem;
 
-      menuItem.SetupItem(name, index++, this);
+      menuItem.SetupItem(item["name"], item["cmd"], this);
+
+      index++;
     }
   }
 
-  public void ButtonWasClicked(int buttonIndex)
+  public void ItemWasClicked(string command)
   {
-    clickDelegate.SendMessage(clickCallback, buttonIndex, SendMessageOptions.DontRequireReceiver);
+    clickDelegate.SendMessage(clickCallback, command, SendMessageOptions.DontRequireReceiver);
 
     // hide the menu
     gameObject.SetActive(false);
