@@ -674,7 +674,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonID: Next
   mat: {fileID: 2100000, guid: 4860b3b0797c35a4e8b58fef16f3c63d, type: 2}
-  revealPlane: {fileID: 0}
   textLabel: {fileID: 186448}
 --- !u!114 &11438634
 MonoBehaviour:
@@ -689,7 +688,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonID: Reset
   mat: {fileID: 2100000, guid: 5b012a8261b3be149b181efd474c442b, type: 2}
-  revealPlane: {fileID: 0}
   textLabel: {fileID: 189764}
 --- !u!114 &11455390
 MonoBehaviour:
@@ -704,7 +702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonID: Home
   mat: {fileID: 2100000, guid: d93c8010725a3f64cab2799fb696dec0, type: 2}
-  revealPlane: {fileID: 0}
   textLabel: {fileID: 194486}
 --- !u!114 &11460868
 MonoBehaviour:

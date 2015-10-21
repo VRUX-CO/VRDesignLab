@@ -8,8 +8,9 @@ public class LookButton : MonoBehaviour
   MeshRenderer buttonRenderer;
   Color defaultColor;
   Color fadeStartColor;
-  public ButtonRevealPlane revealPlane;
   public GameObject textLabel;
+  GameObject clickDelegate;
+  string clickCallback;
 
   bool isFadingIn = false;
 
@@ -17,7 +18,6 @@ public class LookButton : MonoBehaviour
   bool isFadingTextIn = false;
   AnimationUpdater fadeUpdater = new AnimationUpdater();
   AnimationUpdater textUpdater = new AnimationUpdater();
-
 
   void Update()
   {
@@ -67,6 +67,12 @@ public class LookButton : MonoBehaviour
     labelTextMesh.color = Color.clear;
   }
 
+  public void SetClickDelegate(GameObject del, string callb)
+  {
+    clickDelegate = del;
+    clickCallback = callb;
+  }
+
   void SetColorAlpha(float alpha)
   {
     buttonRenderer.material.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, alpha);
@@ -79,7 +85,7 @@ public class LookButton : MonoBehaviour
 
   public void OnClick()
   {
-    revealPlane.OnLookButtonClick(buttonID);
+    clickDelegate.SendMessage(clickCallback, buttonID, SendMessageOptions.DontRequireReceiver);
   }
 
   public void OnHoverStart()
@@ -87,7 +93,8 @@ public class LookButton : MonoBehaviour
     transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
     // play click sound
-    if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
+    if (gameObject.GetComponent<AudioSource>() != null)
+      gameObject.GetComponent<AudioSource>().Play();
 
     FadeInText(true);
   }

@@ -60,4 +60,20 @@ public class AppCentral : MonoBehaviour
   {
     GetComponent<LevelManager>().LoadLevel(levelName);
   }
+
+  public void HandleNavigation(string navigationID)
+  {
+    switch (navigationID)
+    {
+      case "Reset":
+        Debug.Log("reset");
+        break;
+      case "Home":
+        Debug.Log("home");
+        break;
+      case "Next":
+        Debug.Log("next");
+        break;
+    }
+  }
 }

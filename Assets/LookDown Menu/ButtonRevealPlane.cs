@@ -9,9 +9,9 @@ public class ButtonRevealPlane : MonoBehaviour
   // called only from LookButton when it's clicked
   public void OnLookButtonClick(string buttonID)
   {
-    Debug.Log(buttonID);
     ShowButtons(false);
 
+    AppCentral.APP.HandleNavigation(buttonID);
   }
 
   // Use this for initialization
@@ -21,7 +21,7 @@ public class ButtonRevealPlane : MonoBehaviour
 
     // clicks from buttons are sent from the button to OnLookButtonClick()
     foreach (LookButton button in buttons)
-      button.revealPlane = this;
+      button.SetClickDelegate(gameObject, "OnLookButtonClick");
 
     MeshUtilities.AddMeshComponent(gameObject, 1f, 2.5f);
 
