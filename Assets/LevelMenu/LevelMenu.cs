@@ -7,24 +7,43 @@ public class LevelMenu : MonoBehaviour
   public GameObject itemPrefab;
   public GameObject clickDelegate;
   public string clickCallback;
+  List<GameObject> menuItems = null;  // keep the list so we can delete on rebuild
+
+  void ResetMenu()
+  {
+    if (menuItems != null)
+    {
+      foreach (GameObject item in menuItems)
+      {
+        Destroy(item);
+      }
+      menuItems = null;
+    }
+
+    menuItems = new List<GameObject>();
+  }
 
   // Use this for initialization
-  public void SetupItems(List<Dictionary<string, string>> menuItems)
+  public void SetupItems(List<Dictionary<string, string>> inItems)
   {
+    ResetMenu();
+
     Vector3 position = gameObject.transform.position;
     int index = 0;
     const float itemHeight = .15f;
     float startY = position.y;
-    int cnt = menuItems.Count;
+    int cnt = inItems.Count;
 
-    foreach (Dictionary<string, string> item in menuItems)
+    foreach (Dictionary<string, string> item in inItems)
     {
       position.y = startY + ((cnt - index) * itemHeight);
-      GameObject itemGO = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
+      GameObject anItem = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
 
-      itemGO.transform.parent = gameObject.transform;
+      menuItems.Add(anItem);
 
-      LevelMenuItem menuItem = itemGO.GetComponent<LevelMenuItem>() as LevelMenuItem;
+      anItem.transform.parent = gameObject.transform;
+
+      LevelMenuItem menuItem = anItem.GetComponent<LevelMenuItem>() as LevelMenuItem;
 
       menuItem.SetupItem(item["name"], item["cmd"], this);
 

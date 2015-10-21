@@ -42,8 +42,6 @@ public class WelcomeRoom : MonoBehaviour
     menu.clickDelegate = gameObject;
     menu.clickCallback = "MenuCallback";
 
-    BuildMenuItems();
-
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
 
@@ -72,7 +70,6 @@ public class WelcomeRoom : MonoBehaviour
 
     FadeInButtonBar();
   }
-
 
   // -----------------------------------------------------
 
@@ -135,12 +132,16 @@ public class WelcomeRoom : MonoBehaviour
     FadeOutRoom();
     iconButtonBar.SetActive(false);
 
-    if (buttonID.Equals("Immersion"))
+    if (buttonID.Equals("Foundation"))
     {
+      BuildMenuItems(1);
+
       levelMenu.SetActive(true);
     }
-    else if (buttonID.Equals("Foundation"))
+    else if (buttonID.Equals("Immersion"))
     {
+      BuildMenuItems(0);
+
       levelMenu.SetActive(true);
     }
   }
@@ -149,6 +150,7 @@ public class WelcomeRoom : MonoBehaviour
   {
     switch (command)
     {
+      // Foundation menu
       case "reticle":
         AppCentral.APP.LoadLevel("VRDL_Lab1");
         break;
@@ -164,47 +166,100 @@ public class WelcomeRoom : MonoBehaviour
       case "tracking":
         AppCentral.APP.LoadLevel("VRDL_Lab5");
         break;
+
+      // Immersion menu
+      case "light":
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case "scale":
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case "audio":
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case "gaze":
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+      case "beautiful":
+        AppCentral.APP.LoadLevel("VRDL_Lab1");
+        break;
+
       case "back":  // go back item
         Debug.Log("go back");
         break;
     }
   }
 
-  void BuildMenuItems()
+  void BuildMenuItems(int menuID)
   {
     Dictionary<string, string> newItem;
     LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
     List<Dictionary<string, string>> menuItems = new List<Dictionary<string, string>>();
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "1. Using a Reticle";
-    newItem["cmd"] = "reticle";
-    menuItems.Add(newItem);
+    if (menuID == 0)
+    {
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "1. Using a Reticle";
+      newItem["cmd"] = "reticle";
+      menuItems.Add(newItem);
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "2. UI Depth & Eye Strain";
-    newItem["cmd"] = "depth";
-    menuItems.Add(newItem);
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "2. UI Depth & Eye Strain";
+      newItem["cmd"] = "depth";
+      menuItems.Add(newItem);
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "3. Using Constant Velocity";
-    newItem["cmd"] = "velocity";
-    menuItems.Add(newItem);
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "3. Using Constant Velocity";
+      newItem["cmd"] = "velocity";
+      menuItems.Add(newItem);
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "4. Keep the User Grounded";
-    newItem["cmd"] = "grounded";
-    menuItems.Add(newItem);
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "4. Keep the User Grounded";
+      newItem["cmd"] = "grounded";
+      menuItems.Add(newItem);
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "5. Maintaining Head Tracking";
-    newItem["cmd"] = "tracking";
-    menuItems.Add(newItem);
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "5. Maintaining Head Tracking";
+      newItem["cmd"] = "tracking";
+      menuItems.Add(newItem);
 
-    newItem = new Dictionary<string, string>();
-    newItem["name"] = "< Go Back";
-    newItem["cmd"] = "back";
-    menuItems.Add(newItem);
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "< Go Back";
+      newItem["cmd"] = "back";
+      menuItems.Add(newItem);
+    }
+    else if (menuID == 1)
+    {
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "6. Guiding with Light";
+      newItem["cmd"] = "light";
+      menuItems.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "7. Leveraging Scale";
+      newItem["cmd"] = "scale";
+      menuItems.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "8. Spatial Audio";
+      newItem["cmd"] = "audio";
+      menuItems.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "9. Gaze Cues";
+      newItem["cmd"] = "gaze";
+      menuItems.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "10. Make it Beautiful";
+      newItem["cmd"] = "beautiful";
+      menuItems.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "< Go Back";
+      newItem["cmd"] = "back";
+      menuItems.Add(newItem);
+    }
 
     menu.SetupItems(menuItems);
   }
