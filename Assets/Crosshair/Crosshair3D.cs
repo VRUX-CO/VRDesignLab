@@ -20,10 +20,6 @@ public class Crosshair3D : MonoBehaviour
 {
   static public string kCrosshairTargetable = "targetable";
 
-  // NOTE: three different crosshair methods are shown here.  The most comfortable for the
-  // user is going to be when the crosshair is located in the world (or slightly in front of)
-  // the position where the user's gaze is.  Positioning the cursor a fixed distance from the
-  // camera inbetween the camera and the player's gaze will be uncomfortable and unfocused.
   public enum CrosshairMode
   {
     Dynamic = 0,			// cursor positions itself in 3D based on raycasts into the scene
@@ -36,13 +32,14 @@ public class Crosshair3D : MonoBehaviour
   public float offsetFromObjects = 0.1f;
   public float fixedDepth = 3.0f;
 
-  private Transform thisTransform = null;
-  private Material crosshairMaterial = null;
-  private Vector3 originalScale;
-  private GameObject previousHitGameObject;
-  private GameObject previousHitButtonRevealer;
-  private AnimateTiledTexture _animatedCrosshair;
+  Transform thisTransform = null;
+  Material crosshairMaterial = null;
+  Vector3 originalScale;
+  GameObject previousHitGameObject;
+  GameObject previousHitButtonRevealer;
+  AnimateTiledTexture _animatedCrosshair;
   OVRCameraRig cameraController = null;
+  bool showOnClickOnly = false;
 
   void Awake()
   {
@@ -168,16 +165,8 @@ public class Crosshair3D : MonoBehaviour
 
     if (cameraController == null)
     {
-      //StereoController controller = Cardboard.Controller;
-
-      //Ray gaze = controller.Head.Gaze;
-
-      //cameraPosition = gaze.origin;
-      //cameraForward = gaze.direction;
-
       cameraPosition = Camera.main.transform.position;
       cameraForward = Camera.main.transform.forward;
-
     }
     else
     {
@@ -275,4 +264,20 @@ public class Crosshair3D : MonoBehaviour
       previousHitButtonRevealer = null;
     }
   }
+
+  public void ShowReticleOnClick(bool showOnClick)
+  {
+    showOnClickOnly = showOnClick;
+  }
+
+  void FadeOutCrosshair()
+  {
+    StartCoroutine(FadeOutCrosshair(1));
+  }
+
+  IEnumerator FadeOutCrosshair(float delay)
+  {
+    yield return null;
+  }
+
 }

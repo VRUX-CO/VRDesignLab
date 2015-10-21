@@ -4,6 +4,7 @@ using System.Collections;
 public class AppBootStrap : MonoBehaviour
 {
   public bool buildForCardboard = false;
+  public bool isMainScene = false;
   public GameObject cameraFadeScreenPrefab;
   public GameObject cardboardCameraPrefab;
   public GameObject oculusCameraPrefab;
@@ -32,6 +33,7 @@ public class AppBootStrap : MonoBehaviour
       app.lookdownNotifierPrefab = lookdownNotifierPrefab;
       app.cameraFadeScreenPrefab = cameraFadeScreenPrefab;
       app.mainScenePrefab = mainScenePrefab;
+      app.isMainScene = isMainScene;
       app.Initialize();
     }
 

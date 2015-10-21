@@ -49,6 +49,7 @@ MonoBehaviour:
   lookdownMenuPrefab: {fileID: 105362, guid: 173d081ad8063114b8029dfd6abc2a30, type: 2}
   lookdownNotifierPrefab: {fileID: 162264, guid: d4a285bf34c4daf43a4f4a313f097c9e,
     type: 2}
+  mainScenePrefab: {fileID: 194122, guid: 5e2cdb1009f64b7429b4f3c42a0440c1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

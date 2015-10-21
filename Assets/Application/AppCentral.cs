@@ -4,6 +4,7 @@ using System.Collections;
 public class AppCentral : MonoBehaviour
 {
   public bool buildForCardboard = false;
+  public bool isMainScene = false;
   public GameObject cardboardCameraPrefab;
   public GameObject oculusCameraPrefab;
   public GameObject reticlePrefab;
@@ -16,6 +17,7 @@ public class AppCentral : MonoBehaviour
   LevelManager levelManager;
   GameObject lookdownNotifier;
   WelcomeRoom mainScene;
+  Crosshair3D reticle;
 
   static AppCentral app = null;
 
@@ -56,11 +58,13 @@ public class AppCentral : MonoBehaviour
     }
 
     // must create reticle after cameras since it trys to access them
-    Instantiate(reticlePrefab);
+    reticle = Instantiate(reticlePrefab).GetComponent<Crosshair3D>();
 
     Instantiate(lookdownMenuPrefab);
     lookdownNotifier = Instantiate(lookdownNotifierPrefab);
     mainScene = Instantiate(mainScenePrefab).GetComponent<WelcomeRoom>();
+
+    mainScene.gameObject.SetActive(isMainScene);
 
     // add level manager to app
     levelManager = gameObject.AddComponent<LevelManager>();
@@ -77,24 +81,34 @@ public class AppCentral : MonoBehaviour
     switch (navigationID)
     {
       case "Reset":
-        Debug.Log("reset");
         break;
       case "Home":
-        Debug.Log("home");
-        levelManager.UnloadLevel(null);
-
-        // restore state to main icon bar
-        mainScene.ShowHome();
-
+        ResetToHomeState();
         break;
       case "Next":
-        Debug.Log("next");
         break;
     }
+  }
+
+  void ResetToHomeState()
+  {
+    levelManager.UnloadLevel(null);
+
+    // reset this if set by the level
+    ShowReticleOnClick(false);
+
+    // restore state to main icon bar
+    mainScene.ShowHome();
   }
 
   public void ShowLookdownNotifier()
   {
     lookdownNotifier.SetActive(true);
   }
+
+  public void ShowReticleOnClick(bool showOnClick)
+  {
+    reticle.ShowReticleOnClick(showOnClick);
+  }
+
 }

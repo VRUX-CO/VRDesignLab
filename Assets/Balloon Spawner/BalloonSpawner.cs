@@ -12,6 +12,9 @@ public class BalloonSpawner : MonoBehaviour
   // Use this for initialization
   void Start()
   {
+    // SNG, need to reset this if the person bails out to main menu
+    AppCentral.APP.ShowReticleOnClick(true);
+
     SpawnBalloon();
   }
 
@@ -56,17 +59,20 @@ public class BalloonSpawner : MonoBehaviour
   public void BalloonPopped()
   {
     balloonpop += 1;
-    Debug.Log(balloonpop.ToString());
     if (balloonpop == 2)
     {
       flow.PoppedBalloon();
+
+      AppCentral.APP.ShowReticleOnClick(false);
+
       swapped = true;
     }
     SpawnBalloon();
+
+    if (balloonpop == 5)
+    {
+      AppCentral.APP.ShowLookdownNotifier();
+    }
   }
 
-  void CardAppear()
-  {
-    flow.PoppedBalloon();
-  }
 }
