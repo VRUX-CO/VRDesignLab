@@ -21,6 +21,7 @@ public class AnimateTiledTexture : MonoBehaviour
   float _framesPerSecond = 60f;
   ReticleState _reticleState = ReticleState.kUnknown;
   bool visible = true;
+  Renderer reticleRenderer;
 
   public void SetState(ReticleState newState)
   {
@@ -37,13 +38,14 @@ public class AnimateTiledTexture : MonoBehaviour
 
   private void Awake()
   {
-    GetComponent<Renderer>().enabled = visible;
+    reticleRenderer = GetComponent<Renderer>();
+    reticleRenderer.enabled = visible;
 
     // Create the material instance, if needed. else, just use this function to recalc the texture size
     CalcTextureSize();
 
     // Assign the new texture size
-    GetComponent<Renderer>().sharedMaterial.SetTextureScale("_MainTex", _textureSize);
+    reticleRenderer.sharedMaterial.SetTextureScale("_MainTex", _textureSize);
 
     // index is 0, set up for default state
     ApplyOffset();
@@ -55,7 +57,7 @@ public class AnimateTiledTexture : MonoBehaviour
     {
       visible = inVisible;
 
-      GetComponent<Renderer>().enabled = visible;
+      reticleRenderer.enabled = visible;
     }
   }
 
@@ -134,6 +136,6 @@ public class AnimateTiledTexture : MonoBehaviour
     offset.y += ((1f / _rows) - _textureSize.y) / 2.0f;
 
     // Update the material
-    GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
+    reticleRenderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
   }
 }
