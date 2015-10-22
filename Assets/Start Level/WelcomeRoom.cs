@@ -9,32 +9,17 @@ public class WelcomeRoom : MonoBehaviour
   public GameObject iconButtonBarPrefab;
   public GameObject levelMenuPrefab;
 
-  GameObject proceduralRoom, welcomeSign, iconButtonBar, levelMenu;
+  GameObject proceduralRoom, welcomeSign, levelMenu;
 
   Material signMaterial;
   bool dismissedSign = false;
   int step = 0;
 
-  // update these if wall size changes
-  const float wallDimension = 12;
-  const float zOffset = wallDimension / 2;
-
   // Use this for initialization
   void Start()
   {
-    Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
-
-    proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
+    CreateRoom();
     welcomeSign = Instantiate(welcomeSignPrefab, ContentPosition(), Quaternion.identity) as GameObject;
-    iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
-
-    // these prefabs start off inactive, so turn them on as needed
-    welcomeSign.SetActive(true);
-
-    // setup callback for button bar
-    IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
-    btnBar.clickDelegate = gameObject;
-    btnBar.clickCallback = "ButtonBarClickCallback";
 
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
@@ -62,11 +47,23 @@ public class WelcomeRoom : MonoBehaviour
     return new Vector3(0, 1.2f, 2);
   }
 
+  void CreateRoom()
+  {
+    if (proceduralRoom == null)
+    {
+      // update these if wall size changes
+      const float wallDimension = 12;
+      const float zOffset = wallDimension / 2;
+
+      Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
+      proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
+    }
+  }
+
   public void ShowHome()
   {
-    proceduralRoom.SetActive(true);
-    proceduralRoom.GetComponent<ProceduralRoom>().SetColor(new Color(1, 1, 1, 1));
-
+    CreateRoom();
+    DestroyLevelMenu();
     FadeInButtonBar();
   }
 
@@ -98,7 +95,13 @@ public class WelcomeRoom : MonoBehaviour
   // -----------------------------------------------------
   void FadeInButtonBar()
   {
-    iconButtonBar.SetActive(true);
+    GameObject iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
+
+    // setup callback for button bar
+    IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
+    btnBar.clickDelegate = gameObject;
+    btnBar.clickCallback = "ButtonBarClickCallback";
+
     // iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeInButtonBarUpdate", "time", 3.5f));
   }
 
@@ -120,7 +123,8 @@ public class WelcomeRoom : MonoBehaviour
 
   public void FadeOutRoomDone()
   {
-    proceduralRoom.SetActive(false);
+    Destroy(proceduralRoom);
+    proceduralRoom = null;
   }
 
   // -----------------------------------------------------
@@ -128,7 +132,6 @@ public class WelcomeRoom : MonoBehaviour
   void ButtonBarClickCallback(string buttonID)
   {
     FadeOutRoom();
-    iconButtonBar.SetActive(false);
 
     levelMenu = Instantiate(levelMenuPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
@@ -138,16 +141,27 @@ public class WelcomeRoom : MonoBehaviour
 
     if (buttonID.Equals("Foundation"))
     {
-      BuildMenuItems(0);
+      BuildMenuItems(menu, 0);
     }
     else if (buttonID.Equals("Immersion"))
     {
-      BuildMenuItems(1);
+      BuildMenuItems(menu, 1);
+    }
+  }
+
+  void DestroyLevelMenu()
+  {
+    if (levelMenu != null)
+    {
+      Destroy(levelMenu);
+      levelMenu = null;
     }
   }
 
   void MenuCallback(string command)
   {
+    DestroyLevelMenu();
+
     switch (command)
     {
       // Foundation menu
@@ -190,10 +204,9 @@ public class WelcomeRoom : MonoBehaviour
     }
   }
 
-  void BuildMenuItems(int menuID)
+  void BuildMenuItems(LevelMenu menu, int menuID)
   {
     Dictionary<string, string> newItem;
-    LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
     List<Dictionary<string, string>> menuItems = new List<Dictionary<string, string>>();
 
     if (menuID == 0)

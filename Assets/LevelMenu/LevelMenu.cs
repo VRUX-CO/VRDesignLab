@@ -35,9 +35,6 @@ public class LevelMenu : MonoBehaviour
   public void ItemWasClicked(string command)
   {
     clickDelegate.SendMessage(clickCallback, command, SendMessageOptions.DontRequireReceiver);
-
-    // destroy, we are done
-    Destroy(gameObject);
   }
 
 }

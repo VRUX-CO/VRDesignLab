@@ -14,7 +14,6 @@ public class IconButtonBar : MonoBehaviour
 
   public void FadeIn(bool fadeIn)
   {
-
   }
 
   public void OnButtonClick(string buttonID)
@@ -22,6 +21,9 @@ public class IconButtonBar : MonoBehaviour
     if (clickDelegate != null)
     {
       clickDelegate.transform.gameObject.SendMessage(clickCallback, buttonID, SendMessageOptions.DontRequireReceiver);
+
+      // we're done
+      Destroy(gameObject);
     }
     else
       Debug.Log("icon button bar has no click delegate");
