@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &428156
 Transform:
   m_ObjectHideFlags: 1
@@ -39,14 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e7d123ee477144eb8a506e33360880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelNames:
-  - 1. Using a Reticle
-  - 2. UI Depth & Eye Strain
-  - 3. Using Constant Velocity
-  - 4. Keep the User Grounded
-  - 5. Maintaining Head Tracking
-  - < Go Back
   itemPrefab: {fileID: 109556, guid: d3bd38b300b551b41aab700e5713370c, type: 2}
+  clickDelegate: {fileID: 0}
+  clickCallback: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -64,7 +59,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

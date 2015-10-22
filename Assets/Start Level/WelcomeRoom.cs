@@ -23,12 +23,10 @@ public class WelcomeRoom : MonoBehaviour
   void Start()
   {
     Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
-    Vector3 contentPosition = new Vector3(0, 1.2f, 2);
 
     proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
-    welcomeSign = Instantiate(welcomeSignPrefab, contentPosition, Quaternion.identity) as GameObject;
-    iconButtonBar = Instantiate(iconButtonBarPrefab, contentPosition, Quaternion.identity) as GameObject;
-    levelMenu = Instantiate(levelMenuPrefab, contentPosition, Quaternion.identity) as GameObject;
+    welcomeSign = Instantiate(welcomeSignPrefab, ContentPosition(), Quaternion.identity) as GameObject;
+    iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
     // these prefabs start off inactive, so turn them on as needed
     welcomeSign.SetActive(true);
@@ -37,10 +35,6 @@ public class WelcomeRoom : MonoBehaviour
     IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
     btnBar.clickDelegate = gameObject;
     btnBar.clickCallback = "ButtonBarClickCallback";
-
-    LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
-    menu.clickDelegate = gameObject;
-    menu.clickCallback = "MenuCallback";
 
     signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
   }
@@ -61,6 +55,11 @@ public class WelcomeRoom : MonoBehaviour
           break;
       }
     }
+  }
+
+  Vector3 ContentPosition()
+  {
+    return new Vector3(0, 1.2f, 2);
   }
 
   public void ShowHome()
@@ -126,23 +125,24 @@ public class WelcomeRoom : MonoBehaviour
 
   // -----------------------------------------------------
 
-
   void ButtonBarClickCallback(string buttonID)
   {
     FadeOutRoom();
     iconButtonBar.SetActive(false);
 
+    levelMenu = Instantiate(levelMenuPrefab, ContentPosition(), Quaternion.identity) as GameObject;
+
+    LevelMenu menu = levelMenu.GetComponent<LevelMenu>();
+    menu.clickDelegate = gameObject;
+    menu.clickCallback = "MenuCallback";
+
     if (buttonID.Equals("Foundation"))
     {
       BuildMenuItems(0);
-
-      levelMenu.SetActive(true);
     }
     else if (buttonID.Equals("Immersion"))
     {
       BuildMenuItems(1);
-
-      levelMenu.SetActive(true);
     }
   }
 
