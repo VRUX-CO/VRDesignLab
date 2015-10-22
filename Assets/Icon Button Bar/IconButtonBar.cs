@@ -7,7 +7,7 @@ public class IconButtonBar : MonoBehaviour
   public string clickCallback;
 
   // Update is called once per frame
-  void Update()
+  void Start()
   {
     Utilities.RotateToFaceCamera(transform, Camera.main);
   }
