@@ -11,8 +11,6 @@ public class IconButton : MonoBehaviour
   public IconButtonBar buttonBar;
   public GameObject textLabel;
 
-  bool isFadingIn = false;
-
   TextMesh labelTextMesh;
 
   // Use this for initialization

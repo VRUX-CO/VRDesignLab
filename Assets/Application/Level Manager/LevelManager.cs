@@ -4,7 +4,6 @@ using System.Collections;
 public class LevelManager : MonoBehaviour
 {
   // private
-  static LevelManager lm = null;
   GameObject cameraFadeScreenPrefab;
   string levelToLoad = null;
   string currentLoadedLevel = null;
