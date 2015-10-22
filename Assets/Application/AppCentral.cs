@@ -144,6 +144,7 @@ public class AppCentral : MonoBehaviour
     }
     else
     {
+      UnityEngine.VR.InputTracking.Recenter();
     }
   }
 
