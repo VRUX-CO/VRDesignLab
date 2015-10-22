@@ -110,8 +110,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: 1, g: .956862748, b: .839215696, a: 1}
-  m_Intensity: 3.21000004
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: .270000011
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -184,6 +184,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11470882, guid: 69563a1c891be2241b64c5439799be92, type: 2}
+      propertyPath: floorMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 82ea6fe1e40ff4e46af64f5669f0164a, type: 2}
+    - target: {fileID: 11470882, guid: 69563a1c891be2241b64c5439799be92, type: 2}
+      propertyPath: floorMatLined
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f0b23d48b6d27c40a3e23bc2a60417a, type: 2}
+    - target: {fileID: 11470882, guid: 69563a1c891be2241b64c5439799be92, type: 2}
+      propertyPath: floor
+      value: 
+      objectReference: {fileID: 169214, guid: 2c717f29e9c5e5e49920ddc7d3655bb2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69563a1c891be2241b64c5439799be92, type: 2}
   m_IsPrefabParent: 0
@@ -229,7 +241,11 @@ Prefab:
     - target: {fileID: 2316382, guid: 2c717f29e9c5e5e49920ddc7d3655bb2, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9f5177618754ef94ead0d768b3877a91, type: 2}
+      objectReference: {fileID: 2100000, guid: 82ea6fe1e40ff4e46af64f5669f0164a, type: 2}
+    - target: {fileID: 2316382, guid: 2c717f29e9c5e5e49920ddc7d3655bb2, type: 2}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c717f29e9c5e5e49920ddc7d3655bb2, type: 2}
   m_IsPrefabParent: 0
