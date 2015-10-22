@@ -50,8 +50,12 @@ public class CubeSpawner : MonoBehaviour
       position = new Vector3(-xOffset - xRandom, 0f, startZ + zRandom);
     }
 
-    GameObject gameObject = Instantiate(cube, position, Quaternion.identity) as GameObject;
-    gameObject.GetComponent<CubeSpawnerCube>().StartMoving(speed);
+    GameObject newCube = Instantiate(cube, position, Quaternion.identity) as GameObject;
+
+    // make sure it gets deleted when scene is swapped out
+    newCube.transform.parent = transform;
+
+    newCube.GetComponent<CubeSpawnerCube>().StartMoving(speed);
 
     if (running)
     {

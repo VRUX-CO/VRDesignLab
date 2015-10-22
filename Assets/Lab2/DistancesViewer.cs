@@ -78,6 +78,9 @@ public class DistancesViewer : MonoBehaviour
       Vector3 newPosition = new Vector3(0, -22f, distance);
       currentSign = Instantiate(signToShow, newPosition, Quaternion.identity) as GameObject;
 
+      // parent this so it gets deleted when scene is swapped out
+      currentSign.transform.parent = transform;
+
       newPosition = new Vector3(0, 1f, distance);
       iTween.MoveTo(currentSign, iTween.Hash("position", newPosition, "time", .5f, "easeType", iTween.EaseType.easeInExpo, "oncomplete", "OnCompleteInCallback", "oncompleteparams", currentSign));
     }
