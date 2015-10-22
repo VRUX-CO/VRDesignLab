@@ -9,7 +9,8 @@ public class WelcomeRoom : MonoBehaviour
   public GameObject iconButtonBarPrefab;
   public GameObject levelMenuPrefab;
 
-  GameObject proceduralRoom, welcomeSign, levelMenu;
+  GameObject proceduralRoom, welcomeSign, levelMenu, iconButtonBar;
+  ProceduralRoom proom;
 
   Material signMaterial;
   bool dismissedSign = false;
@@ -18,6 +19,9 @@ public class WelcomeRoom : MonoBehaviour
   // Use this for initialization
   void Start()
   {
+    // not reticle on start screen
+    AppCentral.APP.ShowReticleOnClick(true);
+
     CreateRoom();
     welcomeSign = Instantiate(welcomeSignPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
@@ -57,6 +61,9 @@ public class WelcomeRoom : MonoBehaviour
 
       Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
       proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
+
+      // cache for the fadeout
+      proom = proceduralRoom.GetComponent<ProceduralRoom>();
     }
   }
 
@@ -64,7 +71,8 @@ public class WelcomeRoom : MonoBehaviour
   {
     CreateRoom();
     DestroyLevelMenu();
-    FadeInButtonBar();
+    DestroyIconBar();
+    ShowButtonBar();
   }
 
   // -----------------------------------------------------
@@ -88,43 +96,40 @@ public class WelcomeRoom : MonoBehaviour
     Destroy(welcomeSign);
     welcomeSign = null;
 
+    AppCentral.APP.ShowReticleOnClick(false);
+
     // show button bar
-    FadeInButtonBar();
+    ShowButtonBar();
   }
 
   // -----------------------------------------------------
-  void FadeInButtonBar()
+  void ShowButtonBar()
   {
-    GameObject iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
+    iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
     // setup callback for button bar
     IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
     btnBar.clickDelegate = gameObject;
     btnBar.clickCallback = "ButtonBarClickCallback";
-
-    // iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeInButtonBarUpdate", "time", 3.5f));
-  }
-
-  public void FadeInButtonBarUpdate(float progress)
-  {
   }
 
   // -----------------------------------------------------
 
   void FadeOutRoom()
   {
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutRoomUpdate", "time", 3.5f, "oncomplete", "FadeOutRoomDone"));
+    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutRoomUpdate", "time", 2f, "oncomplete", "FadeOutRoomDone"));
   }
 
   public void FadeOutRoomUpdate(float progress)
   {
-    proceduralRoom.GetComponent<ProceduralRoom>().SetColor(new Color(1, 1, 1, progress));
+    proom.SetColor(new Color(1, 1, 1, progress));
   }
 
   public void FadeOutRoomDone()
   {
     Destroy(proceduralRoom);
     proceduralRoom = null;
+    proom = null;
   }
 
   // -----------------------------------------------------
@@ -147,6 +152,8 @@ public class WelcomeRoom : MonoBehaviour
     {
       BuildMenuItems(menu, 1);
     }
+
+    DestroyIconBar();
   }
 
   void DestroyLevelMenu()
@@ -155,6 +162,15 @@ public class WelcomeRoom : MonoBehaviour
     {
       Destroy(levelMenu);
       levelMenu = null;
+    }
+  }
+
+  void DestroyIconBar()
+  {
+    if (iconButtonBar != null)
+    {
+      Destroy(iconButtonBar);
+      iconButtonBar = null;
     }
   }
 
