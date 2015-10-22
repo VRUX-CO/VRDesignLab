@@ -10,7 +10,10 @@ public class WelcomeRoom : MonoBehaviour
   public GameObject levelMenuPrefab;
 
   GameObject proceduralRoom, welcomeSign, levelMenu, iconButtonBar;
-  ProceduralRoom proom;
+
+  // used when fading out only
+  GameObject fadingGameObject;
+  ProceduralRoom fadingProceduralRoom;
 
   Material signMaterial;
   bool dismissedSign = false;
@@ -61,9 +64,6 @@ public class WelcomeRoom : MonoBehaviour
 
       Vector3 roomPosition = new Vector3(0, 0f, -zOffset);
       proceduralRoom = Instantiate(proceduralRoomPrefab, roomPosition, Quaternion.identity) as GameObject;
-
-      // cache for the fadeout
-      proom = proceduralRoom.GetComponent<ProceduralRoom>();
     }
   }
 
@@ -117,19 +117,37 @@ public class WelcomeRoom : MonoBehaviour
 
   void FadeOutRoom()
   {
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutRoomUpdate", "time", 2f, "oncomplete", "FadeOutRoomDone"));
+    if (proceduralRoom != null)
+    {
+      if (fadingGameObject == null)
+      {
+        fadingGameObject = proceduralRoom;
+        proceduralRoom = null;
+
+        fadingProceduralRoom = fadingGameObject.GetComponent<ProceduralRoom>();
+
+        iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutRoomUpdate", "time", 2f, "oncomplete", "FadeOutRoomDone"));
+      }
+      else
+      {
+        // don't bother fading if already in progress
+        Destroy(proceduralRoom);
+        proceduralRoom = null;
+      }
+    }
   }
 
   public void FadeOutRoomUpdate(float progress)
   {
-    proom.SetColor(new Color(1, 1, 1, progress));
+    fadingProceduralRoom.SetColor(new Color(1, 1, 1, progress));
   }
 
   public void FadeOutRoomDone()
   {
-    Destroy(proceduralRoom);
-    proceduralRoom = null;
-    proom = null;
+    Destroy(fadingGameObject);
+
+    fadingGameObject = null;
+    fadingProceduralRoom = null;
   }
 
   // -----------------------------------------------------
