@@ -19,9 +19,21 @@ public class LookDownNotifier : MonoBehaviour
       return;
     }
 
-    startPosition = transform.position;
     signMaterial = sign.GetComponent<MeshRenderer>().material;
     downArrayMaterial = downArrow.GetComponent<MeshRenderer>().material;
+
+    // attach to camera
+    transform.parent = Camera.main.transform;
+    Utilities.RotateToFaceCamera(transform, Camera.main);
+    transform.localPosition = new Vector3(0f, 0f, 2f);
+
+    ShowNotification();
+  }
+
+  void ShowNotification()
+  {
+    startPosition = transform.localPosition;
+    startPosition.y = -3f;
 
     signMaterial.color = new Color(1, 1, 1, 0);
     downArrayMaterial.color = new Color(0, 0, 0, 0);
@@ -42,12 +54,11 @@ public class LookDownNotifier : MonoBehaviour
 
   public void AnimationUpdateCallback(float progress)
   {
-    Vector3 vect = gameObject.transform.position;
+    Vector3 vect = transform.localPosition;
 
-    vect.y = startPosition.y + (progress * 1);
+    vect.y = startPosition.y + (progress * 2.5f);
 
-    gameObject.transform.position = vect;
-
+    transform.localPosition = vect;
 
     signMaterial.color = new Color(1, 1, 1, progress);
     downArrayMaterial.color = new Color(0, 0, 0, progress);
@@ -55,14 +66,14 @@ public class LookDownNotifier : MonoBehaviour
 
   public void AnimationDoneCallback()
   {
-    StartCoroutine(FadeOutAndDestroy(3));
+    StartCoroutine(FadeOutAndDestroy(2));
   }
 
   IEnumerator FadeOutAndDestroy(float delay)
   {
     yield return new WaitForSeconds(delay);
 
-    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", .5f, "oncomplete", "FadeOutDoneCallback"));
+    iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", 1f, "oncomplete", "FadeOutDoneCallback"));
   }
 
   public void FadeOutUpdateCallback(float progress)
@@ -73,6 +84,6 @@ public class LookDownNotifier : MonoBehaviour
 
   public void FadeOutDoneCallback()
   {
-    gameObject.SetActive(false);
+    Destroy(gameObject);
   }
 }

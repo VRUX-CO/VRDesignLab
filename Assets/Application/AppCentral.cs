@@ -15,7 +15,6 @@ public class AppCentral : MonoBehaviour
 
   bool isCardboard = false;
   LevelManager levelManager;
-  GameObject lookdownNotifier;
   WelcomeRoom mainScene;
   Crosshair3D reticle;
 
@@ -63,7 +62,6 @@ public class AppCentral : MonoBehaviour
     reticle = Instantiate(reticlePrefab).GetComponent<Crosshair3D>();
 
     Instantiate(lookdownMenuPrefab);
-    lookdownNotifier = Instantiate(lookdownNotifierPrefab);
     mainScene = Instantiate(mainScenePrefab).GetComponent<WelcomeRoom>();
 
     mainScene.gameObject.SetActive(isMainScene);
@@ -105,7 +103,8 @@ public class AppCentral : MonoBehaviour
 
   public void ShowLookdownNotifier()
   {
-    lookdownNotifier.SetActive(true);
+    // deletes self when done
+    Instantiate(lookdownNotifierPrefab);
   }
 
   public void ShowReticleOnClick(bool showOnClick)
