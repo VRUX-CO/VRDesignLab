@@ -122,4 +122,29 @@ public class AppCentral : MonoBehaviour
     reticle.ShowReticleOnClick(showOnClick);
   }
 
+  public void DisableHeadTracking(bool disable)
+  {
+    if (isCardboard)
+    {
+      CardboardHead head = Cardboard.Controller.Head;
+
+      head.trackRotation = !disable;
+      head.trackPosition = !disable;
+    }
+    else
+    {
+    }
+  }
+
+  public void RecenterHeadTracking()
+  {
+    if (isCardboard)
+    {
+      Cardboard.SDK.Recenter();
+    }
+    else
+    {
+    }
+  }
+
 }
