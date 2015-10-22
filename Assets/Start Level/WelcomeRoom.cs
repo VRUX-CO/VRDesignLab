@@ -154,6 +154,9 @@ public class WelcomeRoom : MonoBehaviour
     }
 
     DestroyIconBar();
+
+    // install the lookdown menu at this point
+    AppCentral.APP.InstallLookdownMenu();
   }
 
   void DestroyLevelMenu()
@@ -215,7 +218,7 @@ public class WelcomeRoom : MonoBehaviour
         break;
 
       case "back":  // go back item
-        Debug.Log("go back");
+        AppCentral.APP.HandleNavigation("Home");
         break;
     }
   }

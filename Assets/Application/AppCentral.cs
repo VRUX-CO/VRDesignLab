@@ -17,6 +17,7 @@ public class AppCentral : MonoBehaviour
   LevelManager levelManager;
   WelcomeRoom mainScene;
   Crosshair3D reticle;
+  GameObject lookDownMenu = null;
 
   static AppCentral app = null;
 
@@ -61,7 +62,6 @@ public class AppCentral : MonoBehaviour
     // must create reticle after cameras since it trys to access them
     reticle = Instantiate(reticlePrefab).GetComponent<Crosshair3D>();
 
-    Instantiate(lookdownMenuPrefab);
     mainScene = Instantiate(mainScenePrefab).GetComponent<WelcomeRoom>();
 
     mainScene.gameObject.SetActive(isMainScene);
@@ -74,6 +74,12 @@ public class AppCentral : MonoBehaviour
   public void LoadLevel(string levelName)
   {
     levelManager.LoadLevel(levelName);
+  }
+
+  public void InstallLookdownMenu()
+  {
+    if (lookDownMenu == null)
+      lookDownMenu = Instantiate(lookdownMenuPrefab);
   }
 
   public void HandleNavigation(string navigationID)
@@ -99,6 +105,10 @@ public class AppCentral : MonoBehaviour
 
     // restore state to main icon bar
     mainScene.ShowHome();
+
+    // remove look down menu
+    Destroy(lookDownMenu);
+    lookDownMenu = null;
   }
 
   public void ShowLookdownNotifier()
