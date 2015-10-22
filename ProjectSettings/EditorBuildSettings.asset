@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Start Level/VRDL_Welcome.unity
+    path: Assets/Scenes/VRDL_Start.unity
   - enabled: 1
     path: Assets/Scenes/VRDL_Lab1.unity
   - enabled: 1
