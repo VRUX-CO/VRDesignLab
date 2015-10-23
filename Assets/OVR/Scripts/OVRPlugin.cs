@@ -30,10 +30,9 @@ using System.Runtime.InteropServices;
 
 internal static class OVRPlugin
 {
-	public static System.Version wrapperVersion = new System.Version("0.1.3.0");
+	public static System.Version wrapperVersion = new System.Version("0.1.2.0");
 	private static System.Version v0110 = new System.Version(0, 1, 1, 0);
 	private static System.Version v0120 = new System.Version(0, 1, 2, 0);
-	private static System.Version v0130 = new System.Version(0, 1, 3, 0);
 	private static System.Version v0500 = new System.Version(0, 5, 0, 0);
 
 	private enum Bool
@@ -395,22 +394,6 @@ internal static class OVRPlugin
 			return new Posef();
 	}
 
-	public static Posef GetNodeVelocity(Node nodeId)
-	{
-		if (version >= v0130)
-			return OVRP0130.ovrp_GetNodeVelocity(nodeId);
-		else
-			return new Posef();
-	}
-
-	public static Posef GetNodeAcceleration(Node nodeId)
-	{
-		if (version >= v0130)
-			return OVRP0130.ovrp_GetNodeAcceleration(nodeId);
-		else
-			return new Posef();
-	}
-
 	public static InputState GetInputState(uint controllerMask)
 	{
 		if (version >= v0120)
@@ -444,10 +427,7 @@ internal static class OVRPlugin
 
 	private static bool GetCap(Caps cap)
 	{
-		if (version >= v0130)
-			return OVRP0130.ovrp_GetCaps2((uint)(1 << (int)cap)) != 0;
-		else
-			return ((int)OVRP0100.ovrp_GetCaps() & (1 << (int)cap)) != 0;
+		return ((int)OVRP0100.ovrp_GetCaps() & (1 << (int)cap)) != 0;
 	}
 
 	private static void SetCap(Caps cap, bool value)
@@ -589,17 +569,5 @@ internal static class OVRPlugin
 
 		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern Bool ovrp_SetControllerVibration(uint controllerMask, float frequency, float amplitude);
-	}
-
-	private static class OVRP0130
-	{
-		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
-		public static extern uint ovrp_GetCaps2(uint query);
-
-		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
-		public static extern Posef ovrp_GetNodeVelocity(Node nodeId);
-
-		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
-		public static extern Posef ovrp_GetNodeAcceleration(Node nodeId);
 	}
 }
