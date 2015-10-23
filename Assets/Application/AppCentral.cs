@@ -79,7 +79,7 @@ public class AppCentral : MonoBehaviour
   public void InstallLookdownMenu()
   {
     if (lookDownMenu == null)
-      lookDownMenu = Instantiate(lookdownMenuPrefab);
+      lookDownMenu = Instantiate(lookdownMenuPrefab, new Vector3(0f, .01f, 1f), Quaternion.identity) as GameObject;
   }
 
   public void HandleNavigation(string navigationID)
