@@ -163,8 +163,10 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: ee6b6c047f060074596445bbb9ebbfe7, type: 3}
-      m_Size: 128
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: ee6b6c047f060074596445bbb9ebbfe7, type: 3}
+      m_Width: 128
+      m_Height: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Android
     m_StaticBatching: 1
@@ -267,6 +269,8 @@ PlayerSettings:
   ps4pnGameCustomData: 1
   playerPrefsSupport: 0
   ps4ReprojectionSupport: 0
+  ps4UseAudio3dBackend: 0
+  ps4Audio3dVirtualSpeakerCount: 14
   ps4attribUserManagement: 0
   ps4attribMoveSupport: 0
   ps4attrib3DSupport: 0
