@@ -73,16 +73,11 @@ public static class MeshUtilities
   }
 
   // http://wiki.unity3d.com/index.php/ProceduralPrimitives
-  public static MeshFilter AddTorusMeshFilter(GameObject gameObject)
+  public static MeshFilter AddTorusMeshFilter(GameObject gameObject, float radius1 = 1f, float radius2 = .05f, int nbRadSeg = 44, int nbSides = 18)
   {
     MeshFilter filter = gameObject.AddComponent<MeshFilter>();
     Mesh mesh = filter.mesh;
     mesh.Clear();
-
-    float radius1 = 1f;
-    float radius2 = .3f;
-    int nbRadSeg = 24;
-    int nbSides = 18;
 
     #region Vertices
     Vector3[] vertices = new Vector3[(nbRadSeg + 1) * (nbSides + 1)];
