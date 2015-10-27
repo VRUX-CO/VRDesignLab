@@ -3,12 +3,17 @@ using System.Collections;
 
 public class DistancesViewer : MonoBehaviour
 {
+  public GameObject DistanceRingObject;
+  public GameObject DistanceLineObject;
+  public float lineLength;
+
   public GameObject HalfMeterMessage;
   public GameObject OneMeterMessage;
   public GameObject OneHalfMeterMessage;
   public GameObject ThreeMeterMessage;
   public GameObject FiveMeterMessage;
 
+  GameObject currentRingObject;
   int index = 0;
   GameObject currentSign;
 
@@ -75,6 +80,17 @@ public class DistancesViewer : MonoBehaviour
           break;
       }
 
+      // update distance loop
+      if (currentRingObject != null)
+        Destroy(currentRingObject);
+      currentRingObject = Instantiate(DistanceRingObject) as GameObject;
+      DistanceRing distanceRing;
+      distanceRing = currentRingObject.GetComponent<DistanceRing>();
+      distanceRing.UpdateDistance(distance);
+
+      DistanceLineObject.transform.position = new Vector3(0, lineLength / 2f, distance);
+      DistanceLineObject.transform.localScale = new Vector3(.01f, lineLength, 1);
+
       Vector3 newPosition = new Vector3(0, -22f, distance);
       currentSign = Instantiate(signToShow, newPosition, Quaternion.identity) as GameObject;
 
@@ -84,7 +100,6 @@ public class DistancesViewer : MonoBehaviour
       newPosition = new Vector3(0, 1f, distance);
       iTween.MoveTo(currentSign, iTween.Hash("position", newPosition, "time", .5f, "easeType", iTween.EaseType.easeInExpo, "oncomplete", "OnCompleteInCallback", "oncompleteparams", currentSign));
     }
-
 
     index++;
   }
