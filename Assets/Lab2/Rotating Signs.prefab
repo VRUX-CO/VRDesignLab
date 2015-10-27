@@ -25,6 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 490826}
+  - 114: {fileID: 11421024}
   m_Layer: 0
   m_Name: Rotating Signs
   m_TagString: Untagged
@@ -39,8 +40,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.66100001, z: 2}
-  m_LocalScale: {x: .0299999993, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 1.44799995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490826}
   m_RootOrder: 0
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15499997, z: 0}
+  m_LocalPosition: {x: 0, y: 1.09800005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489510}
@@ -88,6 +89,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134308}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11421024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f2e09868becd2479c1d60b464d9275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torusMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
+  line: {fileID: 134308}
+  meters: 1
+  lineLength: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
