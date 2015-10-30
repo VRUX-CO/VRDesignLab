@@ -39,6 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f2e09868becd2479c1d60b464d9275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  OneMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  OneHalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  ThreeMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  SixMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  TwelveMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
   goodMaterial: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
   warningMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
   lineLength: 1
@@ -65,6 +71,30 @@ Prefab:
       propertyPath: warningMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HalfMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: OneMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: OneHalfMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ThreeMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: SixMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: TwelveMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193656}

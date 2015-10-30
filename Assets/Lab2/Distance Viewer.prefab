@@ -40,11 +40,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistanceRingObject: {fileID: 193656, guid: 5d5920a2837c509409389899cd8516d1, type: 2}
-  HalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
-  OneMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
-  OneHalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
-  ThreeMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
-  FiveMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
