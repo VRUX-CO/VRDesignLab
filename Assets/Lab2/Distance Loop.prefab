@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f2e09868becd2479c1d60b464d9275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torusMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
-  line: {fileID: 0}
-  lineLength: 4
+  goodMaterial: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
+  warningMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
+  lineLength: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -53,6 +53,18 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lineLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: goodMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: warningMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193656}

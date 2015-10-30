@@ -4,22 +4,22 @@ using System.Collections;
 public class DistancesViewer : MonoBehaviour
 {
   public GameObject DistanceRingObject;
-  public GameObject DistanceLineObject;
-  public float lineLength;
-
   public GameObject HalfMeterMessage;
   public GameObject OneMeterMessage;
   public GameObject OneHalfMeterMessage;
   public GameObject ThreeMeterMessage;
   public GameObject FiveMeterMessage;
 
-  GameObject currentRingObject;
+  DistanceRing distanceRing;
   int index = 0;
   GameObject currentSign;
 
   // Use this for initialization
   void Start()
   {
+    GameObject obj = Instantiate(DistanceRingObject) as GameObject;
+    distanceRing = obj.GetComponent<DistanceRing>();
+
     Next();
   }
 
@@ -70,7 +70,6 @@ public class DistancesViewer : MonoBehaviour
         case 4:
           signToShow = FiveMeterMessage;
           distance = 5f;
-
           break;
         case 5:
         default:
@@ -81,15 +80,7 @@ public class DistancesViewer : MonoBehaviour
       }
 
       // update distance loop
-      if (currentRingObject != null)
-        Destroy(currentRingObject);
-      currentRingObject = Instantiate(DistanceRingObject) as GameObject;
-      DistanceRing distanceRing;
-      distanceRing = currentRingObject.GetComponent<DistanceRing>();
-      distanceRing.UpdateDistance(distance);
-
-      DistanceLineObject.transform.position = new Vector3(0, lineLength / 2f, distance);
-      DistanceLineObject.transform.localScale = new Vector3(.01f, lineLength, 1);
+      distanceRing.UpdateRadius(distance);
 
       Vector3 newPosition = new Vector3(0, -22f, distance);
       currentSign = Instantiate(signToShow, newPosition, Quaternion.identity) as GameObject;
