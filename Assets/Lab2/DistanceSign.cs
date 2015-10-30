@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DistanceRing : MonoBehaviour
+public class DistanceSign : MonoBehaviour
 {
   public GameObject HalfMeterMessage;
   public GameObject OneMeterMessage;

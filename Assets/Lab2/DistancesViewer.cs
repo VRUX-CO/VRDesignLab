@@ -5,7 +5,7 @@ public class DistancesViewer : MonoBehaviour
 {
   public GameObject DistanceRingObject;
 
-  DistanceRing distanceRing;
+  DistanceSign distanceSign;
   int index = 0;
   GameObject currentSign;
 
@@ -13,7 +13,7 @@ public class DistancesViewer : MonoBehaviour
   void Start()
   {
     GameObject obj = Instantiate(DistanceRingObject) as GameObject;
-    distanceRing = obj.GetComponent<DistanceRing>();
+    distanceSign = obj.GetComponent<DistanceSign>();
 
     Next();
   }
@@ -30,7 +30,7 @@ public class DistancesViewer : MonoBehaviour
   void Next()
   {
     // update distance loop
-    distanceRing.Show(index, true);
+    distanceSign.Show(index, true);
 
     index++;
   }

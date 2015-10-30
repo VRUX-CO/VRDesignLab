@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 478906}
   - 114: {fileID: 11454750}
   m_Layer: 0
-  m_Name: Distance Loop
+  m_Name: Distance Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
