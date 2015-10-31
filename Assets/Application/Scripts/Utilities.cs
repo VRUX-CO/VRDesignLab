@@ -5,8 +5,7 @@ public class Utilities : MonoBehaviour
 {
   public static bool UserClicked()
   {
-    if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)OVRGamepadController.Button.A]) ||   // "Desktop_Button A"
-Input.GetButtonDown("Button A") ||
+    if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") ||
 AppCentral.APP.CardboardClickEvent() || (Input.GetMouseButtonDown(0)))
     {
       return true;

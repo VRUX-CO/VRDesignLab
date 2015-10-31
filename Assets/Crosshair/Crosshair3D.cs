@@ -20,13 +20,10 @@ public class Crosshair3D : MonoBehaviour
   GameObject previousHitGameObject;
   GameObject previousHitButtonRevealer;
   AnimateTiledTexture _animatedCrosshair;
-  OVRCameraRig cameraController = null;
   bool showOnClickOnly = false;
 
   void Awake()
   {
-    cameraController = FindObjectOfType<OVRCameraRig>();
-
     // not required
     _animatedCrosshair = GetComponent<AnimateTiledTexture>();
   }
@@ -89,17 +86,8 @@ public class Crosshair3D : MonoBehaviour
     Vector3 cameraPosition;
     Vector3 cameraForward;
 
-    if (cameraController == null)
-    {
-      cameraPosition = Camera.main.transform.position;
-      cameraForward = Camera.main.transform.forward;
-    }
-    else
-    {
-      // get the camera forward vector and position
-      cameraPosition = cameraController.centerEyeAnchor.position;
-      cameraForward = cameraController.centerEyeAnchor.forward;
-    }
+    cameraPosition = Camera.main.transform.position;
+    cameraForward = Camera.main.transform.forward;
 
     return new Ray(cameraPosition, cameraForward);
   }

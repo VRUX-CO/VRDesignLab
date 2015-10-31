@@ -56,6 +56,7 @@ public class AppCentral : MonoBehaviour
     }
     else
     {
+
       Instantiate(oculusCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity);
     }
 
