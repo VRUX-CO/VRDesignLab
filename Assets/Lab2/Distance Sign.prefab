@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &193656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 478906}
+  - 114: {fileID: 11454750}
+  m_Layer: 0
+  m_Name: Distance Sign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &478906
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11454750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f2e09868becd2479c1d60b464d9275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  OneMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  OneHalfMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  ThreeMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  SixMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  TwelveMeterMessage: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+  goodMaterial: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
+  warningMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
+  lineLength: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lineLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: goodMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: warningMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HalfMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: OneMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: OneHalfMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ThreeMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: SixMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: TwelveMeterMessage
+      value: 
+      objectReference: {fileID: 166134, guid: c518d820ca4d0024e85f05fc59ccb1b1, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 193656}
+  m_IsPrefabParent: 1
