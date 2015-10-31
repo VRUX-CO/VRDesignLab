@@ -4,10 +4,9 @@ using System.Collections;
 public class BalloonSpawner : MonoBehaviour
 {
   public GameObject balloonPrefab;
-  public Lab1_Flow flow;
+  public Lab1Controller controller;
   private int balloonpop = 0;
   private bool swapped;
-  private bool endlab;
 
   // Use this for initialization
   void Start()
@@ -61,7 +60,7 @@ public class BalloonSpawner : MonoBehaviour
     balloonpop += 1;
     if (balloonpop == 2)
     {
-      flow.PoppedBalloon();
+      controller.PoppedBalloon();
 
       AppCentral.APP.ShowReticleOnClick(false);
 
