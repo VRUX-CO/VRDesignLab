@@ -5,32 +5,63 @@ public class Lab1Controller : MonoBehaviour
 {
   public GameObject balloonSpawnerPrefab;
 
-  public GameObject Card1;
-  public GameObject Card2;
+  public Material Card1Mat;
+  public Material Card2Mat;
+
+  GameObject currentCard = null;
 
   // Use this for initialization
   void Start()
   {
     GameObject gobj = Instantiate(balloonSpawnerPrefab);
 
-    BalloonSpawner spawnerr = gobj.GetComponent<BalloonSpawner>();
-    spawnerr.controller = this;
+    BalloonSpawner spawner = gobj.GetComponent<BalloonSpawner>();
+    spawner.controller = this;
 
-    /*balloons = GameObject.FindGameObjectsWithTag("Ballons");
-    if (balloons.length > 20)
-    {
-        // Do Something
-    }*/
+    ShowCard(0);
   }
 
   // Update is called once per frame
   public void PoppedBalloon()
   {
-    //   Destroy(Card1);
-    //   GameObject newCard = Instantiate(Card2, Card2.transform.position, Card2.transform.rotation) as GameObject;
+    Destroy(currentCard);
+    ShowCard(1);
+  }
 
+  void ShowCard(int cardIndex)
+  {
+    Vector3 endPosition = new Vector3(0, 1, 2);
+
+    currentCard = GameObject.CreatePrimitive(PrimitiveType.Quad);
+    currentCard.AddComponent<FaceCameraScript>();
+    MeshRenderer renderer = currentCard.GetComponent<MeshRenderer>();
+
+    switch (cardIndex)
+    {
+      case 0:
+        renderer.material = Card1Mat;
+        endPosition = new Vector3(0, 2, 2);
+        break;
+      default:
+      case 1:
+        renderer.material = Card2Mat;
+        endPosition = new Vector3(-1, 2, 2);
+        break;
+    }
 
     // parent this to gameObject so it gets cleaned up when level is unloaded
-    //   newCard.transform.parent = gameObject.transform;
+    currentCard.transform.parent = gameObject.transform;
+
+    currentCard.transform.position = new Vector3(0, 20, 2);
+
+    iTween.MoveTo(currentCard, iTween.Hash("position", endPosition, "time", 2f, "easeType", iTween.EaseType.linear, "oncomplete", "OnCompleteCallback", "oncompleteparams", currentCard));
   }
+
+  void OnCompleteCallback(GameObject card)
+  {
+    // Destroy(card);
+  }
+
+
+
 }
