@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 3d81965548c84ed4bb23edfabefb7003
+timeCreated: 1444760564
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BackgroundTerrainA_BaseMesh
+    100002: BackgroundTerrainA_BaseMesh1
+    100004: BackgroundTerrainA_BaseMesh10
+    100006: BackgroundTerrainA_BaseMesh11
+    100008: BackgroundTerrainA_BaseMesh12
+    100010: BackgroundTerrainA_BaseMesh13
+    100012: BackgroundTerrainA_BaseMesh14
+    100014: BackgroundTerrainA_BaseMesh2
+    100016: BackgroundTerrainA_BaseMesh4
+    100018: BackgroundTerrainA_BaseMesh5
+    100020: BackgroundTerrainA_BaseMesh6
+    100022: BackgroundTerrainA_BaseMesh7
+    100024: BackgroundTerrainA_BaseMesh8
+    100026: BackgroundTerrainA_BaseMesh9
+    100028: //RootNode
+    400000: BackgroundTerrainA_BaseMesh
+    400002: BackgroundTerrainA_BaseMesh1
+    400004: BackgroundTerrainA_BaseMesh10
+    400006: BackgroundTerrainA_BaseMesh11
+    400008: BackgroundTerrainA_BaseMesh12
+    400010: BackgroundTerrainA_BaseMesh13
+    400012: BackgroundTerrainA_BaseMesh14
+    400014: BackgroundTerrainA_BaseMesh2
+    400016: BackgroundTerrainA_BaseMesh4
+    400018: BackgroundTerrainA_BaseMesh5
+    400020: BackgroundTerrainA_BaseMesh6
+    400022: BackgroundTerrainA_BaseMesh7
+    400024: BackgroundTerrainA_BaseMesh8
+    400026: BackgroundTerrainA_BaseMesh9
+    400028: //RootNode
+    2300000: BackgroundTerrainA_BaseMesh
+    2300002: BackgroundTerrainA_BaseMesh1
+    2300004: BackgroundTerrainA_BaseMesh10
+    2300006: BackgroundTerrainA_BaseMesh11
+    2300008: BackgroundTerrainA_BaseMesh12
+    2300010: BackgroundTerrainA_BaseMesh13
+    2300012: BackgroundTerrainA_BaseMesh14
+    2300014: BackgroundTerrainA_BaseMesh2
+    2300016: BackgroundTerrainA_BaseMesh4
+    2300018: BackgroundTerrainA_BaseMesh5
+    2300020: BackgroundTerrainA_BaseMesh6
+    2300022: BackgroundTerrainA_BaseMesh7
+    2300024: BackgroundTerrainA_BaseMesh8
+    2300026: BackgroundTerrainA_BaseMesh9
+    3300000: BackgroundTerrainA_BaseMesh
+    3300002: BackgroundTerrainA_BaseMesh1
+    3300004: BackgroundTerrainA_BaseMesh10
+    3300006: BackgroundTerrainA_BaseMesh11
+    3300008: BackgroundTerrainA_BaseMesh12
+    3300010: BackgroundTerrainA_BaseMesh13
+    3300012: BackgroundTerrainA_BaseMesh14
+    3300014: BackgroundTerrainA_BaseMesh2
+    3300016: BackgroundTerrainA_BaseMesh4
+    3300018: BackgroundTerrainA_BaseMesh5
+    3300020: BackgroundTerrainA_BaseMesh6
+    3300022: BackgroundTerrainA_BaseMesh7
+    3300024: BackgroundTerrainA_BaseMesh8
+    3300026: BackgroundTerrainA_BaseMesh9
+    4300000: BackgroundTerrainA_BaseMesh
+    4300002: BackgroundTerrainA_BaseMesh1
+    4300004: BackgroundTerrainA_BaseMesh2
+    4300006: BackgroundTerrainA_BaseMesh4
+    4300008: BackgroundTerrainA_BaseMesh5
+    4300010: BackgroundTerrainA_BaseMesh6
+    4300012: BackgroundTerrainA_BaseMesh7
+    4300014: BackgroundTerrainA_BaseMesh8
+    4300016: BackgroundTerrainA_BaseMesh9
+    4300018: BackgroundTerrainA_BaseMesh10
+    4300020: BackgroundTerrainA_BaseMesh11
+    4300022: BackgroundTerrainA_BaseMesh12
+    4300024: BackgroundTerrainA_BaseMesh13
+    4300026: BackgroundTerrainA_BaseMesh14
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
