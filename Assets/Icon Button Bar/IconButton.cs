@@ -16,17 +16,18 @@ public class IconButton : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    gameObject.tag = Crosshair3D.kCrosshairTargetable;
+    GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+    quad.transform.parent = transform;  // parent this quad
+    quad.transform.localPosition = Vector3.zero;
+    quad.tag = Crosshair3D.kCrosshairTargetable;
+    EventDelegate ed = quad.AddComponent<EventDelegate>();
+    ed.eventDelegate = gameObject;
 
-    buttonRenderer = gameObject.AddComponent<MeshRenderer>();
-    buttonRenderer.material = mat;
+    quad.transform.localScale = new Vector3(.15f, .15f, .15f);
+    buttonRenderer = quad.GetComponent<MeshRenderer>();
 
     defaultColor = CurrentColor();
-
-    MeshUtilities.AddMeshComponent(gameObject, .15f, .15f);
-
-    // start off hidden
-    // SetColorAlpha(0);
+    buttonRenderer.material = mat;
 
     labelTextMesh = textLabel.GetComponent<TextMesh>();
     labelTextMesh.color = new Color(0f, 0f, 0f, .9f);

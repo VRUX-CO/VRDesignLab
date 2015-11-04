@@ -70,7 +70,7 @@ public class Crosshair3D : MonoBehaviour
       ray = new Ray(cameraPosition, cameraForward);
       if (Physics.Raycast(ray, out hit))
       {
-        hit.transform.gameObject.SendMessage("OnClick", SendMessageOptions.DontRequireReceiver);
+        SendEventToGameObject(hit.transform.gameObject, "OnClick");
       }
 
       // show cross hair temporarily if in the showOnClickOnly mode
@@ -92,11 +92,21 @@ public class Crosshair3D : MonoBehaviour
     return new Ray(cameraPosition, cameraForward);
   }
 
+  void SendEventToGameObject(GameObject go, string eventName)
+  {
+    // send to event delegate if exists, otherwise send it to the game object hit
+    EventDelegate eventDelegate = go.GetComponent<EventDelegate>();
+    if (eventDelegate)
+      eventDelegate.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+    else
+      go.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+  }
+
   void EndHover()
   {
     if (previousHitGameObject != null)
     {
-      previousHitGameObject.SendMessage("OnHoverEnd", SendMessageOptions.DontRequireReceiver);
+      SendEventToGameObject(previousHitGameObject, "OnHoverEnd");
       previousHitGameObject = null;
     }
 
@@ -121,7 +131,7 @@ public class Crosshair3D : MonoBehaviour
       {
         EndHover();
 
-        hit.transform.gameObject.SendMessage("OnHoverStart", SendMessageOptions.DontRequireReceiver);
+        SendEventToGameObject(hit.transform.gameObject, "OnHoverStart");
 
         if (hit.transform.gameObject.tag == kCrosshairTargetable)
         {
@@ -158,7 +168,7 @@ public class Crosshair3D : MonoBehaviour
       {
         EndButtonRevealer();
 
-        hit.transform.gameObject.SendMessage("OnRevealStart", SendMessageOptions.DontRequireReceiver);
+        SendEventToGameObject(hit.transform.gameObject, "OnRevealStart");
 
         previousHitButtonRevealer = hit.transform.gameObject;
       }
@@ -173,7 +183,7 @@ public class Crosshair3D : MonoBehaviour
   {
     if (previousHitButtonRevealer != null)
     {
-      previousHitButtonRevealer.SendMessage("OnRevealEnd", SendMessageOptions.DontRequireReceiver);
+      SendEventToGameObject(previousHitButtonRevealer, "OnRevealEnd");
 
       previousHitButtonRevealer = null;
     }
