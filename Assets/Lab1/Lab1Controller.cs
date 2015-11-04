@@ -15,6 +15,9 @@ public class Lab1Controller : MonoBehaviour
   {
     GameObject gobj = Instantiate(balloonSpawnerPrefab);
 
+    // parent this to gameObject so it gets cleaned up when level is unloaded
+    gobj.transform.parent = transform;
+
     BalloonSpawner spawner = gobj.GetComponent<BalloonSpawner>();
     spawner.controller = this;
 
