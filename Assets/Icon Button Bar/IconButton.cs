@@ -25,9 +25,9 @@ public class IconButton : MonoBehaviour
 
     quad.transform.localScale = new Vector3(.15f, .15f, .15f);
     buttonRenderer = quad.GetComponent<MeshRenderer>();
+    buttonRenderer.material = mat;
 
     defaultColor = CurrentColor();
-    buttonRenderer.material = mat;
 
     labelTextMesh = textLabel.GetComponent<TextMesh>();
     labelTextMesh.color = new Color(0f, 0f, 0f, .9f);

@@ -60,9 +60,9 @@ public class LookButton : MonoBehaviour
 
     quad.transform.localScale = new Vector3(.15f, .15f, .15f);
     buttonRenderer = quad.GetComponent<MeshRenderer>();
+    buttonRenderer.material = mat;
 
     defaultColor = CurrentColor();
-    buttonRenderer.material = mat;
 
     // start off hidden
     SetColorAlpha(0);
