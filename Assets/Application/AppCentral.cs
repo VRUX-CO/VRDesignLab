@@ -12,12 +12,14 @@ public class AppCentral : MonoBehaviour
   public GameObject lookdownNotifierPrefab;
   public GameObject cameraFadeScreenPrefab;
   public GameObject mainScenePrefab;
+  public GameObject environmentPrefab;
 
   bool isCardboard = false;
   LevelManager levelManager;
   WelcomeRoom mainScene;
   Crosshair3D reticle;
   GameObject lookDownMenu = null;
+  GameObject environment = null;
 
   static AppCentral app = null;
 
@@ -56,7 +58,6 @@ public class AppCentral : MonoBehaviour
     }
     else
     {
-
       Instantiate(oculusCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity);
     }
 
@@ -70,6 +71,8 @@ public class AppCentral : MonoBehaviour
     // add level manager to app
     levelManager = gameObject.AddComponent<LevelManager>();
     levelManager.Initialize(cameraFadeScreenPrefab);
+
+    ShowEnvironment(true);
   }
 
   public void LoadLevel(string levelName)
@@ -81,6 +84,23 @@ public class AppCentral : MonoBehaviour
   {
     if (lookDownMenu == null)
       lookDownMenu = Instantiate(lookdownMenuPrefab, new Vector3(0f, .01f, 1f), Quaternion.identity) as GameObject;
+  }
+
+  public void ShowEnvironment(bool showEnvironment)
+  {
+    if (showEnvironment)
+    {
+      if (environment == null)
+        environment = Instantiate(environmentPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+    }
+    else
+    {
+      if (environment != null)
+      {
+        Destroy(environment);
+        environment = null;
+      }
+    }
   }
 
   public void HandleNavigation(string navigationID)
