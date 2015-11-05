@@ -25,6 +25,8 @@ public class ButtonRevealPlane : MonoBehaviour
 
     MeshUtilities.AddMeshComponent(gameObject, 1f, 2.5f);
 
+    // gameObject.AddComponent<FaceCameraScript>();
+
     // m_Camera = Camera.main;
 
     // StartCoroutine(Dupdate(0));
