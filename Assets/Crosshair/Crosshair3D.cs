@@ -4,15 +4,8 @@ using System.Collections;
 public class Crosshair3D : MonoBehaviour
 {
   static public string kCrosshairTargetable = "targetable";
+  static public int kRevealerLayer = 11;
 
-  public enum CrosshairMode
-  {
-    Dynamic = 0,			// cursor positions itself in 3D based on raycasts into the scene
-    DynamicObjects = 1,		// similar to Dynamic but cursor is only visible for objects in a specific layer
-    FixedDepth = 2,			// cursor positions itself based on camera forward and draws at a fixed depth
-  }
-
-  public CrosshairMode mode = CrosshairMode.Dynamic;
   public int objectLayer = 8;
   public float offsetFromObjects = 0.1f;
   public float fixedDepth = 3.0f;
@@ -37,24 +30,18 @@ public class Crosshair3D : MonoBehaviour
     Vector3 cameraPosition = camRay.origin;
     Vector3 cameraForward = camRay.direction;
 
-    switch (mode)
+    if (false)  // disabled this, but might be needed later
     {
-      case CrosshairMode.Dynamic:
-        // cursor positions itself in 3D based on raycasts into the scene
-        // trace to the spot that the player is looking at
-        ray = new Ray(cameraPosition, cameraForward);
-        if (Physics.Raycast(ray, out hit))
-        {
-          // distance = hit.distance;
-          transform.position = hit.point + (-cameraForward * offsetFromObjects);
+      // cursor positions itself in 3D based on raycasts into the scene
+      // trace to the spot that the player is looking at
+      ray = new Ray(cameraPosition, cameraForward);
+      if (Physics.Raycast(ray, out hit))
+      {
+        // distance = hit.distance;
+        transform.position = hit.point + (-cameraForward * offsetFromObjects);
 
-          cursorSet = true;
-        }
-        break;
-
-      case CrosshairMode.FixedDepth:
-        // gets set below as the default mode when fixed or nothing hit
-        break;
+        cursorSet = true;
+      }
     }
 
     if (!cursorSet)
@@ -159,10 +146,8 @@ public class Crosshair3D : MonoBehaviour
 
     ray = new Ray(cameraPosition, cameraForward);
 
-    int layerMask = 1 << 11;
-
     // Does the ray intersect any objects which are in the player layer.
-    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+    if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << kRevealerLayer))
     {
       if (previousHitButtonRevealer != hit.transform.gameObject)
       {

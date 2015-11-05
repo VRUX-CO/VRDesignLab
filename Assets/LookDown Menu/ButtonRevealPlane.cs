@@ -23,7 +23,17 @@ public class ButtonRevealPlane : MonoBehaviour
     foreach (LookButton button in buttons)
       button.SetClickDelegate(gameObject, "OnLookButtonClick");
 
-    MeshUtilities.AddMeshComponent(gameObject, 1f, 2.5f);
+    GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+    quad.transform.parent = transform;  // parent this quad
+    quad.transform.localPosition = new Vector3(0, 0, .2f);
+    EventDelegate ed = quad.AddComponent<EventDelegate>();
+    ed.eventDelegate = gameObject;
+
+    quad.transform.localScale = new Vector3(1f, 1f, 1f);
+    quad.layer = Crosshair3D.kRevealerLayer;
+
+    MeshRenderer buttonRenderer = quad.GetComponent<MeshRenderer>();
+    buttonRenderer.enabled = false;  // don't draw
 
     // gameObject.AddComponent<FaceCameraScript>();
 
@@ -44,8 +54,8 @@ public class ButtonRevealPlane : MonoBehaviour
   void MoveInfrontOfCamera()
   {
     Vector3 pos = Camera.main.transform.position;
-    pos.z += .5f;
-    pos.y = .1f;
+    pos.z += 1.5f;
+    pos.y = .3f;
 
     transform.position = pos;
   }
