@@ -1,8 +1,13 @@
-Open source Virtual Reality design lab.
 
-Inspired by Google's Cardboard Lab app, but this app runs on DK2, GearVR and Cardboard.
+Unity Project
 
-If anyone would like to contribute this app, please contact me.   steve@vrux.co
+Open sourced Virtual Reality Design Lab app.
+
+Runs on Cardboard, DK2, GearVR.
+
+Inspired by Google's Cardboard Design Lab app, but this will be open source and run on all platforms.
+
+If anyone would like to contribute, please contact me.   steve@vrux.co
 
 I'll be posting more information on how to easily add labs soon.
 
