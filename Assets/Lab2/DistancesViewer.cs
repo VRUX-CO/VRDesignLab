@@ -12,8 +12,11 @@ public class DistancesViewer : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    GameObject obj = Instantiate(DistanceRingObject) as GameObject;
-    distanceSign = obj.GetComponent<DistanceSign>();
+    currentSign = Instantiate(DistanceRingObject) as GameObject;
+    distanceSign = currentSign.GetComponent<DistanceSign>();
+
+    // parent so it gets destroyed on scene swap
+    currentSign.transform.parent = transform;
 
     Next();
   }
@@ -24,6 +27,14 @@ public class DistancesViewer : MonoBehaviour
     if (Utilities.UserClicked())
     {
       Next();
+    }
+
+    // maintain distance to camera without attaching
+    if (currentSign != null)
+    {
+      Vector3 newPosition = new Vector3(0, 0, Camera.main.transform.position.z);
+
+      currentSign.transform.localPosition = newPosition;
     }
   }
 
