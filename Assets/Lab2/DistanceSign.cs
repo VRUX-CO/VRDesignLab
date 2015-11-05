@@ -51,7 +51,10 @@ public class DistanceSign : MonoBehaviour
 
     if (index < 6)
     {
-      mainObject = new GameObject();
+      mainObject = new GameObject("Sign");
+
+      // parent it all together so we can move it to stay z distance from camera, and so it gets deleted properly
+      mainObject.transform.parent = transform;
 
       float radius = RadiusForIndex(index);
 
@@ -178,5 +181,16 @@ public class DistanceSign : MonoBehaviour
     }
 
     return result;
+  }
+
+  void Update()
+  {
+    // maintain distance to camera without attaching
+    if (mainObject != null)
+    {
+      Vector3 newPosition = new Vector3(0, 0, Camera.main.transform.position.z);
+
+      mainObject.transform.localPosition = newPosition;
+    }
   }
 }

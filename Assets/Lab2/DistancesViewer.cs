@@ -28,14 +28,6 @@ public class DistancesViewer : MonoBehaviour
     {
       Next();
     }
-
-    // maintain distance to camera without attaching
-    if (currentSign != null)
-    {
-      Vector3 newPosition = new Vector3(0, 0, Camera.main.transform.position.z);
-
-      currentSign.transform.localPosition = newPosition;
-    }
   }
 
   void Next()
