@@ -77,7 +77,18 @@ public class AppCentral : MonoBehaviour
 
   public void LoadLevel(string levelName)
   {
+    // reset this if set by the level
+    ShowReticleOnClick(false);
+
     levelManager.LoadLevel(levelName);
+  }
+
+  public void NextLevel()
+  {
+    // reset this if set by the level
+    ShowReticleOnClick(false);
+
+    levelManager.LoadNextLevel();
   }
 
   public void InstallLookdownMenu()
@@ -113,6 +124,7 @@ public class AppCentral : MonoBehaviour
         ResetToHomeState();
         break;
       case "Next":
+        NextLevel();
         break;
     }
   }

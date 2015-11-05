@@ -36,6 +36,13 @@ public class LevelManager : MonoBehaviour
     GetFadeScreen().FadeOut("FadeOutDone");
   }
 
+  public void LoadNextLevel()
+  {
+    int index = IndexForLevel(currentLoadedLevel);
+
+    LoadLevel(LevelNameForIndex(index + 1));
+  }
+
   public void FadeOutDone()
   {
     UnloadLevel(null); // null unloads currentLoadedLevel
@@ -73,4 +80,59 @@ public class LevelManager : MonoBehaviour
 
     return result;
   }
+
+  // this complexity was added for the next button
+  int IndexForLevel(string levelName)
+  {
+    int result;
+    switch (levelName)
+    {
+      default:
+      case "VRDL_Lab1":
+        result = 0;
+        break;
+      case "VRDL_Lab2":
+        result = 1;
+        break;
+      case "VRDL_Lab3":
+        result = 2;
+        break;
+      case "VRDL_Lab4":
+        result = 3;
+        break;
+      case "VRDL_Lab5":
+        result = 4;
+        break;
+    }
+
+    return result;
+  }
+
+  // this complexity was added for the next button
+  string LevelNameForIndex(int index)
+  {
+    string result;
+    switch (index)
+    {
+      default:
+      case 0:
+        result = "VRDL_Lab1";
+        break;
+      case 1:
+        result = "VRDL_Lab2";
+        break;
+      case 2:
+        result = "VRDL_Lab3";
+        break;
+      case 3:
+        result = "VRDL_Lab4";
+        break;
+      case 4:
+        result = "VRDL_Lab5";
+        break;
+    }
+
+    return result;
+  }
 }
+

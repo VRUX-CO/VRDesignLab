@@ -9,8 +9,6 @@ public class ButtonRevealPlane : MonoBehaviour
   // called only from LookButton when it's clicked
   public void OnLookButtonClick(string buttonID)
   {
-    ShowButtons(false);
-
     AppCentral.APP.HandleNavigation(buttonID);
   }
 
