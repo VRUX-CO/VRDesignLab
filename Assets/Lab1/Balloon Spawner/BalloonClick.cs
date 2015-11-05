@@ -5,6 +5,7 @@ public class BalloonClick : MonoBehaviour
 {
   public BalloonSpawner spawner;
   public SplitMeshIntoTriangles balloonsplit;
+  public AudioClip popSound;
 
   void Start()
   {
@@ -17,15 +18,13 @@ public class BalloonClick : MonoBehaviour
     balloonsplit.SplitBalloon();
 
     // play pop sound
-    if (gameObject.GetComponent<AudioSource>() != null)
-      gameObject.GetComponent<AudioSource>().Play();
+    if (popSound != null)
+      Utilities.PlaySound(popSound);
 
     // tell the spawner we've been popped
     spawner.BalloonPopped();
 
     // give time for the sound to play
-    Destroy(gameObject, 1);
-
+    Destroy(gameObject);
   }
-
 }

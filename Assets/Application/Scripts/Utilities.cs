@@ -46,5 +46,14 @@ AppCentral.APP.CardboardClickEvent() || (Input.GetMouseButtonDown(0)))
         camera.transform.rotation * Vector3.up);
   }
 
+  public static void PlaySound(AudioClip clip)
+  {
+    GameObject go = new GameObject();
 
+    AudioSource audio = go.AddComponent<AudioSource>();
+    audio.clip = clip;
+    audio.Play();
+
+    Destroy(go, audio.clip.length);
+  }
 }

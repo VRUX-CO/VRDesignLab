@@ -44,15 +44,12 @@ public class SplitMeshIntoTriangles : MonoBehaviour
         GO.AddComponent<BoxCollider>();
         GO.AddComponent<Rigidbody>().AddExplosionForce(100, transform.position, 30);
 
-        //Destroy(GO, 5 + Random.Range(0.0f, 5.0f));
         Destroy(GO, Random.Range(0.0f, 0.5f));
       }
     }
     MR.enabled = false;
 
-    //Time.timeScale = 0.2f;
     yield return new WaitForSeconds(0.8f);
-    Time.timeScale = 1.0f;
     Destroy(gameObject);
   }
 
