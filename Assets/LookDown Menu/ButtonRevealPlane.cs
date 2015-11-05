@@ -25,11 +25,11 @@ public class ButtonRevealPlane : MonoBehaviour
 
     GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
     quad.transform.parent = transform;  // parent this quad
-    quad.transform.localPosition = new Vector3(0, 0, .2f);
+    quad.transform.localPosition = new Vector3(0, 0, .1f);
     EventDelegate ed = quad.AddComponent<EventDelegate>();
     ed.eventDelegate = gameObject;
 
-    quad.transform.localScale = new Vector3(1f, 1f, 1f);
+    quad.transform.localScale = new Vector3(1f, .8f, 1f);
     quad.layer = Crosshair3D.kRevealerLayer;
 
     MeshRenderer buttonRenderer = quad.GetComponent<MeshRenderer>();
