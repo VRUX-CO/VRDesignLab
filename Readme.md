@@ -1,16 +1,19 @@
 
-Unity Project
+### An open source VR project written in [Unity](http://unity3d.com)
 
-Open sourced Virtual Reality Design Lab app.
+### Runs on Cardboard, DK2, GearVR.
 
-Runs on Cardboard, DK2, GearVR.
+Inspired by Google's Cardboard Design Lab Android app.
 
-Inspired by Google's Cardboard Design Lab app, but this will be open source and run on all platforms.
+This is a VR commuity owned project.  Please extend, modify and improve.  Send us your pull requests.
 
-If anyone would like to contribute, please contact me.   steve@vrux.co
+### How to add a VR Lab
 
-I'll be posting more information on how to easily add labs soon.
+1. Make a new scene
+2. Drag in the "App Boot Strap" prefab
+3. (more coming soon)
 
-Stay tuned.
 
-vrux.co
+**License:** [No License](http://choosealicense.com/no-license/)
+
+by [VRUX](http://vrux.co)
