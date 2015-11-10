@@ -8,7 +8,7 @@ public class CubeSpawner : MonoBehaviour
   public Material floorMat;
   public Material floorMatLined;
   bool linedMode = false;
-  MeshRenderer renderer;
+  MeshRenderer meshRenderer;
 
   bool running = true;
   float xOffset = 3;
@@ -16,7 +16,7 @@ public class CubeSpawner : MonoBehaviour
 
   void Start()
   {
-    renderer = floor.GetComponent<MeshRenderer>();
+    meshRenderer = floor.GetComponent<MeshRenderer>();
 
     StartCoroutine(SpawnCube(0));
   }
@@ -27,11 +27,11 @@ public class CubeSpawner : MonoBehaviour
     {
       if (linedMode)
       {
-        renderer.material = floorMat;
+        meshRenderer.material = floorMat;
       }
       else
       {
-        renderer.material = floorMatLined;
+        meshRenderer.material = floorMatLined;
       }
 
       linedMode = !linedMode;
