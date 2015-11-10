@@ -27,7 +27,7 @@ public class DistanceSign : MonoBehaviour
 
     GameObject result = new GameObject();
 
-    MeshFilter filter = MeshUtilities.AddTorusMeshFilter(result, radius, innerRadius, nbRadSeg, nbSides);
+    MeshUtilities.AddTorusMeshFilter(result, radius, innerRadius, nbRadSeg, nbSides);
 
     MeshRenderer renderer = result.AddComponent<MeshRenderer>();
 

@@ -41,8 +41,8 @@ public class CubeSpawner : MonoBehaviour
   IEnumerator SpawnCube(int count)
   {
     float startZ = 70;
-    float xRandom = Random.RandomRange(3f, 22f);
-    float zRandom = Random.RandomRange(-10f, 10f);
+    float xRandom = Random.Range(3f, 22f);
+    float zRandom = Random.Range(-10f, 10f);
 
     Vector3 position = new Vector3(xOffset + xRandom, 0f, startZ + zRandom);
     if ((count % 2) == 0)

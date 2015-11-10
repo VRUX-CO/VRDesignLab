@@ -11,7 +11,7 @@ public class CubeSpawnerCube : MonoBehaviour
   {
     transform.localScale = new Vector3(startScale, 0, startScale);
 
-    iTween.ScaleTo(gameObject, new Vector3(startScale, yScale, startScale), Random.RandomRange(9f, 13f) / inSpeed);
+    iTween.ScaleTo(gameObject, new Vector3(startScale, yScale, startScale), Random.Range(9f, 13f) / inSpeed);
 
     Vector3 startPosition = transform.position;
     startPosition.z = -4;
