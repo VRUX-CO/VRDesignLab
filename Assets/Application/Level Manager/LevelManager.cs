@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class LevelManager : MonoBehaviour
   GameObject cameraFadeScreenPrefab;
   string levelToLoad = null;
   string currentLoadedLevel = null;
+  List<Dictionary<string, string>> menuItems;
 
   void Awake()
   {
@@ -36,11 +38,11 @@ public class LevelManager : MonoBehaviour
     GetFadeScreen().FadeOut("FadeOutDone");
   }
 
-  public void LoadNextLevel()
+  public void LoadNextLevel(string category)
   {
-    int index = IndexForLevel(currentLoadedLevel);
+    int index = IndexForLevel(currentLoadedLevel, category);
 
-    LoadLevel(LevelNameForIndex(index + 1));
+    LoadLevel(LevelNameForIndex(index + 1, category));
   }
 
   public void FadeOutDone()
@@ -82,57 +84,149 @@ public class LevelManager : MonoBehaviour
   }
 
   // this complexity was added for the next button
-  int IndexForLevel(string levelName)
+  int IndexForLevel(string levelName, string category)
   {
-    int result;
-    switch (levelName)
+    List<Dictionary<string, string>> menuItems = MenuItems(category);
+
+    int result = -1;
+    int index = 0;
+
+    foreach (Dictionary<string, string> item in menuItems)
     {
-      default:
-      case "VRDL_Lab1":
-        result = 0;
-        break;
-      case "VRDL_Lab2":
-        result = 1;
-        break;
-      case "VRDL_Lab3":
-        result = 2;
-        break;
-      case "VRDL_Lab4":
-        result = 3;
-        break;
-      case "VRDL_Lab5":
-        result = 4;
-        break;
+      if (item["scene"].Equals(levelName))
+      {
+        result = index;
+      }
+
+      index++;
     }
 
     return result;
   }
 
   // this complexity was added for the next button
-  string LevelNameForIndex(int index)
+  string LevelNameForIndex(int index, string category)
   {
-    string result;
-    switch (index)
-    {
-      default:
-      case 0:
-        result = "VRDL_Lab1";
-        break;
-      case 1:
-        result = "VRDL_Lab2";
-        break;
-      case 2:
-        result = "VRDL_Lab3";
-        break;
-      case 3:
-        result = "VRDL_Lab4";
-        break;
-      case 4:
-        result = "VRDL_Lab5";
-        break;
-    }
+    List<Dictionary<string, string>> menuItems = MenuItems(category);
+
+    string result = menuItems[index]["scene"];
 
     return result;
+  }
+
+  List<Dictionary<string, string>> MenuItems(string category)
+  {
+    List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+    List<Dictionary<string, string>> allItems;
+
+    allItems = AllMenuItems();
+    foreach (Dictionary<string, string> item in allItems)
+    {
+      if (category.Equals(item["category"]))
+      {
+        result.Add(item);
+      }
+    }
+
+    // add back item
+    result.Add(BackMenuItem());
+
+    return result;
+  }
+
+  List<Dictionary<string, string>> AllMenuItems()
+  {
+    if (menuItems == null)
+    {
+      Dictionary<string, string> newItem;
+      List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "1. Using a Reticle";
+      newItem["cmd"] = "reticle";
+      newItem["scene"] = "VRDL_Lab1";
+      newItem["category"] = "1";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "2. UI Depth & Eye Strain";
+      newItem["cmd"] = "depth";
+      newItem["scene"] = "VRDL_Lab2";
+      newItem["category"] = "1";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "3. Using Constant Velocity";
+      newItem["cmd"] = "velocity";
+      newItem["scene"] = "VRDL_Lab3";
+      newItem["category"] = "1";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "4. Keep the User Grounded";
+      newItem["cmd"] = "grounded";
+      newItem["scene"] = "VRDL_Lab4";
+      newItem["category"] = "1";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "5. Maintaining Head Tracking";
+      newItem["cmd"] = "tracking";
+      newItem["scene"] = "VRDL_Lab5";
+      newItem["category"] = "1";
+      result.Add(newItem);
+
+      // category 2
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "6. Guiding with Light";
+      newItem["cmd"] = "light";
+      newItem["scene"] = "VRDL_Lab101";
+      newItem["category"] = "2";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "7. Leveraging Scale";
+      newItem["cmd"] = "scale";
+      newItem["scene"] = "VRDL_Lab102";
+      newItem["category"] = "2";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "8. Spatial Audio";
+      newItem["cmd"] = "audio";
+      newItem["scene"] = "VRDL_Lab103";
+      newItem["category"] = "2";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "9. Gaze Cues";
+      newItem["cmd"] = "gaze";
+      newItem["scene"] = "VRDL_Lab104";
+      newItem["category"] = "2";
+      result.Add(newItem);
+
+      newItem = new Dictionary<string, string>();
+      newItem["name"] = "10. Make it Beautiful";
+      newItem["cmd"] = "beautiful";
+      newItem["scene"] = "VRDL_Lab105";
+      newItem["category"] = "2";
+      result.Add(newItem);
+
+      menuItems = result;
+    }
+
+    return menuItems;
+  }
+
+  Dictionary<string, string> BackMenuItem()
+  {
+    Dictionary<string, string> newItem;
+
+    newItem = new Dictionary<string, string>();
+    newItem["name"] = "< Go Back";
+    newItem["cmd"] = "back";
+
+    return newItem;
   }
 }
 

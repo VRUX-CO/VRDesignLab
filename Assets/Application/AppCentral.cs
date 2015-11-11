@@ -20,6 +20,7 @@ public class AppCentral : MonoBehaviour
   Crosshair3D reticle;
   GameObject lookDownMenu = null;
   GameObject environment = null;
+  string category = "1";
 
   static AppCentral app = null;
 
@@ -83,12 +84,12 @@ public class AppCentral : MonoBehaviour
     levelManager.LoadLevel(levelName);
   }
 
-  public void NextLevel()
+  public void NextLevel(string category)
   {
     // reset this if set by the level
     ShowReticleOnClick(false);
 
-    levelManager.LoadNextLevel();
+    levelManager.LoadNextLevel(category);
   }
 
   public void InstallLookdownMenu()
@@ -124,7 +125,7 @@ public class AppCentral : MonoBehaviour
         ResetToHomeState();
         break;
       case "Next":
-        NextLevel();
+        NextLevel(category);
         break;
     }
   }
