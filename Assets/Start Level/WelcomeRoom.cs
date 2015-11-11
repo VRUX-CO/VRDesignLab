@@ -195,9 +195,11 @@ public class WelcomeRoom : MonoBehaviour
     }
   }
 
-  void MenuCallback(string command)
+  void MenuCallback(Dictionary<string, string> info)
   {
     DestroyLevelMenu();
+
+    string command = info["cmd"];
 
     switch (command)
     {

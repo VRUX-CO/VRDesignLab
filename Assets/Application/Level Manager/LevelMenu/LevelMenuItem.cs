@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelMenuItem : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class LevelMenuItem : MonoBehaviour
   public GameObject textObject;
   public LevelMenu levelMenu;
 
-  string command;
+  Dictionary<string, string> itemInfo;
   float scaleTime = .5f;
   float scaleBy = 1.05f;
 
@@ -26,10 +27,10 @@ public class LevelMenuItem : MonoBehaviour
     backgroundObject.GetComponent<MeshRenderer>().material = material;
   }
 
-  public void SetupItem(string name, string inCommand, LevelMenu menu)
+  public void SetupItem(Dictionary<string, string> info, LevelMenu menu)
   {
-    textObject.GetComponent<TextMesh>().text = name;
-    command = inCommand;
+    textObject.GetComponent<TextMesh>().text = info["name"];
+    itemInfo = info;
     levelMenu = menu;
   }
 
@@ -47,7 +48,7 @@ public class LevelMenuItem : MonoBehaviour
 
   public void OnClick()
   {
-    levelMenu.ItemWasClicked(command);
+    levelMenu.ItemWasClicked(itemInfo);
   }
 
 }

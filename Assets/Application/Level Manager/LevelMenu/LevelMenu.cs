@@ -26,15 +26,15 @@ public class LevelMenu : MonoBehaviour
 
       LevelMenuItem menuItem = anItem.GetComponent<LevelMenuItem>() as LevelMenuItem;
 
-      menuItem.SetupItem(item["name"], item["cmd"], this);
+      menuItem.SetupItem(item, this);
 
       index++;
     }
   }
 
-  public void ItemWasClicked(string command)
+  public void ItemWasClicked(Dictionary<string, string> info)
   {
-    clickDelegate.SendMessage(clickCallback, command, SendMessageOptions.DontRequireReceiver);
+    clickDelegate.SendMessage(clickCallback, info, SendMessageOptions.DontRequireReceiver);
   }
 
 }
