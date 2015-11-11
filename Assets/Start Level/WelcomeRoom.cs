@@ -199,47 +199,22 @@ public class WelcomeRoom : MonoBehaviour
   {
     DestroyLevelMenu();
 
-    string command = info["cmd"];
-
-    switch (command)
+    if (info.ContainsKey("scene"))
     {
-      // Foundation menu
-      case "reticle":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
-      case "depth":
-        AppCentral.APP.LoadLevel("VRDL_Lab2");
-        break;
-      case "velocity":
-        AppCentral.APP.LoadLevel("VRDL_Lab3");
-        break;
-      case "grounded":
-        AppCentral.APP.LoadLevel("VRDL_Lab4");
-        break;
-      case "tracking":
-        AppCentral.APP.LoadLevel("VRDL_Lab5");
-        break;
+      string scene = info["scene"];
 
-      // Immersion menu
-      case "light":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
-      case "scale":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
-      case "audio":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
-      case "gaze":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
-      case "beautiful":
-        AppCentral.APP.LoadLevel("VRDL_Lab1");
-        break;
+      AppCentral.APP.LoadLevel(scene);
+    }
+    else if (info.ContainsKey("cmd"))
+    {
+      string command = info["cmd"];
 
-      case "back":  // go back item
-        AppCentral.APP.HandleNavigation("Home");
-        break;
+      switch (command)
+      {
+        case "back":  // go back item
+          AppCentral.APP.HandleNavigation("Home");
+          break;
+      }
     }
   }
 
