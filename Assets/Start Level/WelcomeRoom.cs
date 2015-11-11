@@ -164,11 +164,11 @@ public class WelcomeRoom : MonoBehaviour
 
     if (buttonID.Equals("Foundation"))
     {
-      BuildMenuItems(menu, 0);
+      BuildMenuItems(menu, "1");
     }
     else if (buttonID.Equals("Immersion"))
     {
-      BuildMenuItems(menu, 1);
+      BuildMenuItems(menu, "2");
     }
 
     DestroyIconBar();
@@ -243,77 +243,9 @@ public class WelcomeRoom : MonoBehaviour
     }
   }
 
-  void BuildMenuItems(LevelMenu menu, int menuID)
+  void BuildMenuItems(LevelMenu menu, string category)
   {
-    Dictionary<string, string> newItem;
-    List<Dictionary<string, string>> menuItems = new List<Dictionary<string, string>>();
-
-    if (menuID == 0)
-    {
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "1. Using a Reticle";
-      newItem["cmd"] = "reticle";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "2. UI Depth & Eye Strain";
-      newItem["cmd"] = "depth";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "3. Using Constant Velocity";
-      newItem["cmd"] = "velocity";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "4. Keep the User Grounded";
-      newItem["cmd"] = "grounded";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "5. Maintaining Head Tracking";
-      newItem["cmd"] = "tracking";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "< Go Back";
-      newItem["cmd"] = "back";
-      menuItems.Add(newItem);
-    }
-    else if (menuID == 1)
-    {
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "6. Guiding with Light";
-      newItem["cmd"] = "light";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "7. Leveraging Scale";
-      newItem["cmd"] = "scale";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "8. Spatial Audio";
-      newItem["cmd"] = "audio";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "9. Gaze Cues";
-      newItem["cmd"] = "gaze";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "10. Make it Beautiful";
-      newItem["cmd"] = "beautiful";
-      menuItems.Add(newItem);
-
-      newItem = new Dictionary<string, string>();
-      newItem["name"] = "< Go Back";
-      newItem["cmd"] = "back";
-      menuItems.Add(newItem);
-    }
-
-    menu.SetupItems(menuItems);
+    menu.SetupItems(AppCentral.APP.MenuItems(category));
   }
 
 }

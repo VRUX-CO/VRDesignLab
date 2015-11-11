@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AppCentral : MonoBehaviour
 {
@@ -82,6 +83,11 @@ public class AppCentral : MonoBehaviour
     ShowReticleOnClick(false);
 
     levelManager.LoadLevel(levelName);
+  }
+
+  public List<Dictionary<string, string>> MenuItems(string category)
+  {
+    return levelManager.MenuItems(category);
   }
 
   public void NextLevel(string category)

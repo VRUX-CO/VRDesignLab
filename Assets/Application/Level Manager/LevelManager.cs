@@ -96,6 +96,7 @@ public class LevelManager : MonoBehaviour
       if (item["scene"].Equals(levelName))
       {
         result = index;
+        break;
       }
 
       index++;
@@ -114,7 +115,7 @@ public class LevelManager : MonoBehaviour
     return result;
   }
 
-  List<Dictionary<string, string>> MenuItems(string category)
+  public List<Dictionary<string, string>> MenuItems(string category)
   {
     List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
     List<Dictionary<string, string>> allItems;
