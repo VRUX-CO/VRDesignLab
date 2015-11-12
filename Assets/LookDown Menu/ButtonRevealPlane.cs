@@ -32,21 +32,12 @@ public class ButtonRevealPlane : MonoBehaviour
 
     MeshRenderer buttonRenderer = quad.GetComponent<MeshRenderer>();
     buttonRenderer.enabled = false;  // don't draw
-
-    // gameObject.AddComponent<FaceCameraScript>();
-
-    // m_Camera = Camera.main;
-
-    // StartCoroutine(Dupdate(0));
   }
 
   // Update is called once per frame
   void Update()
   {
     MoveInfrontOfCamera();
-
-    //   transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.forward,
-    //         Vector3.forward);
   }
 
   void MoveInfrontOfCamera()

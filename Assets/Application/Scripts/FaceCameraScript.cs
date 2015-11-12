@@ -4,8 +4,8 @@ using System.Collections;
 public class FaceCameraScript : MonoBehaviour
 {
   // Update is called once per frame
-  void Update()
+  void LateUpdate()
   {
-    Utilities.RotateToFaceCamera(transform, Camera.main);
+    Utilities.RotateToFaceCamera(transform, Camera.main, false, true, false);
   }
 }

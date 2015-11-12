@@ -24,8 +24,10 @@ public class LookDownNotifier : MonoBehaviour
 
     // attach to camera
     transform.parent = Camera.main.transform;
-    Utilities.RotateToFaceCamera(transform, Camera.main);
     transform.localPosition = new Vector3(0f, 0f, 2f);
+
+    transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
+         Camera.main.transform.rotation * Vector3.up);
 
     ShowNotification();
   }

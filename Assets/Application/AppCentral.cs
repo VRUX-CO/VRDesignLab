@@ -39,6 +39,15 @@ public class AppCentral : MonoBehaviour
     }
   }
 
+  void Update()
+  {
+    // quit game when escape key is pressed
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+  }
+
   public bool CardboardClickEvent()
   {
     // Cardboard.SDK will lazily load a Cardboard gameobject if called, so we are wrapping all cardboard.sdk calls here

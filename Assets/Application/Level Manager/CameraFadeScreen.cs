@@ -14,7 +14,7 @@ public class CameraFadeScreen : MonoBehaviour
     material = GetComponent<MeshRenderer>().material;
     baseColor = material.color;
 
-    Utilities.RotateToFaceCamera(transform, Camera.main);
+    Utilities.RotateToFaceCamera(transform, Camera.main, true, true, true);
   }
 
   public void FadeOut(string callback)
