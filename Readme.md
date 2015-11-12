@@ -46,6 +46,8 @@ There's still lots of work to go to complete all the labs.
 We need your help! 
 [Email](mailto:steve@vrux.co) me if you have questions or suggestions.
 
+See the projects <a href="https://trello.com/b/V6xU9a4Y/vr-design-lab" target="_blank">Trello board</a> for what's needed.
+
 **Contributors:**
 
 - Steve Gehrman
