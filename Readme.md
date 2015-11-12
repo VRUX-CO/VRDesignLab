@@ -18,22 +18,22 @@ Send us your pull requests!
 5. Start inside the VRDL_Start scene to run app.
 
 #### Compiling for Platforms
-Windows/Mac/Linux/DK2:
+
+**Windows/Mac/Linux/DK2:**
 
 1. Open the build settings, Click PC/Mac/Linux and click the appropriate OS type to the right.
 2. Build
 
-Cardboard:
+**Cardboard:**
 
 1. Open the VRDL_Start scene and select the App Boot Strap object in teh heirarchy. Check the checkbox named "Build for Cardboard".
 2. Open the build settings, click Android, click Player Settings and uncheck "Virtual Reality Supported" checkbox.
 3. Build
 
-GearVR:
+**GearVR:**
 
 1. Open the build settings, click Android, click Player Settings and make sure "Virtual Reality Supported" is checked.
 2. Build
-
 
 There's still lots of work to go to complete all the labs.  We need your help! [Email](mailto:steve@vrux.co) me if you have questions or suggestions.
 
