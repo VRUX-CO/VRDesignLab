@@ -1,5 +1,5 @@
 
-# VR design project written in [Unity](http://unity3d.com)
+# VR Design Lab project written in [Unity](http://unity3d.com)
 
 ## Runs on Cardboard, DK2, GearVR.
 
