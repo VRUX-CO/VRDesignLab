@@ -35,6 +35,7 @@ Send us your pull requests!
 **GearVR:**
 
 1. Open the build settings, click Android, click Player Settings and make sure "Virtual Reality Supported" is checked.
+2. Get your [Oculus Signature File](https://developer.oculus.com/osig/) and put it in Project/Assets/Plugins/Android/assets/
 2. Build
 
 ## Engage and Contribute
