@@ -30,13 +30,15 @@ Send us your pull requests!
 
 1. Open the VRDL_Start scene and select the App Boot Strap object in teh heirarchy. Check the checkbox named "Build for Cardboard".
 2. Open the build settings, click Android, click Player Settings and uncheck "Virtual Reality Supported" checkbox.
-3. Build
+3. If your building for GearVR and Cardboard, make sure to have unique Product names and Bundle Idenifiers so you can run both on your phone.  See build settings/player settings/other under the phone tab.
+4. Plug in phone and Build & Run to 
 
 **GearVR:**
 
 1. Open the build settings, click Android, click Player Settings and make sure "Virtual Reality Supported" is checked.
 2. Get your [Oculus Signature File](https://developer.oculus.com/osig/) and put it in Project/Assets/Plugins/Android/assets/
-2. Build
+3. If your building for GearVR and Cardboard, make sure to have unique Product names and Bundle Idenifiers so you can run both versions on your phone.  See build settings/player settings/other under the phone tab.
+4. Plug in phone and Build & Run
 
 ## Engage and Contribute
 
