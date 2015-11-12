@@ -1,12 +1,12 @@
 
-# An open source VR design project written in [Unity](http://unity3d.com)
+# VR design project written in [Unity](http://unity3d.com)
 
 ## Runs on Cardboard, DK2, GearVR.
 
 Inspired by Google's <a href="https://play.google.com/store/apps/details?id=com.google.vr.cardboard.apps.designlab&hl=en" target="_blank">Cardboard Design Lab</a> Android app.  VRUX Design Lab was designed to showcase the dos and donts of VR with instructional labs inside of VR. 
 It was designed to be extensible so anyone with a new idea can add a new lab. It's simple to add additional labs and hook them up to the main menu.
 
-This is a VR community owned project. [No License](http://choosealicense.com/no-license/).  
+This is a VR community owned project.  Open sourced. [No License](http://choosealicense.com/no-license/).  
 
 Send us your pull requests!
 
