@@ -47,6 +47,7 @@ We need your help!
 
 - Steve Gehrman
 - Xin Chung
+- (your name here)
 
 Thanks!
 
