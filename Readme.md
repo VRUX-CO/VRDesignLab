@@ -3,16 +3,11 @@
 
 #### Runs on Cardboard, DK2, GearVR.
 
-Inspired by Google's [Cardboard Design Lab](https://play.google.com/store/apps/details?id=com.google.vr.cardboard.apps.designlab&hl=en target="_blank") Android app.  This app was designed to be extensible. It's simple to add additional labs and hook them up to the main menu.
+Inspired by Google's <a href="https://play.google.com/store/apps/details?id=com.google.vr.cardboard.apps.designlab&hl=en" target="_blank">Cardboard Design Lab</a> Android app.  This app was designed to be extensible. It's simple to add additional labs and hook them up to the main menu.
 
 This is a VR community owned project. [No License](http://choosealicense.com/no-license/).  
 
 Send us your pull requests!
-
-
-<a href="http://example.com" target="_blank">cl</a>
-
-
 
 #### How to add a VR Lab
 
