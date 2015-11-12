@@ -23,6 +23,7 @@ Send us your pull requests!
 **Windows/Mac/Linux/DK2:**
 
 1. Open the build settings, Click PC/Mac/Linux and click the appropriate OS type to the right.
+1. For DK2, click Player Settings and make sure "Virtual Reality Supported" is checked.
 2. Build
 
 **Cardboard:**
