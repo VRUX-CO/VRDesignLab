@@ -5,7 +5,7 @@
 
 Inspired by Google's Cardboard Design Lab Android app.  This app was designed to be extensible. It's simple to add additional labs and hook them up to the main menu.
 
-This is a VR community owned project. [License](http://choosealicense.com/no-license/): Free to extend, modify and improve.  
+This is a VR community owned project. [No License](http://choosealicense.com/no-license/).  
 
 Send us your pull requests!
 
@@ -35,7 +35,9 @@ Send us your pull requests!
 1. Open the build settings, click Android, click Player Settings and make sure "Virtual Reality Supported" is checked.
 2. Build
 
-There's still lots of work to go to complete all the labs.  We need your help! [Email](mailto:steve@vrux.co) me if you have questions or suggestions.
+There's still lots of work to go to complete all the labs.  
+We need your help! 
+[Email](mailto:steve@vrux.co) me if you have questions or suggestions.
 
 Thanks!
 
