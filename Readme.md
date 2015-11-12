@@ -3,7 +3,8 @@
 
 #### Runs on Cardboard, DK2, GearVR.
 
-Inspired by Google's <a href="https://play.google.com/store/apps/details?id=com.google.vr.cardboard.apps.designlab&hl=en" target="_blank">Cardboard Design Lab</a> Android app.  This app was designed to be extensible. It's simple to add additional labs and hook them up to the main menu.
+Inspired by Google's <a href="https://play.google.com/store/apps/details?id=com.google.vr.cardboard.apps.designlab&hl=en" target="_blank">Cardboard Design Lab</a> Android app.  VRUX Design Lab was designed to showcase the dos and donts of VR with instructional labs inside of VR. 
+It was designed to be extensible so anyone with a new idea can add a new lab. It's simple to add additional labs and hook them up to the main menu.
 
 This is a VR community owned project. [No License](http://choosealicense.com/no-license/).  
 
@@ -42,3 +43,8 @@ We need your help!
 Thanks!
 
 by [VRUX](http://vrux.co)
+
+**Contributors:**
+
+- Steve Gehrman
+- Xin Chung
