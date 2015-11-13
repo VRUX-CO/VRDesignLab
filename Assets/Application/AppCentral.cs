@@ -66,6 +66,8 @@ public class AppCentral : MonoBehaviour
     {
       Instantiate(cardboardCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity);
       isCardboard = true;
+
+      Cardboard.SDK.EnableSettingsButton = false;
     }
     else
     {
