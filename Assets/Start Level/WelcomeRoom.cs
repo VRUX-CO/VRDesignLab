@@ -9,7 +9,9 @@ public class WelcomeRoom : MonoBehaviour
   public GameObject iconButtonBarPrefab;
   public GameObject levelMenuPrefab;
 
-  GameObject proceduralRoom, welcomeSign, levelMenu, iconButtonBar;
+  GameObject proceduralRoom, levelMenu, iconButtonBar;
+
+  List<GameObject> welcomeSigns = new List<GameObject>();
 
   // used when fading out only
   GameObject fadingGameObject;
@@ -18,6 +20,9 @@ public class WelcomeRoom : MonoBehaviour
   Material signMaterial;
   bool dismissedSign = false;
 
+  const float ContentYOffset = 1.2f;
+  const float DistanceAway = 2f;
+
   // Use this for initialization
   void Start()
   {
@@ -25,9 +30,41 @@ public class WelcomeRoom : MonoBehaviour
     AppCentral.APP.ShowReticleOnClick(true);
 
     CreateRoom();
-    welcomeSign = Instantiate(welcomeSignPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
-    signMaterial = welcomeSign.GetComponent<MeshRenderer>().material;
+    for (int i = 0; i < 4; i++)
+    {
+      GameObject newSign = Instantiate(welcomeSignPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+      newSign.AddComponent<FaceCameraScript>();
+
+      welcomeSigns.Add(newSign);
+      Vector3 position;
+
+      switch (i)
+      {
+        default:
+        case 0:
+          position = new Vector3(0, ContentYOffset, DistanceAway);
+          break;
+        case 1:
+          position = new Vector3(0, ContentYOffset, -DistanceAway);
+          break;
+        case 2:
+          position = new Vector3(DistanceAway, ContentYOffset, 0);
+          break;
+        case 3:
+          position = new Vector3(-DistanceAway, ContentYOffset, 0);
+          break;
+      }
+
+      newSign.transform.localPosition = position;
+    }
+
+    signMaterial = welcomeSigns[0].GetComponent<MeshRenderer>().material;
+
+    foreach (GameObject sign in welcomeSigns)
+    {
+      sign.GetComponent<MeshRenderer>().sharedMaterial = signMaterial;
+    }
   }
 
   // Update is called once per frame
@@ -41,7 +78,7 @@ public class WelcomeRoom : MonoBehaviour
 
   Vector3 ContentPosition()
   {
-    return new Vector3(0, 1.2f, 2);
+    return new Vector3(0, ContentYOffset, DistanceAway);
   }
 
   void CreateRoom()
@@ -83,8 +120,11 @@ public class WelcomeRoom : MonoBehaviour
 
   public void FadeOutSignDone()
   {
-    Destroy(welcomeSign);
-    welcomeSign = null;
+    foreach (GameObject sign in welcomeSigns)
+    {
+      Destroy(sign);
+    }
+    welcomeSigns = null;
 
     AppCentral.APP.ShowReticleOnClick(false);
 
