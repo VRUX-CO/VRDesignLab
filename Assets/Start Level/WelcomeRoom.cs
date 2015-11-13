@@ -17,7 +17,6 @@ public class WelcomeRoom : MonoBehaviour
 
   Material signMaterial;
   bool dismissedSign = false;
-  int step = 0;
 
   // Use this for initialization
   void Start()
@@ -36,16 +35,7 @@ public class WelcomeRoom : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
-      switch (step)
-      {
-        case 0:  // showing welcome sign
-          FadeOutSign();
-          break;
-        case 1:  // showing icon bar
-          break;
-        case 2:  // showing level menu
-          break;
-      }
+      FadeOutSign();
     }
   }
 
@@ -97,6 +87,9 @@ public class WelcomeRoom : MonoBehaviour
     welcomeSign = null;
 
     AppCentral.APP.ShowReticleOnClick(false);
+
+    // recenter on first click
+    AppCentral.APP.RecenterHeadTracking();
 
     // show button bar
     ShowButtonBar();

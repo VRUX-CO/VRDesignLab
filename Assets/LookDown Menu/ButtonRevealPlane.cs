@@ -27,7 +27,7 @@ public class ButtonRevealPlane : MonoBehaviour
     EventDelegate ed = quad.AddComponent<EventDelegate>();
     ed.eventDelegate = gameObject;
 
-    quad.transform.localScale = new Vector3(1f, .8f, 1f);
+    quad.transform.localScale = new Vector3(3f, .8f, 1f);
     quad.layer = Crosshair3D.kRevealerLayer;
 
     MeshRenderer buttonRenderer = quad.GetComponent<MeshRenderer>();
@@ -47,19 +47,8 @@ public class ButtonRevealPlane : MonoBehaviour
     pos.y = .3f;
 
     transform.position = pos;
-  }
 
-  IEnumerator Dupdate(int duh)
-  {
-    Vector3 relativePos = Camera.main.transform.position - transform.position;
-
-    Quaternion rotation = Quaternion.LookRotation(relativePos);
-
-    rotation = rotation * Quaternion.Euler(duh, 0, 0);
-    transform.rotation = rotation;
-
-    yield return new WaitForSeconds(.1f);
-    StartCoroutine(Dupdate(duh + 10));
+    Utilities.RotateToFaceCamera(transform, Camera.main, true, false, false);
   }
 
   public void OnRevealStart()
