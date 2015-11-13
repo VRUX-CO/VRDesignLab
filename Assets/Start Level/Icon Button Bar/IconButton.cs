@@ -11,7 +11,7 @@ public class IconButton : MonoBehaviour
   public IconButtonBar buttonBar;
   public GameObject textLabel;
 
-  TextMesh labelTextMesh;
+  MeshRenderer labelTextRenderer;
 
   // Use this for initialization
   void Start()
@@ -29,8 +29,11 @@ public class IconButton : MonoBehaviour
 
     defaultColor = CurrentColor();
 
-    labelTextMesh = textLabel.GetComponent<TextMesh>();
-    labelTextMesh.color = new Color(0f, 0f, 0f, .9f);
+    labelTextRenderer = textLabel.GetComponent<MeshRenderer>();
+
+    // start off invisible
+    SetColorAlpha(0f);
+    labelTextRenderer.material.color = new Color(1f, 1f, 1f, 0f);
   }
 
   void SetColorAlpha(float alpha)
@@ -72,12 +75,17 @@ public class IconButton : MonoBehaviour
       end = 1f;
     }
 
-    iTween.ValueTo(gameObject, iTween.Hash("from", start, "to", end, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeUpdate", "time", .5f));
+    iTween.ValueTo(gameObject, iTween.Hash("from", start, "to", end, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeUpdate", "time", 1.5f, "oncomplete", "FadeOutSignDone"));
   }
 
   void FadeUpdate(float alpha)
   {
     SetColorAlpha(alpha);
+
+    labelTextRenderer.material.color = new Color(1f, 1f, 1f, alpha);
   }
 
+  public void FadeOutSignDone()
+  {
+  }
 }

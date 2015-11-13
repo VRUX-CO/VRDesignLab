@@ -9,7 +9,8 @@ public class WelcomeRoom : MonoBehaviour
   public GameObject iconButtonBarPrefab;
   public GameObject levelMenuPrefab;
 
-  GameObject proceduralRoom, levelMenu, iconButtonBar;
+  GameObject proceduralRoom, levelMenu;
+  IconButtonBar iconButtonBar;
 
   List<GameObject> welcomeSigns = new List<GameObject>();
 
@@ -102,8 +103,6 @@ public class WelcomeRoom : MonoBehaviour
     ShowButtonBar();
   }
 
-  // -----------------------------------------------------
-
   void FadeOutSign()
   {
     if (!dismissedSign)
@@ -135,18 +134,17 @@ public class WelcomeRoom : MonoBehaviour
     ShowButtonBar();
   }
 
-  // -----------------------------------------------------
   void ShowButtonBar()
   {
-    iconButtonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
+    GameObject buttonBar = Instantiate(iconButtonBarPrefab, ContentPosition(), Quaternion.identity) as GameObject;
 
     // setup callback for button bar
-    IconButtonBar btnBar = iconButtonBar.GetComponent<IconButtonBar>();
-    btnBar.clickDelegate = gameObject;
-    btnBar.clickCallback = "ButtonBarClickCallback";
-  }
+    iconButtonBar = buttonBar.GetComponent<IconButtonBar>();
+    iconButtonBar.clickDelegate = gameObject;
+    iconButtonBar.clickCallback = "ButtonBarClickCallback";
 
-  // -----------------------------------------------------
+    iconButtonBar.FadeIn(true);
+  }
 
   void FadeOutRoom()
   {
@@ -182,8 +180,6 @@ public class WelcomeRoom : MonoBehaviour
     fadingGameObject = null;
     fadingProceduralRoom = null;
   }
-
-  // -----------------------------------------------------
 
   void ButtonBarClickCallback(string buttonID)
   {
@@ -223,7 +219,8 @@ public class WelcomeRoom : MonoBehaviour
   {
     if (iconButtonBar != null)
     {
-      Destroy(iconButtonBar);
+      iconButtonBar.FadeIn(false); // destroys after fadeout
+
       iconButtonBar = null;
     }
   }
