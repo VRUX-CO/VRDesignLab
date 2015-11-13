@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public enum ReticleState
 {
@@ -36,7 +35,7 @@ public class AnimateTiledTexture : MonoBehaviour
     }
   }
 
-  private void Awake()
+  void Awake()
   {
     reticleRenderer = GetComponent<Renderer>();
     reticleRenderer.enabled = visible;
@@ -61,14 +60,14 @@ public class AnimateTiledTexture : MonoBehaviour
     }
   }
 
-  private void CalcTextureSize()
+  void CalcTextureSize()
   {
     //set the tile size of the texture (in UV units), based on the rows and columns
     _textureSize = new Vector2(1f / _columns, 1f / _rows);
   }
 
   // The main update function of this script
-  private IEnumerator updateTiling()
+  IEnumerator updateTiling()
   {
     long routineIndex = _currentCoroutineIndex;
 
@@ -121,7 +120,7 @@ public class AnimateTiledTexture : MonoBehaviour
     }
   }
 
-  private void ApplyOffset()
+  void ApplyOffset()
   {
     float x = (_index % _columns) / (float)_columns;
     float y = 1f - (Mathf.Floor((_index / _columns)) / (float)_columns);
@@ -131,7 +130,6 @@ public class AnimateTiledTexture : MonoBehaviour
 
     Vector2 offset = new Vector2(x, y);
 
-    // If we have scaled the texture, we need to reposition the texture to the center of the object
     offset.x += ((1f / _columns) - _textureSize.x) / 2.0f;
     offset.y += ((1f / _rows) - _textureSize.y) / 2.0f;
 
