@@ -44,13 +44,13 @@ Please send us your pull requests!
 ## Compiled builds
 
 **DK2:**
-<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gNEROMmtKclFQYXc/view" target="_blank">Download for DK2</a>
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gNEROMmtKclFQYXc/view" target="_blank">Download</a>
 
 **Cardboard:**
-<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gMXA0QnB5bEsxNWM/view" target="_blank">Download for Cardboard</a>
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gMXA0QnB5bEsxNWM/view" target="_blank">Download</a>
 
 **GearVR**
-<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gTnNDSW9OUmRrME0/view" target="_blank">Download for GearVR</a>
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gTnNDSW9OUmRrME0/view" target="_blank">Download</a>
 
 ## Engage and Contribute
 
