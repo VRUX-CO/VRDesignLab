@@ -41,6 +41,17 @@ Please send us your pull requests!
 3. If your building for GearVR and Cardboard, make sure to have unique Product names and Bundle Idenifiers so you can run both versions on your phone.  See build settings/player settings/other under the phone tab.
 4. Plug in phone and Build & Run to install it and launch it on your phone.
 
+## Compiled builds
+
+**DK2:**
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gNEROMmtKclFQYXc/view" target="_blank">Download for DK2</a>
+
+**Cardboard:**
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gMXA0QnB5bEsxNWM/view" target="_blank">Download for Cardboard</a>
+
+**GearVR**
+<a href="https://drive.google.com/file/d/0BzWQtvPqqX8gTnNDSW9OUmRrME0/view" target="_blank">Download for GearVR</a>
+
 ## Engage and Contribute
 
 There's still lots of work to go to complete all the labs. We need your help! [Email](mailto:steve@vrux.co) me if you have questions or suggestions.
