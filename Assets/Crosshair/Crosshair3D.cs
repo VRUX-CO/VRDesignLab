@@ -6,9 +6,9 @@ public class Crosshair3D : MonoBehaviour
   static public string kCrosshairTargetable = "targetable";
   static public int kRevealerLayer = 11;
 
-  public int objectLayer = 8;
   public float offsetFromObjects = 0.1f;
   public float fixedDepth = 3.0f;
+  public bool matchDepthOnHitMode = false;
 
   GameObject previousHitGameObject;
   GameObject previousHitButtonRevealer;
@@ -30,7 +30,7 @@ public class Crosshair3D : MonoBehaviour
     Vector3 cameraPosition = camRay.origin;
     Vector3 cameraForward = camRay.direction;
 
-    if (false)  // disabled this, but might be needed later
+    if (matchDepthOnHitMode)  // disabled this, but might be needed later
     {
       // cursor positions itself in 3D based on raycasts into the scene
       // trace to the spot that the player is looking at
