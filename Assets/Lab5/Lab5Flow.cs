@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Lab5Flow : MonoBehaviour
 {
-  bool trackingEnabled = true;
+  bool trackingDisabled = false;
 
   // Use this for initialization
   void Start()
@@ -16,9 +16,29 @@ public class Lab5Flow : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
-      trackingEnabled = !trackingEnabled;
-
-      AppCentral.APP.DisableHeadTracking(trackingEnabled);
+      StartCoroutine(DisableTrackingForSeconds(2));
     }
+  }
+
+  IEnumerator DisableTrackingForSeconds(float delay)
+  {
+    if (!trackingDisabled)
+    {
+      ToggleTracking();
+
+      yield return new WaitForSeconds(delay);
+
+      if (trackingDisabled)
+        ToggleTracking();
+    }
+
+    yield return null;
+  }
+
+  void ToggleTracking()
+  {
+    trackingDisabled = !trackingDisabled;
+
+    AppCentral.APP.DisableHeadTracking(trackingDisabled);
   }
 }

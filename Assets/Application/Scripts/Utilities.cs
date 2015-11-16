@@ -67,4 +67,20 @@ AppCentral.APP.CardboardClickEvent() || (Input.GetMouseButtonDown(0)))
 
     Destroy(go, audio.clip.length);
   }
+
+  // stupid debug tool.  throw out a cube to verify we hit a codepath. returns where cube was placed and Debug.Logs it
+  static float cnt = 0;
+  public static Vector3 DebugCube(string message)
+  {
+    Vector3 result = new Vector3(0, cnt, 5);
+
+    GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = result;
+    cnt += 1.1f;
+
+    Debug.Log(message + result.ToString());
+
+    return result;
+  }
+
+
 }
