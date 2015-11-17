@@ -4,6 +4,7 @@ using System.Collections;
 public class Lab5Controller : MonoBehaviour
 {
   public Material trackingOffMat;
+  public Material instructionsMat;
 
   Material fadeMaterial;
 
@@ -12,6 +13,7 @@ public class Lab5Controller : MonoBehaviour
   // Use this for initialization
   void Start()
   {
+    TextureBillboard.ShowBillboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1f, 1.5f), transform);
   }
 
   // Update is called once per frame
@@ -27,8 +29,7 @@ public class Lab5Controller : MonoBehaviour
   {
     if (!trackingDisabled)
     {
-      GameObject trackingOffCard = ShowCard(0);
-      StartCoroutine(FadeIn(trackingOffCard, 0));
+      TextureBillboard tbb = TextureBillboard.ShowBillboard(trackingOffMat, new Vector3(.8f, .4f, .8f), 0, new Vector3(0, 1.5f, 1.5f), transform);
 
       ToggleTracking();
 
@@ -38,7 +39,7 @@ public class Lab5Controller : MonoBehaviour
       {
         ToggleTracking();
 
-        StartCoroutine(FadeOut(trackingOffCard, .25f));
+        tbb.Hide(.25f);
       }
     }
 
@@ -50,62 +51,6 @@ public class Lab5Controller : MonoBehaviour
     trackingDisabled = !trackingDisabled;
 
     AppCentral.APP.DisableHeadTracking(trackingDisabled);
-  }
-
-  GameObject ShowCard(int cardIndex)
-  {
-    GameObject result = GameObject.CreatePrimitive(PrimitiveType.Quad);
-    result.AddComponent<FaceCameraScript>();
-    MeshRenderer renderer = result.GetComponent<MeshRenderer>();
-
-    switch (cardIndex)
-    {
-      default:
-      case 0:
-        trackingOffMat.color = new Color(1, 1, 1, 0f);
-        renderer.material = trackingOffMat;
-
-        fadeMaterial = renderer.sharedMaterial;
-
-        result.transform.parent = Camera.main.transform;
-        result.transform.localPosition = new Vector3(0, .5f, 2);
-        break;
-    }
-
-    return result;
-  }
-
-  IEnumerator FadeIn(GameObject sign, float delay)
-  {
-    yield return new WaitForSeconds(delay);
-
-    iTween.ValueTo(sign, iTween.Hash("from", 0f, "to", 1f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeInUpdateCallback", "time", 1f, "oncomplete", "FadeInDoneCallback", "onupdatetarget", gameObject, "oncompletetarget", gameObject));
-  }
-
-  void FadeInUpdateCallback(float progress)
-  {
-    fadeMaterial.color = new Color(1, 1, 1, progress);
-  }
-
-  void FadeInDoneCallback()
-  {
-  }
-
-  IEnumerator FadeOut(GameObject sign, float delay)
-  {
-    yield return new WaitForSeconds(delay);
-
-    iTween.ValueTo(sign, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", 1f, "oncomplete", "FadeOutDoneCallback", "oncompleteparams", sign, "onupdatetarget", gameObject, "oncompletetarget", gameObject));
-  }
-
-  void FadeOutUpdateCallback(float progress)
-  {
-    fadeMaterial.color = new Color(1, 1, 1, progress);
-  }
-
-  void FadeOutDoneCallback(GameObject sign)
-  {
-    Destroy(sign);
   }
 
 }
