@@ -13,7 +13,15 @@ public class Lab5Controller : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    TextureBillboard.ShowBillboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1f, 1.5f), transform);
+    TextureBillboard.ShowBillboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1.4f, 1.5f), transform);
+  }
+
+  void OnDestroy()
+  {
+    if (trackingDisabled)
+    {
+      ToggleTracking();
+    }
   }
 
   // Update is called once per frame
@@ -29,7 +37,7 @@ public class Lab5Controller : MonoBehaviour
   {
     if (!trackingDisabled)
     {
-      TextureBillboard tbb = TextureBillboard.ShowBillboard(trackingOffMat, new Vector3(.8f, .4f, .8f), 0, new Vector3(0, 1.5f, 1.5f), transform);
+      TextureBillboard tbb = TextureBillboard.ShowBillboard(trackingOffMat, new Vector3(.8f, .4f, .8f), 0, new Vector3(0, 1.8f, 1.5f), transform);
 
       ToggleTracking();
 
