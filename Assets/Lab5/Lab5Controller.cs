@@ -38,12 +38,11 @@ public class Lab5Controller : MonoBehaviour
       {
         ToggleTracking();
 
-        StartCoroutine(FadeOut(trackingOffCard, 1));
+        StartCoroutine(FadeOut(trackingOffCard, .25f));
       }
-
     }
 
-    //  yield return null;
+    yield return null;
   }
 
   void ToggleTracking()
@@ -55,8 +54,6 @@ public class Lab5Controller : MonoBehaviour
 
   GameObject ShowCard(int cardIndex)
   {
-    Vector3 signPosition = new Vector3(0, 1, 2);
-
     GameObject result = GameObject.CreatePrimitive(PrimitiveType.Quad);
     result.AddComponent<FaceCameraScript>();
     MeshRenderer renderer = result.GetComponent<MeshRenderer>();
@@ -71,7 +68,7 @@ public class Lab5Controller : MonoBehaviour
         fadeMaterial = renderer.sharedMaterial;
 
         result.transform.parent = Camera.main.transform;
-        result.transform.localPosition = signPosition;
+        result.transform.localPosition = new Vector3(0, .5f, 2);
         break;
     }
 
@@ -98,7 +95,6 @@ public class Lab5Controller : MonoBehaviour
   {
     yield return new WaitForSeconds(delay);
 
-
     iTween.ValueTo(sign, iTween.Hash("from", 1f, "to", 0f, "easetype", iTween.EaseType.easeOutExpo, "onupdate", "FadeOutUpdateCallback", "time", 1f, "oncomplete", "FadeOutDoneCallback", "oncompleteparams", sign, "onupdatetarget", gameObject, "oncompletetarget", gameObject));
   }
 
@@ -111,6 +107,5 @@ public class Lab5Controller : MonoBehaviour
   {
     Destroy(sign);
   }
-
 
 }
