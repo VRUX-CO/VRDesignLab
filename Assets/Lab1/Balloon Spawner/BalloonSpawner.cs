@@ -68,9 +68,10 @@ public class BalloonSpawner : MonoBehaviour
     }
     SpawnBalloon();
 
-    if (balloonpop == 4)
+    if (balloonpop >= 4)
     {
-      AppCentral.APP.ShowLookdownNotifier();
+      if ((balloonpop % 2) == 0)
+        AppCentral.APP.ShowLookdownNotifier();
     }
   }
 

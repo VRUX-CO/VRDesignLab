@@ -48,6 +48,10 @@ public class Lab5Controller : MonoBehaviour
         ToggleTracking();
 
         tbb.Hide(.25f);
+
+        yield return new WaitForSeconds(.5f);
+
+        AppCentral.APP.ShowLookdownNotifier();
       }
     }
 
