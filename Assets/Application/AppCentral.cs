@@ -186,6 +186,11 @@ public class AppCentral : MonoBehaviour
     }
     else
     {
+      CameraMount mount = Camera.main.transform.parent.GetComponent<CameraMount>();
+      if (mount != null)
+      {
+        mount.DiabledTracking(disable);
+      }
     }
   }
 
