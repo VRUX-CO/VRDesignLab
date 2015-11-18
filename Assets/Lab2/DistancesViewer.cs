@@ -3,22 +3,23 @@ using System.Collections;
 
 public class DistancesViewer : MonoBehaviour
 {
+  public Material introSignMaterial;
   public GameObject DistanceRingObject;
 
   DistanceSign distanceSign;
   int index = 0;
-  GameObject currentSign;
+  TextureBillboard introBillboard;
 
   // Use this for initialization
   void Start()
   {
-    currentSign = Instantiate(DistanceRingObject) as GameObject;
-    distanceSign = currentSign.GetComponent<DistanceSign>();
+    GameObject dSign = Instantiate(DistanceRingObject) as GameObject;
+    distanceSign = dSign.GetComponent<DistanceSign>();
 
     // parent so it gets destroyed on scene swap
-    currentSign.transform.parent = transform;
+    dSign.transform.parent = transform;
 
-    Next();
+    introBillboard = TextureBillboard.ShowBillboard(introSignMaterial, new Vector3(1, 1, 1), 1, new Vector3(0, 1.5f, 2f), transform);
   }
 
   // Update is called once per frame
@@ -26,6 +27,12 @@ public class DistancesViewer : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
+      if (introBillboard != null)
+      {
+        introBillboard.Hide(.2f);
+        introBillboard = null;
+      }
+
       Next();
     }
   }
