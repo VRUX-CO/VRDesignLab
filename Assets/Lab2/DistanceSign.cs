@@ -113,28 +113,33 @@ public class DistanceSign : MonoBehaviour
   {
     GameObject result = null;
     GameObject signPrefab;
-
+    Vector3 scale = new Vector3(1f, 1f, 1f);
 
     switch (index)
     {
       case 0:
         signPrefab = HalfMeterMessage;
+        scale = new Vector3(1f, 1f, 1f);
         break;
       case 1:
         signPrefab = OneMeterMessage;
         break;
       case 2:
         signPrefab = OneHalfMeterMessage;
+        scale = new Vector3(1.5f, 1.5f, 1.5f);
         break;
       case 3:
         signPrefab = ThreeMeterMessage;
+        scale = new Vector3(2f, 2f, 2f);
         break;
       case 4:
         signPrefab = SixMeterMessage;
+        scale = new Vector3(3f, 3f, 3f);
         break;
       case 5:
       default:
         signPrefab = TwelveMeterMessage;
+        scale = new Vector3(4f, 4f, 4f);
         break;
     }
 
@@ -145,6 +150,8 @@ public class DistanceSign : MonoBehaviour
     result.transform.parent = transform;
 
     result.transform.localPosition = new Vector3(0, 1f, radius);
+
+    result.transform.localScale = scale;
 
 
     return result;
