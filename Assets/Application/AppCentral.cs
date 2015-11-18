@@ -15,6 +15,7 @@ public class AppCentral : MonoBehaviour
   public GameObject mainScenePrefab;
   public GameObject environmentPrefab;
 
+  bool savedReticleClickOnlyState;
   bool isCardboard = false;
   LevelManager levelManager;
   WelcomeRoom mainScene;
@@ -172,7 +173,7 @@ public class AppCentral : MonoBehaviour
 
   public void ShowReticleOnClick(bool showOnClick)
   {
-    reticle.ShowReticleOnClick(showOnClick);
+    reticle.SetShowReticleOnClick(showOnClick);
   }
 
   public void DisableHeadTracking(bool disable)
@@ -203,6 +204,21 @@ public class AppCentral : MonoBehaviour
     else
     {
       UnityEngine.VR.InputTracking.Recenter();
+    }
+  }
+
+  // always show crosshair if turned off for reticle lab or future lab
+  public void ShowCrosshairIfHidden(bool start)
+  {
+    if (start)
+    {
+      savedReticleClickOnlyState = reticle.GetShowReticleOnClick();
+
+      reticle.SetShowReticleOnClick(false);  // false, true is the hidden mode
+    }
+    else
+    {
+      reticle.SetShowReticleOnClick(savedReticleClickOnlyState);
     }
   }
 

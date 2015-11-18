@@ -174,7 +174,12 @@ public class Crosshair3D : MonoBehaviour
     }
   }
 
-  public void ShowReticleOnClick(bool showOnClick)
+  public bool GetShowReticleOnClick()
+  {
+    return showOnClickOnly;
+  }
+
+  public void SetShowReticleOnClick(bool showOnClick)
   {
     showOnClickOnly = showOnClick;
 

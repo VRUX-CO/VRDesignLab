@@ -54,11 +54,15 @@ public class ButtonRevealPlane : MonoBehaviour
   public void OnRevealStart()
   {
     ShowButtons(true);
+
+    AppCentral.APP.ShowCrosshairIfHidden(true);
   }
 
   public void OnRevealEnd()
   {
     ShowButtons(false);
+
+    AppCentral.APP.ShowCrosshairIfHidden(false);
   }
 
   public void ShowButtons(bool show)
