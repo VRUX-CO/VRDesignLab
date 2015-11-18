@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DistancesViewer : MonoBehaviour
 {
-  public Material introSignMaterial;
   public GameObject DistanceRingObject;
 
   DistanceSign distanceSign;
@@ -19,7 +18,7 @@ public class DistancesViewer : MonoBehaviour
     // parent so it gets destroyed on scene swap
     dSign.transform.parent = transform;
 
-    introBillboard = TextureBillboard.ShowBillboard(introSignMaterial, new Vector3(1, 1, 1), 1, new Vector3(0, 1.5f, 2f), transform);
+    Next();
   }
 
   // Update is called once per frame
@@ -27,12 +26,6 @@ public class DistancesViewer : MonoBehaviour
   {
     if (Utilities.UserClicked())
     {
-      if (introBillboard != null)
-      {
-        introBillboard.Hide(.2f);
-        introBillboard = null;
-      }
-
       Next();
     }
   }
@@ -48,9 +41,7 @@ public class DistancesViewer : MonoBehaviour
     }
     else // failed, so show them all
     {
-      index = -1;
-
-      distanceSign.ShowAll();
+      index = 0;
     }
   }
 

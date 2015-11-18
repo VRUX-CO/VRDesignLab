@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DistanceSign : MonoBehaviour
 {
+  public Material introSignMaterial;
   public Material HalfMeterMaterial;
   public Material OneMeterMaterial;
   public Material OneHalfMeterMaterial;
@@ -14,15 +15,16 @@ public class DistanceSign : MonoBehaviour
   public Material goodMaterial;
   public Material warningMaterial;
 
-  GameObject ringObject;
-  GameObject lineObject;
-  GameObject sphereObject;
-  GameObject signObject;
+
   GameObject signAnchor_lazy;
   List<GameObject> signs = new List<GameObject>();
 
-  const int numSigns = 6;
+  const int numSigns = 7;
 
+  void Start()
+  {
+    MakeSigns();
+  }
 
   GameObject GetSignAnchor()
   {
@@ -39,7 +41,7 @@ public class DistanceSign : MonoBehaviour
   {
     float innerRadius = .01f;
     int nbRadSeg = 44;
-    int nbSides = 18;
+    int nbSides = 88;
 
     GameObject result = new GameObject();
 
@@ -68,34 +70,26 @@ public class DistanceSign : MonoBehaviour
 
   public bool Show(int index)
   {
-    bool success = false;
+    float degress = DegressForIndex(index % numSigns);
+    iTween.RotateTo(GetSignAnchor(), new Vector3(0f, -degress, 0f), 1f);
 
-    DeleteAllSigns();
-
-    GameObject newSign = MakeSignAtIndex(index);
-    if (newSign != null)
-    {
-      newSign.transform.Rotate(new Vector3(0, .25f * 360, 0f));
-      iTween.RotateBy(newSign, new Vector3(0f, -.25f, 0f), 3f);
-
-      success = true;
-    }
-
-    return success;
+    return true;
   }
 
-  public void ShowAll()
+  float DegressForIndex(int index)
   {
-    DeleteAllSigns();
+    return ((float)index / (float)numSigns) * 360f;
+  }
 
+  //    iTween.RotateBy(sign, new Vector3(0f, degress, 0f), 1f);
+
+  public void MakeSigns()
+  {
     for (int i = 0; i < numSigns; i++)
     {
       GameObject sign = MakeSignAtIndex(i);
 
-      float degress = ((float)i / (float)numSigns) * 360f;
-
-      sign.transform.Rotate(new Vector3(0, degress, 0f));
-      //    iTween.RotateBy(sign, new Vector3(0f, degress, 0f), 1f);
+      sign.transform.Rotate(new Vector3(0, DegressForIndex(i), 0f));
     }
   }
 
@@ -112,17 +106,26 @@ public class DistanceSign : MonoBehaviour
 
       float radius = RadiusForIndex(index);
 
-      ringObject = CreateRing(radius);
-      ringObject.transform.parent = result.transform;
+      GameObject ringObject;
+      GameObject lineObject;
+      GameObject sphereObject;
+      GameObject signObject;
 
       signObject = CreateSign(index, radius);
       signObject.transform.parent = result.transform;
 
-      lineObject = CreateLine(radius, signObject);
-      lineObject.transform.parent = result.transform;
+      // first sign doesn't need distance ring
+      if (index > 0)
+      {
+        lineObject = CreateLine(radius, signObject);
+        lineObject.transform.parent = result.transform;
 
-      sphereObject = CreateSphere(radius);
-      sphereObject.transform.parent = result.transform;
+        ringObject = CreateRing(radius);
+        ringObject.transform.parent = result.transform;
+
+        sphereObject = CreateSphere(radius);
+        sphereObject.transform.parent = result.transform;
+      }
 
       signs.Add(result);
     }
@@ -188,33 +191,37 @@ public class DistanceSign : MonoBehaviour
 
     switch (index)
     {
+      default:
       case 0:
-        signMat = HalfMeterMaterial;
+        signMat = introSignMaterial;
         scale = new Vector3(1f, 1f, 1f);
         break;
       case 1:
-        signMat = OneMeterMaterial;
+        signMat = HalfMeterMaterial;
+        scale = new Vector3(.5f, .5f, .5f);
         break;
       case 2:
+        signMat = OneMeterMaterial;
+        break;
+      case 3:
         signMat = OneHalfMeterMaterial;
         scale = new Vector3(1.5f, 1.5f, 1.5f);
         break;
-      case 3:
+      case 4:
         signMat = ThreeMeterMaterial;
         scale = new Vector3(2f, 2f, 2f);
         break;
-      case 4:
+      case 5:
         signMat = SixMeterMaterial;
         scale = new Vector3(3f, 3f, 3f);
         break;
-      case 5:
-      default:
+      case 6:
         signMat = TwelveMeterMaterial;
         scale = new Vector3(4f, 4f, 4f);
         break;
     }
 
-    Vector3 newPosition = new Vector3(0, -22f, radius);
+    Vector3 newPosition = new Vector3(0, 1.2f, radius);
     TextureBillboard tbb = TextureBillboard.ShowBillboard(signMat, new Vector3(1, 1, 1), 1, newPosition, transform);
     result = tbb.gameObject;
 
@@ -231,23 +238,26 @@ public class DistanceSign : MonoBehaviour
     {
       switch (index)
       {
+        default:
         case 0:
-          result = .5f;
+          result = 1.5f;  // intro sign
           break;
         case 1:
-          result = 1f;
+          result = .5f;
           break;
         case 2:
-          result = 1.5f;
+          result = 1f;
           break;
         case 3:
-          result = 3f;
+          result = 1.5f;
           break;
         case 4:
-          result = 6f;
+          result = 3f;
           break;
         case 5:
-        default:
+          result = 6f;
+          break;
+        case 6:
           result = 12f;
           break;
       }
