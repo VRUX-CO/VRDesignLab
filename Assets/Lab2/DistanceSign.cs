@@ -39,8 +39,10 @@ public class DistanceSign : MonoBehaviour
     return result;
   }
 
-  public void Show(int index, bool deletePrevious)
+  public bool Show(int index, bool deletePrevious)
   {
+    bool success = false;
+
     if (deletePrevious)
     {
       // deleting parent deletes children
@@ -71,23 +73,27 @@ public class DistanceSign : MonoBehaviour
 
       mainObject.transform.Rotate(new Vector3(0, .25f * 360, 0f));
       iTween.RotateBy(mainObject, new Vector3(0f, -.25f, 0f), 3f);
+
+      success = true;
     }
+
+    return success;
   }
 
   GameObject CreateLine(float radius, GameObject sign)
   {
     Bounds signBounds = sign.GetComponent<Renderer>().bounds;
     float lineLength = signBounds.min.y;
+    const float minHeight = .2f;
 
-    if (lineLength < .2f)
+    if (lineLength < minHeight)
     {
       Vector3 newPos = sign.transform.localPosition;
-      newPos.y = signBounds.extents.y + .2f;
+      newPos.y = signBounds.extents.y + minHeight;
 
       sign.transform.position = newPos;
 
-      lineLength = .2f;
-      Debug.Log("duh: " + lineLength.ToString());
+      lineLength = minHeight;
     }
 
     GameObject result = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -174,7 +180,6 @@ public class DistanceSign : MonoBehaviour
     result.transform.localPosition = new Vector3(0, verticalPosition, radius);
 
     result.transform.localScale = scale;
-
 
     return result;
   }
