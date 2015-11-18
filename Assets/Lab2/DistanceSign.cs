@@ -11,7 +11,6 @@ public class DistanceSign : MonoBehaviour
   public GameObject TwelveMeterMessage;
   public Material goodMaterial;
   public Material warningMaterial;
-  public float lineLength;
 
   GameObject ringObject;
   GameObject lineObject;
@@ -59,22 +58,38 @@ public class DistanceSign : MonoBehaviour
       float radius = RadiusForIndex(index);
 
       ringObject = CreateRing(radius);
-      lineObject = CreateLine(radius);
-      sphereObject = CreateSphere(radius);
-      signObject = CreateSign(index, radius);
-
       ringObject.transform.parent = mainObject.transform;
-      lineObject.transform.parent = mainObject.transform;
-      sphereObject.transform.parent = mainObject.transform;
+
+      signObject = CreateSign(index, radius);
       signObject.transform.parent = mainObject.transform;
+
+      lineObject = CreateLine(radius, signObject);
+      lineObject.transform.parent = mainObject.transform;
+
+      sphereObject = CreateSphere(radius);
+      sphereObject.transform.parent = mainObject.transform;
 
       mainObject.transform.Rotate(new Vector3(0, .25f * 360, 0f));
       iTween.RotateBy(mainObject, new Vector3(0f, -.25f, 0f), 3f);
     }
   }
 
-  GameObject CreateLine(float radius)
+  GameObject CreateLine(float radius, GameObject sign)
   {
+    Bounds signBounds = sign.GetComponent<Renderer>().bounds;
+    float lineLength = signBounds.min.y;
+
+    if (lineLength < .2f)
+    {
+      Vector3 newPos = sign.transform.localPosition;
+      newPos.y = signBounds.extents.y + .2f;
+
+      sign.transform.position = newPos;
+
+      lineLength = .2f;
+      Debug.Log("duh: " + lineLength.ToString());
+    }
+
     GameObject result = GameObject.CreatePrimitive(PrimitiveType.Quad);
 
     MeshRenderer renderer = result.GetComponent<MeshRenderer>();
@@ -114,32 +129,39 @@ public class DistanceSign : MonoBehaviour
     GameObject result = null;
     GameObject signPrefab;
     Vector3 scale = new Vector3(1f, 1f, 1f);
+    float verticalPosition = 1f;
 
     switch (index)
     {
       case 0:
         signPrefab = HalfMeterMessage;
         scale = new Vector3(1f, 1f, 1f);
+        verticalPosition = 1f;
         break;
       case 1:
         signPrefab = OneMeterMessage;
+        verticalPosition = 1f;
         break;
       case 2:
         signPrefab = OneHalfMeterMessage;
         scale = new Vector3(1.5f, 1.5f, 1.5f);
+        verticalPosition = 1f;
         break;
       case 3:
         signPrefab = ThreeMeterMessage;
         scale = new Vector3(2f, 2f, 2f);
+        verticalPosition = 1f;
         break;
       case 4:
         signPrefab = SixMeterMessage;
         scale = new Vector3(3f, 3f, 3f);
+        verticalPosition = 1f;
         break;
       case 5:
       default:
         signPrefab = TwelveMeterMessage;
         scale = new Vector3(4f, 4f, 4f);
+        verticalPosition = 1f;
         break;
     }
 
@@ -149,7 +171,7 @@ public class DistanceSign : MonoBehaviour
     // parent this so it gets deleted when scene is swapped out
     result.transform.parent = transform;
 
-    result.transform.localPosition = new Vector3(0, 1f, radius);
+    result.transform.localPosition = new Vector3(0, verticalPosition, radius);
 
     result.transform.localScale = scale;
 
