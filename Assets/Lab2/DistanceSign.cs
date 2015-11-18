@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class DistanceSign : MonoBehaviour
 {
-  public GameObject HalfMeterMessage;
-  public GameObject OneMeterMessage;
-  public GameObject OneHalfMeterMessage;
-  public GameObject ThreeMeterMessage;
-  public GameObject SixMeterMessage;
-  public GameObject TwelveMeterMessage;
+  public Material HalfMeterMaterial;
+  public Material OneMeterMaterial;
+  public Material OneHalfMeterMaterial;
+  public Material ThreeMeterMaterial;
+  public Material SixMeterMaterial;
+  public Material TwelveMeterMaterial;
+
   public Material goodMaterial;
   public Material warningMaterial;
 
@@ -93,10 +94,8 @@ public class DistanceSign : MonoBehaviour
 
       float degress = ((float)i / (float)numSigns) * 360f;
 
-      sign.transform.Rotate(new Vector3(0, .25f * 360, 0f));
-      iTween.RotateBy(sign, new Vector3(0f, -degress, 0f), 3f);
-
-      Debug.Log("duh: " + degress.ToString() + " i: " + i.ToString());
+      sign.transform.Rotate(new Vector3(0, degress, 0f));
+      //    iTween.RotateBy(sign, new Vector3(0f, degress, 0f), 1f);
     }
   }
 
@@ -133,7 +132,7 @@ public class DistanceSign : MonoBehaviour
 
   GameObject CreateLine(float radius, GameObject sign)
   {
-    Bounds signBounds = sign.GetComponent<Renderer>().bounds;
+    Bounds signBounds = sign.GetComponentInChildren<Renderer>().bounds;
     float lineLength = signBounds.min.y;
     const float minHeight = .2f;
 
@@ -184,51 +183,40 @@ public class DistanceSign : MonoBehaviour
   GameObject CreateSign(int index, float radius)
   {
     GameObject result = null;
-    GameObject signPrefab;
+    Material signMat;
     Vector3 scale = new Vector3(1f, 1f, 1f);
-    float verticalPosition = 1f;
 
     switch (index)
     {
       case 0:
-        signPrefab = HalfMeterMessage;
+        signMat = HalfMeterMaterial;
         scale = new Vector3(1f, 1f, 1f);
-        verticalPosition = 1f;
         break;
       case 1:
-        signPrefab = OneMeterMessage;
-        verticalPosition = 1f;
+        signMat = OneMeterMaterial;
         break;
       case 2:
-        signPrefab = OneHalfMeterMessage;
+        signMat = OneHalfMeterMaterial;
         scale = new Vector3(1.5f, 1.5f, 1.5f);
-        verticalPosition = 1f;
         break;
       case 3:
-        signPrefab = ThreeMeterMessage;
+        signMat = ThreeMeterMaterial;
         scale = new Vector3(2f, 2f, 2f);
-        verticalPosition = 1f;
         break;
       case 4:
-        signPrefab = SixMeterMessage;
+        signMat = SixMeterMaterial;
         scale = new Vector3(3f, 3f, 3f);
-        verticalPosition = 1f;
         break;
       case 5:
       default:
-        signPrefab = TwelveMeterMessage;
+        signMat = TwelveMeterMaterial;
         scale = new Vector3(4f, 4f, 4f);
-        verticalPosition = 1f;
         break;
     }
 
     Vector3 newPosition = new Vector3(0, -22f, radius);
-    result = Instantiate(signPrefab, newPosition, Quaternion.identity) as GameObject;
-
-    // parent this so it gets deleted when scene is swapped out
-    result.transform.parent = transform;
-
-    result.transform.localPosition = new Vector3(0, verticalPosition, radius);
+    TextureBillboard tbb = TextureBillboard.ShowBillboard(signMat, new Vector3(1, 1, 1), 1, newPosition, transform);
+    result = tbb.gameObject;
 
     result.transform.localScale = scale;
 

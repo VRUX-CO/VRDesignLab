@@ -41,7 +41,7 @@ public class DistancesViewer : MonoBehaviour
     }
     else // failed, so show them all
     {
-      index = 0;
+      index = -1;
 
       distanceSign.ShowAll();
     }

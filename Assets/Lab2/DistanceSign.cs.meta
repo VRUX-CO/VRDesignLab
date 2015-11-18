@@ -1,10 +1,21 @@
 fileFormatVersion: 2
 guid: 32f2e09868becd2479c1d60b464d9275
-timeCreated: 1445634368
+timeCreated: 1447836388
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HalfMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72, type: 2}
+  - OneMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72, type: 2}
+  - OneHalfMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72,
+      type: 2}
+  - ThreeMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72,
+      type: 2}
+  - SixMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72, type: 2}
+  - TwelveMeterMaterial: {fileID: 2100000, guid: 83013510187e8cd4294a3c0731d8be72,
+      type: 2}
+  - goodMaterial: {fileID: 2100000, guid: 8defec2c0e8ff8340a71d9d7a7dcddcc, type: 2}
+  - warningMaterial: {fileID: 2100000, guid: 703ff5645be3b3a4f9addb583b259e90, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
