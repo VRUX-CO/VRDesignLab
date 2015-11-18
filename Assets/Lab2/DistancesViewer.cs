@@ -33,7 +33,7 @@ public class DistancesViewer : MonoBehaviour
   void Next()
   {
     // update distance loop
-    bool success = distanceSign.Show(index, true);
+    bool success = distanceSign.Show(index);
 
     if (success)
     {
@@ -43,12 +43,7 @@ public class DistancesViewer : MonoBehaviour
     {
       index = 0;
 
-      success = true;
-      while (success)
-      {
-        success = distanceSign.Show(index, false);
-        index++;
-      }
+      distanceSign.ShowAll();
     }
   }
 

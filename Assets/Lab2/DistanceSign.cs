@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DistanceSign : MonoBehaviour
 {
@@ -16,7 +17,22 @@ public class DistanceSign : MonoBehaviour
   GameObject lineObject;
   GameObject sphereObject;
   GameObject signObject;
-  GameObject mainObject;
+  GameObject signAnchor_lazy;
+  List<GameObject> signs = new List<GameObject>();
+
+  const int numSigns = 6;
+
+
+  GameObject GetSignAnchor()
+  {
+    if (signAnchor_lazy == null)
+    {
+      signAnchor_lazy = new GameObject("Anchor");
+      signAnchor_lazy.transform.parent = transform;
+    }
+
+    return signAnchor_lazy;
+  }
 
   GameObject CreateRing(float radius)
   {
@@ -39,45 +55,80 @@ public class DistanceSign : MonoBehaviour
     return result;
   }
 
-  public bool Show(int index, bool deletePrevious)
+  void DeleteAllSigns()
+  {
+    foreach (GameObject obj in signs)
+    {
+      Destroy(obj);
+    }
+
+    signs.Clear();
+  }
+
+  public bool Show(int index)
   {
     bool success = false;
 
-    if (deletePrevious)
+    DeleteAllSigns();
+
+    GameObject newSign = MakeSignAtIndex(index);
+    if (newSign != null)
     {
-      // deleting parent deletes children
-      if (mainObject != null)
-        Destroy(mainObject);
-    }
-
-    if (index < 6)
-    {
-      mainObject = new GameObject("Sign");
-
-      // parent it all together so we can move it to stay z distance from camera, and so it gets deleted properly
-      mainObject.transform.parent = transform;
-
-      float radius = RadiusForIndex(index);
-
-      ringObject = CreateRing(radius);
-      ringObject.transform.parent = mainObject.transform;
-
-      signObject = CreateSign(index, radius);
-      signObject.transform.parent = mainObject.transform;
-
-      lineObject = CreateLine(radius, signObject);
-      lineObject.transform.parent = mainObject.transform;
-
-      sphereObject = CreateSphere(radius);
-      sphereObject.transform.parent = mainObject.transform;
-
-      mainObject.transform.Rotate(new Vector3(0, .25f * 360, 0f));
-      iTween.RotateBy(mainObject, new Vector3(0f, -.25f, 0f), 3f);
+      newSign.transform.Rotate(new Vector3(0, .25f * 360, 0f));
+      iTween.RotateBy(newSign, new Vector3(0f, -.25f, 0f), 3f);
 
       success = true;
     }
 
     return success;
+  }
+
+  public void ShowAll()
+  {
+    DeleteAllSigns();
+
+    for (int i = 0; i < numSigns; i++)
+    {
+      GameObject sign = MakeSignAtIndex(i);
+
+      float degress = ((float)i / (float)numSigns) * 360f;
+
+      sign.transform.Rotate(new Vector3(0, .25f * 360, 0f));
+      iTween.RotateBy(sign, new Vector3(0f, -degress, 0f), 3f);
+
+      Debug.Log("duh: " + degress.ToString() + " i: " + i.ToString());
+    }
+  }
+
+  GameObject MakeSignAtIndex(int index)
+  {
+    GameObject result = null;
+
+    if (index >= 0 && index < numSigns)
+    {
+      result = new GameObject("Sign");
+
+      // parent it all together so we can move it to stay z distance from camera, and so it gets deleted properly
+      result.transform.parent = GetSignAnchor().transform;
+
+      float radius = RadiusForIndex(index);
+
+      ringObject = CreateRing(radius);
+      ringObject.transform.parent = result.transform;
+
+      signObject = CreateSign(index, radius);
+      signObject.transform.parent = result.transform;
+
+      lineObject = CreateLine(radius, signObject);
+      lineObject.transform.parent = result.transform;
+
+      sphereObject = CreateSphere(radius);
+      sphereObject.transform.parent = result.transform;
+
+      signs.Add(result);
+    }
+
+    return result;
   }
 
   GameObject CreateLine(float radius, GameObject sign)
@@ -219,12 +270,14 @@ public class DistanceSign : MonoBehaviour
 
   void Update()
   {
+    GameObject anchor = GetSignAnchor();
+
     // maintain distance to camera without attaching
-    if (mainObject != null)
+    if (anchor != null)
     {
       Vector3 newPosition = new Vector3(0, 0, Camera.main.transform.position.z);
 
-      mainObject.transform.localPosition = newPosition;
+      anchor.transform.localPosition = newPosition;
     }
   }
 }

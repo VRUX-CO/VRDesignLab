@@ -47,6 +47,8 @@ public class AppCentral : MonoBehaviour
     {
       Application.Quit();
     }
+    else if (Input.GetKeyDown(KeyCode.R))
+      RecenterHeadTracking();
   }
 
   public bool CardboardClickEvent()
