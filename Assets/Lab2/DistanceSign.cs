@@ -19,6 +19,41 @@ public class DistanceSign : MonoBehaviour
   List<SignWithRing> signs;
 
   const int numSigns = 7;
+  int index = 0;
+
+  void Start()
+  {
+    Next();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    if (Utilities.UserClicked())
+    {
+      Next();
+    }
+  }
+
+  void LastUpdate()
+  {
+    MoveAnchorProperDistanceFromCamera();
+  }
+
+  void Next()
+  {
+    // update distance loop
+    bool success = Show(index);
+
+    if (success)
+    {
+      index++;
+    }
+    else // failed, so show them all
+    {
+      index = 0;
+    }
+  }
 
   SignWithRing SignAtIndex(int index)
   {
@@ -194,7 +229,7 @@ public class DistanceSign : MonoBehaviour
     return result;
   }
 
-  void Update()
+  void MoveAnchorProperDistanceFromCamera()
   {
     GameObject anchor = GetSignAnchor();
 
