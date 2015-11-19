@@ -11,7 +11,7 @@ public class TextureBillboard : MonoBehaviour
   {
   }
 
-  public static TextureBillboard ShowBillboard(Material signMat, Vector3 scale, float delay, Vector3 position, Transform parent)
+  public static TextureBillboard Billboard(Material signMat, Vector3 scale, float delay, Vector3 position, Transform parent)
   {
     GameObject go = new GameObject("TextureBillboard");
     go.transform.parent = parent;
@@ -19,16 +19,13 @@ public class TextureBillboard : MonoBehaviour
 
     TextureBillboard tbb = go.AddComponent<TextureBillboard>();
 
-
-    tbb.Show(signMat, scale, delay);
+    tbb.sign = tbb.MakeSign(signMat, scale);
 
     return tbb;
   }
 
-  public void Show(Material trackingOffMat, Vector3 scale, float delay)
+  public void Show(float delay)
   {
-    sign = MakeSign(trackingOffMat, scale);
-
     StartCoroutine(FadeIn(delay));
   }
 

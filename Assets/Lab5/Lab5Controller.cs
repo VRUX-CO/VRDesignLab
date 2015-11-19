@@ -13,7 +13,7 @@ public class Lab5Controller : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    TextureBillboard.ShowBillboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1.4f, 1.5f), transform);
+    TextureBillboard.Billboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1.4f, 1.5f), transform).Show(0f);
   }
 
   void OnDestroy()
@@ -37,7 +37,8 @@ public class Lab5Controller : MonoBehaviour
   {
     if (!trackingDisabled)
     {
-      TextureBillboard tbb = TextureBillboard.ShowBillboard(trackingOffMat, new Vector3(.8f, .4f, .8f), 0, new Vector3(0, 1.8f, 1.5f), transform);
+      TextureBillboard tbb = TextureBillboard.Billboard(trackingOffMat, new Vector3(.8f, .4f, .8f), 0, new Vector3(0, 1.8f, 1.5f), transform);
+      tbb.Show(0f);
 
       ToggleTracking();
 

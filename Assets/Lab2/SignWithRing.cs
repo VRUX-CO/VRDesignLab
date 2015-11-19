@@ -1,0 +1,142 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class SignWithRing : MonoBehaviour
+{
+  Material signMaterial;
+  Material ringMaterial;
+  TextureBillboard sign;
+
+  GameObject ringObject;
+  GameObject lineObject;
+  GameObject sphereObject;
+  GameObject signObject;
+
+  public GameObject Make(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
+  {
+    GameObject result = new GameObject("Sign"); ;
+
+    signMaterial = signMat;
+    ringMaterial = ringMat;
+
+    signObject = CreateSign(radius, signMat, scale);
+    signObject.transform.parent = result.transform;
+
+    // first sign doesn't need distance ring
+    if (hasRing)
+    {
+      lineObject = CreateLine(radius, signObject);
+      lineObject.transform.parent = result.transform;
+
+      ringObject = CreateRing(radius);
+      ringObject.transform.parent = result.transform;
+
+      sphereObject = CreateSphere(radius);
+      sphereObject.transform.parent = result.transform;
+    }
+
+    return result;
+  }
+
+  GameObject CreateRing(float radius)
+  {
+    float innerRadius = .01f;
+    int nbRadSeg = 80;
+    int nbSides = 20;
+
+    GameObject result = new GameObject();
+
+    MeshUtilities.AddTorusMeshFilter(result, radius, innerRadius, nbRadSeg, nbSides);
+
+    MeshRenderer renderer = result.AddComponent<MeshRenderer>();
+    renderer.enabled = false;  // start off hidden
+
+    renderer.material = ringMaterial;
+
+    return result;
+  }
+
+  GameObject CreateLine(float radius, GameObject sign)
+  {
+    Bounds signBounds = sign.GetComponentInChildren<Renderer>().bounds;
+    float lineLength = signBounds.min.y;
+    const float minHeight = .2f;
+
+    if (lineLength < minHeight)
+    {
+      Vector3 newPos = sign.transform.localPosition;
+      newPos.y = signBounds.extents.y + minHeight;
+
+      sign.transform.position = newPos;
+
+      lineLength = minHeight;
+    }
+
+    GameObject result = GameObject.CreatePrimitive(PrimitiveType.Quad);
+
+    MeshRenderer renderer = result.GetComponent<MeshRenderer>();
+    renderer.enabled = false;  // start off hidden
+
+    renderer.material = ringMaterial;
+
+    result.transform.localPosition = new Vector3(0, lineLength / 2f, radius);
+    result.transform.localScale = new Vector3(.01f, lineLength, 1);
+
+    return result;
+  }
+
+  GameObject CreateSphere(float radius)
+  {
+    GameObject result = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+    MeshRenderer renderer = result.GetComponent<MeshRenderer>();
+    renderer.enabled = false;  // start off hidden
+
+    renderer.material = ringMaterial;
+
+    result.transform.localPosition = new Vector3(0, 0, radius);
+    result.transform.localScale = new Vector3(.05f, .05f, .05f);
+
+    return result;
+  }
+
+  GameObject CreateSign(float radius, Material signMat, Vector3 scale)
+  {
+    GameObject result = null;
+
+    Vector3 newPosition = new Vector3(0, 1.2f, radius);
+    sign = TextureBillboard.Billboard(signMat, new Vector3(1, 1, 1), 1, newPosition, null);
+    result = sign.gameObject;
+
+    result.transform.localScale = scale;
+
+    return result;
+  }
+
+  public void Show(bool show)
+  {
+    if (show)
+    {
+      sign.Show(0);
+
+      if (ringObject != null)
+      {
+        ringObject.GetComponent<Renderer>().enabled = true;
+        lineObject.GetComponent<Renderer>().enabled = true;
+        sphereObject.GetComponent<Renderer>().enabled = true;
+      }
+    }
+    else
+    {
+      sign.Hide(.25f);
+
+      if (ringObject != null)
+      {
+        ringObject.GetComponent<Renderer>().enabled = false;
+        lineObject.GetComponent<Renderer>().enabled = false;
+        sphereObject.GetComponent<Renderer>().enabled = false;
+      }
+    }
+  }
+}
