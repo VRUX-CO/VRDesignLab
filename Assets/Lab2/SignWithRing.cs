@@ -13,30 +13,37 @@ public class SignWithRing : MonoBehaviour
   GameObject sphereObject;
   GameObject signObject;
 
-  public GameObject Make(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
+  public static SignWithRing Make(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
   {
-    GameObject result = new GameObject("Sign"); ;
+    GameObject gob = new GameObject("Sign");
 
+    SignWithRing result = gob.AddComponent<SignWithRing>();
+
+    result.Setup(radius, signMat, ringMat, scale, hasRing);
+
+    return result;
+  }
+
+  public void Setup(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
+  {
     signMaterial = signMat;
     ringMaterial = ringMat;
 
     signObject = CreateSign(radius, signMat, scale);
-    signObject.transform.parent = result.transform;
+    signObject.transform.parent = transform;
 
     // first sign doesn't need distance ring
     if (hasRing)
     {
       lineObject = CreateLine(radius, signObject);
-      lineObject.transform.parent = result.transform;
+      lineObject.transform.parent = transform;
 
       ringObject = CreateRing(radius);
-      ringObject.transform.parent = result.transform;
+      ringObject.transform.parent = transform;
 
       sphereObject = CreateSphere(radius);
-      sphereObject.transform.parent = result.transform;
+      sphereObject.transform.parent = transform;
     }
-
-    return result;
   }
 
   GameObject CreateRing(float radius)

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DistanceSign : MonoBehaviour
+public class Lab2Controller : MonoBehaviour
 {
   public Material introSignMaterial;
   public Material HalfMeterMaterial;
@@ -42,11 +42,16 @@ public class DistanceSign : MonoBehaviour
 
   void Next()
   {
-    // update distance loop
-    bool success = Show(index);
+    SignWithRing sign = SignAtIndex(index);
 
-    if (success)
+    if (sign != null)
     {
+      sign.Show(true);
+
+      // update distance loop
+      float degress = DegressForIndex(index % numSigns);
+      iTween.RotateTo(GetSignAnchor(), new Vector3(0f, -degress, 0f), 1f);
+
       index++;
     }
     else // failed, so show them all
@@ -74,10 +79,11 @@ public class DistanceSign : MonoBehaviour
           ringMat = warningMaterial;
         }
 
-        SignWithRing sign = new SignWithRing();
+        SignWithRing sign = SignWithRing.Make(radius, SignMatForIndex(i), ringMat, ScaleForIndex(i), i != 0);
         signs.Add(sign);
 
-        result = sign.Make(radius, SignMatForIndex(i), ringMat, ScaleForIndex(i), i != 0);
+        result = sign.gameObject;
+
         result.transform.Rotate(new Vector3(0, DegressForIndex(i), 0f));
 
         result.transform.parent = GetSignAnchor().transform;
@@ -111,16 +117,6 @@ public class DistanceSign : MonoBehaviour
     }
 
     signs.Clear();
-  }
-
-  public bool Show(int index)
-  {
-    float degress = DegressForIndex(index % numSigns);
-    iTween.RotateTo(GetSignAnchor(), new Vector3(0f, -degress, 0f), 1f);
-
-    SignAtIndex(index).Show(true);
-
-    return true;
   }
 
   float DegressForIndex(int index)
