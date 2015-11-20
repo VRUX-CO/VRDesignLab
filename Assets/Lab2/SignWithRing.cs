@@ -12,6 +12,7 @@ public class SignWithRing : MonoBehaviour
   GameObject lineObject;
   GameObject sphereObject;
   GameObject signObject;
+  bool visible = false;
 
   public static SignWithRing Make(float radius, Material signMat, Texture signTexture, Material ringMat, Vector3 scale, bool hasRing)
   {
@@ -128,6 +129,12 @@ public class SignWithRing : MonoBehaviour
 
   public void Show(bool show)
   {
+    // already in sync
+    if (visible == show)
+      return;
+
+    visible = show;
+
     if (show)
     {
       sign.Show(0);

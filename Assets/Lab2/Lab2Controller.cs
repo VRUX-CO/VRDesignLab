@@ -17,7 +17,7 @@ public class Lab2Controller : MonoBehaviour
   public Material warningMaterial;
 
   GameObject signAnchor_lazy;
-  List<SignWithRing> signs;
+  List<SignWithRing> signs_private;
 
   const int numSigns = 7;
   int index = 0;
@@ -41,8 +41,20 @@ public class Lab2Controller : MonoBehaviour
     MoveAnchorProperDistanceFromCamera();
   }
 
+  void HideAllSigns()
+  {
+    for (int i = 0; i < numSigns; i++)
+    {
+      SignWithRing sign = SignAtIndex(i);
+
+      sign.Show(false);
+    }
+  }
+
   void Next()
   {
+    HideAllSigns();
+
     SignWithRing sign = SignAtIndex(index);
 
     if (sign != null)
@@ -63,9 +75,9 @@ public class Lab2Controller : MonoBehaviour
 
   SignWithRing SignAtIndex(int index)
   {
-    if (signs == null)
+    if (signs_private == null)
     {
-      signs = new List<SignWithRing>();
+      signs_private = new List<SignWithRing>();
 
       for (int i = 0; i < numSigns; i++)
       {
@@ -81,7 +93,7 @@ public class Lab2Controller : MonoBehaviour
         }
 
         SignWithRing sign = SignWithRing.Make(radius, signMaterial, SignTextureForIndex(i), ringMat, ScaleForIndex(i), i != 0);
-        signs.Add(sign);
+        signs_private.Add(sign);
 
         result = sign.gameObject;
 
@@ -91,9 +103,9 @@ public class Lab2Controller : MonoBehaviour
       }
     }
 
-    if (index >= 0 && index < signs.Count)
+    if (index >= 0 && index < signs_private.Count)
     {
-      return signs[index];
+      return signs_private[index];
     }
 
     return null;
@@ -108,16 +120,6 @@ public class Lab2Controller : MonoBehaviour
     }
 
     return signAnchor_lazy;
-  }
-
-  void DeleteAllSigns()
-  {
-    foreach (SignWithRing sign in signs)
-    {
-      Destroy(sign.gameObject);
-    }
-
-    signs.Clear();
   }
 
   float DegressForIndex(int index)
