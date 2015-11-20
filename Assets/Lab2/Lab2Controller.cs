@@ -36,7 +36,7 @@ public class Lab2Controller : MonoBehaviour
     }
   }
 
-  void LastUpdate()
+  void LateUpdate()
   {
     MoveAnchorProperDistanceFromCamera();
   }
