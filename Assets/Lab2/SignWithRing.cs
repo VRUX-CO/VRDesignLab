@@ -74,6 +74,9 @@ public class SignWithRing : MonoBehaviour
   {
     Bounds signBounds = sign.GetComponentInChildren<Renderer>().bounds;
     float lineLength = signBounds.min.y;
+
+    lineLength += signBounds.size.y * .30f;  // image is centered in bounds and bottom half is blank, this is an adustment
+
     const float minHeight = .2f;
 
     if (lineLength < minHeight)
