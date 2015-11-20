@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class Lab2Controller : MonoBehaviour
 {
-  public Material introSignMaterial;
-  public Material HalfMeterMaterial;
-  public Material OneMeterMaterial;
-  public Material OneHalfMeterMaterial;
-  public Material ThreeMeterMaterial;
-  public Material SixMeterMaterial;
-  public Material TwelveMeterMaterial;
+  public Material signMaterial;
+  public Texture introSignTexture;
+  public Texture HalfMeterTexture;
+  public Texture OneMeterTexture;
+  public Texture OneHalfMeterTexture;
+  public Texture ThreeMeterTexture;
+  public Texture SixMeterTexture;
+  public Texture TwelveMeterTexture;
 
   public Material goodMaterial;
   public Material warningMaterial;
@@ -79,7 +80,7 @@ public class Lab2Controller : MonoBehaviour
           ringMat = warningMaterial;
         }
 
-        SignWithRing sign = SignWithRing.Make(radius, SignMatForIndex(i), ringMat, ScaleForIndex(i), i != 0);
+        SignWithRing sign = SignWithRing.Make(radius, signMaterial, SignTextureForIndex(i), ringMat, ScaleForIndex(i), i != 0);
         signs.Add(sign);
 
         result = sign.gameObject;
@@ -125,37 +126,37 @@ public class Lab2Controller : MonoBehaviour
   }
 
   //    iTween.RotateBy(sign, new Vector3(0f, degress, 0f), 1f);
-  Material SignMatForIndex(int index)
+  Texture SignTextureForIndex(int index)
   {
-    Material signMat;
+    Texture result;
 
     switch (index)
     {
       default:
       case 0:
-        signMat = introSignMaterial;
+        result = introSignTexture;
         break;
       case 1:
-        signMat = HalfMeterMaterial;
+        result = HalfMeterTexture;
         break;
       case 2:
-        signMat = OneMeterMaterial;
+        result = OneMeterTexture;
         break;
       case 3:
-        signMat = OneHalfMeterMaterial;
+        result = OneHalfMeterTexture;
         break;
       case 4:
-        signMat = ThreeMeterMaterial;
+        result = ThreeMeterTexture;
         break;
       case 5:
-        signMat = SixMeterMaterial;
+        result = SixMeterTexture;
         break;
       case 6:
-        signMat = TwelveMeterMaterial;
+        result = TwelveMeterTexture;
         break;
     }
 
-    return signMat;
+    return result;
   }
 
   Vector3 ScaleForIndex(int index)

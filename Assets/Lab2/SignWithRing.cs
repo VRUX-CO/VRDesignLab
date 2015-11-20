@@ -13,11 +13,16 @@ public class SignWithRing : MonoBehaviour
   GameObject sphereObject;
   GameObject signObject;
 
-  public static SignWithRing Make(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
+  public static SignWithRing Make(float radius, Material signMat, Texture signTexture, Material ringMat, Vector3 scale, bool hasRing)
   {
     GameObject gob = new GameObject("Sign");
 
     SignWithRing result = gob.AddComponent<SignWithRing>();
+
+    // deep clone the material
+    signMat = Instantiate(signMat) as Material;
+
+    signMat.mainTexture = signTexture;
 
     result.Setup(radius, signMat, ringMat, scale, hasRing);
 
