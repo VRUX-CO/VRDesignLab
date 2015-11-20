@@ -21,6 +21,7 @@ public class Lab2Controller : MonoBehaviour
 
   const int numSigns = 7;
   int index = 0;
+  bool showAllMode = false;
 
   void Start()
   {
@@ -41,36 +42,59 @@ public class Lab2Controller : MonoBehaviour
     MoveAnchorProperDistanceFromCamera();
   }
 
-  void HideAllSigns()
+  void HideAllSigns(bool hide)
   {
     for (int i = 0; i < numSigns; i++)
     {
       SignWithRing sign = SignAtIndex(i);
 
-      sign.Show(false);
+      sign.Show(!hide);
     }
+  }
+
+  void RotateToIndex(int index)
+  {
+    float degress = DegressForIndex(index % numSigns);
+    iTween.RotateTo(GetSignAnchor(), new Vector3(0f, -degress, 0f), 1f);
   }
 
   void Next()
   {
-    HideAllSigns();
-
-    SignWithRing sign = SignAtIndex(index);
-
-    if (sign != null)
+    if (showAllMode)
     {
-      sign.Show(true);
+      if ((index % numSigns) == 0)
+        AppCentral.APP.ShowLookdownNotifier();
 
-      // update distance loop
-      float degress = DegressForIndex(index % numSigns);
-      iTween.RotateTo(GetSignAnchor(), new Vector3(0f, -degress, 0f), 1f);
+      RotateToIndex(index);
 
       index++;
     }
-    else // failed, so show them all
+    else
     {
-      index = 0;
+      HideAllSigns(true);
+
+      SignWithRing sign = SignAtIndex(index);
+
+      if (sign != null)
+      {
+        sign.Show(true);
+
+        RotateToIndex(index);
+
+        index++;
+      }
+      else // failed, so show them all
+      {
+        index = 0;
+        AppCentral.APP.ShowLookdownNotifier();
+
+        HideAllSigns(false);
+        showAllMode = true;
+
+        Next();
+      }
     }
+
   }
 
   SignWithRing SignAtIndex(int index)

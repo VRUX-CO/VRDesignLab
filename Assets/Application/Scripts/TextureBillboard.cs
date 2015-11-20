@@ -5,13 +5,16 @@ public class TextureBillboard : MonoBehaviour
 {
   Material fadeMaterial;
   GameObject sign;
+  bool destroyOnFadeOut = false;
+  bool fading = false;
+  int pendingFade = 0;  // used if a fadein or out is called when a fade is in progress
 
   // Use this for initialization
   void Start()
   {
   }
 
-  public static TextureBillboard Billboard(Material signMat, Vector3 scale, float delay, Vector3 position, Transform parent)
+  public static TextureBillboard Billboard(Material signMat, Vector3 scale, float delay, Vector3 position, Transform parent, bool destroyOnHide)
   {
     GameObject go = new GameObject("TextureBillboard");
     go.transform.parent = parent;
@@ -20,23 +23,42 @@ public class TextureBillboard : MonoBehaviour
     TextureBillboard tbb = go.AddComponent<TextureBillboard>();
 
     tbb.sign = tbb.MakeSign(signMat, scale);
+    tbb.destroyOnFadeOut = destroyOnHide;
 
     return tbb;
   }
 
   public void Show(float delay)
   {
-    StartCoroutine(FadeIn(delay));
+    if (fading)
+    {
+      pendingFade = 1;
+    }
+    else
+    {
+      fading = true;
+
+      StartCoroutine(FadeIn(delay));
+    }
   }
 
   public void Hide(float delay)
   {
-    if (sign)
+    if (fading)
     {
-      StartCoroutine(FadeOut(delay));
+      pendingFade = -1;
     }
     else
-      Debug.Log("wtf?");
+    {
+      fading = true;
+
+      if (sign)
+      {
+        StartCoroutine(FadeOut(delay));
+      }
+      else
+        Debug.Log("wtf?");
+    }
   }
 
   GameObject MakeSign(Material signMat, Vector3 scale)
@@ -72,6 +94,7 @@ public class TextureBillboard : MonoBehaviour
 
   void FadeInDoneCallback()
   {
+    EndFade();
   }
 
   IEnumerator FadeOut(float delay)
@@ -88,7 +111,30 @@ public class TextureBillboard : MonoBehaviour
 
   void FadeOutDoneCallback()
   {
-    Destroy(gameObject);
+    EndFade();
+
+    if (destroyOnFadeOut)
+      Destroy(gameObject);
+  }
+
+  void EndFade()
+  {
+    fading = false;
+
+
+    switch (pendingFade)
+    {
+      case 0:
+        break;
+      case -1:
+        Hide(0);
+        break;
+      case 1:
+        Show(0);
+        break;
+    }
+
+    pendingFade = 0;
   }
 
 }

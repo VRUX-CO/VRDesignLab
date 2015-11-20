@@ -121,7 +121,7 @@ public class SignWithRing : MonoBehaviour
     GameObject result = null;
 
     Vector3 newPosition = new Vector3(0, 1.2f, radius);
-    sign = TextureBillboard.Billboard(signMat, new Vector3(1, 1, 1), 1, newPosition, null);
+    sign = TextureBillboard.Billboard(signMat, new Vector3(1, 1, 1), 1, newPosition, transform, false);
     result = sign.gameObject;
 
     result.transform.localScale = new Vector3(scale, scale, scale);
