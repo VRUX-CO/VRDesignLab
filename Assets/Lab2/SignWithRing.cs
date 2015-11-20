@@ -14,7 +14,7 @@ public class SignWithRing : MonoBehaviour
   GameObject signObject;
   bool visible = false;
 
-  public static SignWithRing Make(float radius, Material signMat, Texture signTexture, Material ringMat, Vector3 scale, bool hasRing)
+  public static SignWithRing Make(float radius, Material signMat, Texture signTexture, Material ringMat, float scale, bool hasRing)
   {
     GameObject gob = new GameObject("Sign");
 
@@ -30,7 +30,7 @@ public class SignWithRing : MonoBehaviour
     return result;
   }
 
-  public void Setup(float radius, Material signMat, Material ringMat, Vector3 scale, bool hasRing)
+  public void Setup(float radius, Material signMat, Material ringMat, float scale, bool hasRing)
   {
     signMaterial = signMat;
     ringMaterial = ringMat;
@@ -73,16 +73,15 @@ public class SignWithRing : MonoBehaviour
   GameObject CreateLine(float radius, GameObject sign)
   {
     Bounds signBounds = sign.GetComponentInChildren<Renderer>().bounds;
-    float lineLength = signBounds.min.y;
-
-    lineLength += signBounds.size.y * .30f;  // image is centered in bounds and bottom half is blank, this is an adustment
+    float signHeight = signBounds.size.y * .40f;  // image is centered in bounds and bottom half is blank, this is an adustment
+    float lineLength = signBounds.center.y - (signHeight / 2);
 
     const float minHeight = .2f;
 
     if (lineLength < minHeight)
     {
       Vector3 newPos = sign.transform.localPosition;
-      newPos.y = signBounds.extents.y + minHeight;
+      newPos.y = (signHeight / 2) + minHeight;
 
       sign.transform.position = newPos;
 
@@ -117,7 +116,7 @@ public class SignWithRing : MonoBehaviour
     return result;
   }
 
-  GameObject CreateSign(float radius, Material signMat, Vector3 scale)
+  GameObject CreateSign(float radius, Material signMat, float scale)
   {
     GameObject result = null;
 
@@ -125,7 +124,7 @@ public class SignWithRing : MonoBehaviour
     sign = TextureBillboard.Billboard(signMat, new Vector3(1, 1, 1), 1, newPosition, null);
     result = sign.gameObject;
 
-    result.transform.localScale = scale;
+    result.transform.localScale = new Vector3(scale, scale, scale);
 
     return result;
   }

@@ -161,9 +161,9 @@ public class Lab2Controller : MonoBehaviour
     return result;
   }
 
-  Vector3 ScaleForIndex(int index)
+  float ScaleForIndex(int index)
   {
-    Vector3 scale = new Vector3(1f, 1f, 1f);
+    float scale = 1;
 
     switch (index)
     {
@@ -171,21 +171,21 @@ public class Lab2Controller : MonoBehaviour
       case 0:
         break;
       case 1:
-        scale = new Vector3(.5f, .5f, .5f);
+        scale = .5f;
         break;
       case 2:
         break;
       case 3:
-        scale = new Vector3(1.5f, 1.5f, 1.5f);
+        scale = 1.5f;
         break;
       case 4:
-        scale = new Vector3(2f, 2f, 2f);
+        scale = 2f;
         break;
       case 5:
-        scale = new Vector3(3f, 3f, 3f);
+        scale = 3f;
         break;
       case 6:
-        scale = new Vector3(4f, 4f, 4f);
+        scale = 6f;
         break;
     }
 
@@ -196,7 +196,7 @@ public class Lab2Controller : MonoBehaviour
   {
     float result = -1f;
 
-    if (index < 6)
+    if (index < numSigns)
     {
       switch (index)
       {
