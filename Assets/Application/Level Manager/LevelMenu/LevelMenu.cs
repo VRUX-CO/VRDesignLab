@@ -16,10 +16,15 @@ public class LevelMenu : MonoBehaviour
     const float itemHeight = .15f;
     float startY = position.y;
     int cnt = inItems.Count;
+    float totalHeight = cnt * itemHeight;
 
     foreach (Dictionary<string, string> item in inItems)
     {
       position.y = startY + ((cnt - index) * itemHeight);
+
+      // center vertically
+      position.y -= totalHeight / 2;
+
       GameObject anItem = Instantiate(itemPrefab, position, Quaternion.identity) as GameObject;
 
       anItem.transform.parent = gameObject.transform;
