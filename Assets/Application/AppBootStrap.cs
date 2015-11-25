@@ -12,7 +12,8 @@ public class AppBootStrap : MonoBehaviour
   public GameObject lookdownMenuPrefab;
   public GameObject lookdownNotifierPrefab;
   public GameObject mainScenePrefab;
-  public GameObject environmentPrefab;
+  public GameObject mountainPrefab;
+  public GameObject forestPrefab;
 
   // singleton access
   void Awake()
@@ -35,7 +36,8 @@ public class AppBootStrap : MonoBehaviour
       app.cameraFadeScreenPrefab = cameraFadeScreenPrefab;
       app.mainScenePrefab = mainScenePrefab;
       app.isMainScene = isMainScene;
-      app.environmentPrefab = environmentPrefab;
+      app.mountainPrefab = mountainPrefab;
+      app.forestPrefab = forestPrefab;
       app.Initialize();
     }
 

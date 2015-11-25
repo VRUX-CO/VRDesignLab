@@ -13,7 +13,8 @@ public class AppCentral : MonoBehaviour
   public GameObject lookdownNotifierPrefab;
   public GameObject cameraFadeScreenPrefab;
   public GameObject mainScenePrefab;
-  public GameObject environmentPrefab;
+  public GameObject mountainPrefab;
+  public GameObject forestPrefab;
 
   bool savedReticleClickOnlyState;
   bool isCardboard = false;
@@ -88,7 +89,7 @@ public class AppCentral : MonoBehaviour
     levelManager = gameObject.AddComponent<LevelManager>();
     levelManager.Initialize(cameraFadeScreenPrefab);
 
-    ShowEnvironment(true);
+    ShowEnvironment(true, false);
   }
 
   public void LoadLevel(string levelName)
@@ -120,20 +121,19 @@ public class AppCentral : MonoBehaviour
       lookDownMenu = Instantiate(lookdownMenuPrefab, new Vector3(0f, .01f, 1f), Quaternion.identity) as GameObject;
   }
 
-  public void ShowEnvironment(bool showEnvironment)
+  public void ShowEnvironment(bool showEnvironment, bool mountain)
   {
+    // destroy existing
+    if (environment != null)
+    {
+      Destroy(environment);
+      environment = null;
+    }
+
     if (showEnvironment)
     {
       if (environment == null)
-        environment = Instantiate(environmentPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-    }
-    else
-    {
-      if (environment != null)
-      {
-        Destroy(environment);
-        environment = null;
-      }
+        environment = Instantiate(mountain ? mountainPrefab : forestPrefab, Vector3.zero, Quaternion.identity) as GameObject;
     }
   }
 
