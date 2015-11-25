@@ -2,6 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum EnvironmentEnum
+{
+  kNone,
+  kMountains,
+  kForest
+}
+
 public class AppCentral : MonoBehaviour
 {
   public bool buildForCardboard = false;
@@ -89,7 +96,7 @@ public class AppCentral : MonoBehaviour
     levelManager = gameObject.AddComponent<LevelManager>();
     levelManager.Initialize(cameraFadeScreenPrefab);
 
-    ShowEnvironment(true, false);
+    ShowEnvironment(EnvironmentEnum.kMountains);
   }
 
   public void LoadLevel(string levelName)
@@ -121,7 +128,7 @@ public class AppCentral : MonoBehaviour
       lookDownMenu = Instantiate(lookdownMenuPrefab, new Vector3(0f, .01f, 1f), Quaternion.identity) as GameObject;
   }
 
-  public void ShowEnvironment(bool showEnvironment, bool mountain)
+  public void ShowEnvironment(EnvironmentEnum env)
   {
     // destroy existing
     if (environment != null)
@@ -130,10 +137,18 @@ public class AppCentral : MonoBehaviour
       environment = null;
     }
 
-    if (showEnvironment)
+    switch (env)
     {
-      if (environment == null)
-        environment = Instantiate(mountain ? mountainPrefab : forestPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+      default:
+      case EnvironmentEnum.kNone:
+        break;
+      case EnvironmentEnum.kMountains:
+        environment = Instantiate(mountainPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        break;
+      case EnvironmentEnum.kForest:
+        environment = Instantiate(forestPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        break;
+
     }
   }
 
