@@ -24,6 +24,8 @@ public class LevelMenuItem : MonoBehaviour
 
     material = new Material(material);  // copy it so they are all independent materials
 
+    material.color = new Color(0f, 0f, 0f, 0f);
+
     backgroundObject.GetComponent<MeshRenderer>().material = material;
   }
 
