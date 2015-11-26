@@ -11,6 +11,9 @@ public class Lab4Controller : MonoBehaviour
   public Material floorMat;
   public Material floorMatLined;
 
+  public Material SignMat;
+  public Texture SignTexture;
+
   bool linedMode = false;
   MeshRenderer meshRenderer;
   List<GameObject> flags = new List<GameObject>();
@@ -24,6 +27,8 @@ public class Lab4Controller : MonoBehaviour
 
     meshRenderer = theFloor.GetComponent<MeshRenderer>();
 
+    ShowSign();
+
     // remove any environment
     AppCentral.APP.ShowEnvironment(EnvironmentEnum.kNone);
 
@@ -31,6 +36,22 @@ public class Lab4Controller : MonoBehaviour
     // make sure it gets removed when scene is swapped out
     gobj.transform.parent = transform;
   }
+
+
+  void ShowSign()
+  {
+    // deep clone the material
+    Material newSignMat = Instantiate(SignMat) as Material;
+
+    newSignMat.mainTexture = SignTexture;
+
+
+    Vector3 newPosition = new Vector3(0, .2f, 1.5f);
+    TextureBillboard sign = TextureBillboard.Billboard(newSignMat, new Vector3(1, 1, 1), 1, newPosition, transform, false);
+
+    sign.Show(0);
+  }
+
 
   void Update()
   {
