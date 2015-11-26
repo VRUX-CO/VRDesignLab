@@ -24,7 +24,7 @@ public class LevelMenuItem : MonoBehaviour
 
     material = new Material(material);  // copy it so they are all independent materials
 
-    material.color = new Color(0f, 0f, 0f, 0f);
+    Selected(false);
 
     backgroundObject.GetComponent<MeshRenderer>().material = material;
   }
@@ -38,14 +38,12 @@ public class LevelMenuItem : MonoBehaviour
 
   public void OnHoverStart()
   {
-    material.color = new Color(0f, 0f, 0f, .2f);
-    iTween.ScaleTo(gameObject, scaleBy * Vector3.one, scaleTime);
+    Selected(true);
   }
 
   public void OnHoverEnd()
   {
-    material.color = new Color(0f, 0f, 0f, 0f);
-    iTween.ScaleTo(gameObject, Vector3.one, scaleTime);
+    Selected(false);
   }
 
   public void OnClick()
@@ -53,4 +51,17 @@ public class LevelMenuItem : MonoBehaviour
     levelMenu.ItemWasClicked(itemInfo);
   }
 
+  void Selected(bool selected)
+  {
+    if (selected)
+    {
+      material.color = new Color(0f, 0f, 0f, .2f);
+      iTween.ScaleTo(gameObject, scaleBy * Vector3.one, scaleTime);
+    }
+    else
+    {
+      material.color = new Color(0f, 0f, 0f, 0f);
+      iTween.ScaleTo(gameObject, Vector3.one, scaleTime);
+    }
+  }
 }
