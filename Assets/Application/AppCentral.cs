@@ -95,8 +95,6 @@ public class AppCentral : MonoBehaviour
     // add level manager to app
     levelManager = gameObject.AddComponent<LevelManager>();
     levelManager.Initialize(cameraFadeScreenPrefab);
-
-    ShowEnvironment(EnvironmentEnum.kMountains);
   }
 
   public void LoadLevel(string levelName)
@@ -180,6 +178,8 @@ public class AppCentral : MonoBehaviour
     // remove look down menu
     Destroy(lookDownMenu);
     lookDownMenu = null;
+
+    ShowEnvironment(EnvironmentEnum.kNone);
   }
 
   public void ShowLookdownNotifier()

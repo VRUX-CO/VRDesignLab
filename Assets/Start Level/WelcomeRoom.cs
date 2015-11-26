@@ -204,6 +204,8 @@ public class WelcomeRoom : MonoBehaviour
 
     // install the lookdown menu at this point
     AppCentral.APP.InstallLookdownMenu();
+
+    AppCentral.APP.ShowEnvironment(EnvironmentEnum.kMountains);
   }
 
   void DestroyLevelMenu()
