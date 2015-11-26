@@ -37,7 +37,6 @@ public class Lab4Controller : MonoBehaviour
     gobj.transform.parent = transform;
   }
 
-
   void ShowSign()
   {
     // deep clone the material
@@ -45,13 +44,11 @@ public class Lab4Controller : MonoBehaviour
 
     newSignMat.mainTexture = SignTexture;
 
-
     Vector3 newPosition = new Vector3(0, .2f, 1.5f);
     TextureBillboard sign = TextureBillboard.Billboard(newSignMat, new Vector3(1, 1, 1), 1, newPosition, transform, false);
 
     sign.Show(0);
   }
-
 
   void Update()
   {
@@ -91,6 +88,5 @@ public class Lab4Controller : MonoBehaviour
       linedMode = !linedMode;
     }
   }
-
 
 }
