@@ -1,12 +1,16 @@
 fileFormatVersion: 2
-guid: fa4b421d41e2021449224bc33573c170
-timeCreated: 1448425130
+guid: 1af13dc9391beda488e1eb03eeeb4e97
+timeCreated: 1448850653
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: pCone1
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -65,7 +69,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
