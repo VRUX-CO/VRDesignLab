@@ -16,9 +16,11 @@ public class Lab101Controller : MonoBehaviour
 
   }
 
-  void TargetClicked(string targetID)
+  void TargetClicked(GameObject clickedObject)
   {
-    Debug.Log(targetID);
+    Debug.Log(clickedObject.transform.position.ToString());
+
+    AppCentral.APP.MoveCamera(clickedObject.transform.position);
   }
 
   void CreateClickTarget(string targetID, Vector3 position)

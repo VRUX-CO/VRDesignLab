@@ -31,6 +31,7 @@ public class AppCentral : MonoBehaviour
   GameObject lookDownMenu = null;
   GameObject environment = null;
   string currentCategory;
+  GameObject player = null;
 
   static AppCentral app = null;
 
@@ -79,10 +80,12 @@ public class AppCentral : MonoBehaviour
       isCardboard = true;
 
       Cardboard.SDK.EnableSettingsButton = false;
+
+      player = Cardboard.SDK.gameObject;
     }
     else
     {
-      Instantiate(oculusCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity);
+      player = Instantiate(oculusCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity) as GameObject;
     }
 
     // must create reticle after cameras since it trys to access them
@@ -146,7 +149,6 @@ public class AppCentral : MonoBehaviour
       case EnvironmentEnum.kForest:
         environment = Instantiate(forestPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         break;
-
     }
   }
 
@@ -237,6 +239,15 @@ public class AppCentral : MonoBehaviour
     {
       reticle.SetShowReticleOnClick(savedReticleClickOnlyState);
     }
+  }
+
+  public void MoveCamera(Vector3 cameraPosition)
+  {
+    Vector3 newPosition = cameraPosition;
+    newPosition.y = player.transform.position.y;
+
+
+    iTween.MoveTo(player, iTween.Hash("position", newPosition, "time", 1, "easeType", iTween.EaseType.linear, "oncomplete", "OnCompleteCallback"));
   }
 
 }

@@ -29,7 +29,6 @@ public class ClickTarget : MonoBehaviour
     ed.eventDelegate = gameObject;
 
     targetModel.transform.localScale = new Vector3(22, 22, 22);
-
   }
 
   public void SetClickDelegate(GameObject del, string callb, string inTargetID)
@@ -44,7 +43,7 @@ public class ClickTarget : MonoBehaviour
   {
     if (clickDelegate != null)
     {
-      clickDelegate.SendMessage(clickCallback, targetID, SendMessageOptions.DontRequireReceiver);
+      clickDelegate.SendMessage(clickCallback, gameObject, SendMessageOptions.DontRequireReceiver);
     }
   }
 
