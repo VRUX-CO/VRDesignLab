@@ -82,5 +82,8 @@ AppCentral.APP.CardboardClickEvent() || (Input.GetMouseButtonDown(0)))
     return result;
   }
 
-
+  public static Vector3 DefaultSignLocation()
+  {
+    return new Vector3(0, 1.5f, 1f);
+  }
 }

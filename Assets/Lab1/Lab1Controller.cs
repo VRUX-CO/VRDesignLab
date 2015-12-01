@@ -43,12 +43,14 @@ public class Lab1Controller : MonoBehaviour
     {
       case 0:
         renderer.material = Card1Mat;
-        endPosition = new Vector3(0, 1.5f, 2);
+
+        endPosition = Utilities.DefaultSignLocation();
         break;
       default:
       case 1:
         renderer.material = Card2Mat;
-        endPosition = new Vector3(-1, 1.5f, 2);
+        endPosition = Utilities.DefaultSignLocation();
+        endPosition.x = -1;
         break;
     }
 
