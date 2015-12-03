@@ -25,6 +25,10 @@ public class AppBootStrap : MonoBehaviour
     {
       GameObject appGameObj = new GameObject("AppCentral");
 
+      // match bootstraps location and rotation
+      appGameObj.transform.position = transform.position;
+      appGameObj.transform.rotation = transform.rotation;
+
       // add appcentral
       app = appGameObj.AddComponent<AppCentral>();
       app.buildForCardboard = buildForCardboard;

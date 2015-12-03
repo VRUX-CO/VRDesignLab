@@ -73,10 +73,14 @@ public class AppCentral : MonoBehaviour
   {
     const float cameraHeight = 1.5f;
 
+    Vector3 cameraPosition = transform.position;
+
+    cameraPosition.y = cameraHeight;
+
     // install camera for platform
     if (buildForCardboard)
     {
-      Instantiate(cardboardCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity);
+      Instantiate(cardboardCameraPrefab, cameraPosition, transform.rotation);
       isCardboard = true;
 
       Cardboard.SDK.EnableSettingsButton = false;
@@ -85,7 +89,8 @@ public class AppCentral : MonoBehaviour
     }
     else
     {
-      player = Instantiate(oculusCameraPrefab, new Vector3(0, cameraHeight, 0f), Quaternion.identity) as GameObject;
+
+      player = Instantiate(oculusCameraPrefab, cameraPosition, transform.rotation) as GameObject;
     }
 
     // must create reticle after cameras since it trys to access them
