@@ -60,11 +60,16 @@ public class AppCentral : MonoBehaviour
       RecenterHeadTracking();
   }
 
-  public bool CardboardClickEvent()
+  public bool UserClicked()
   {
     // Cardboard.SDK will lazily load a Cardboard gameobject if called, so we are wrapping all cardboard.sdk calls here
     if (isCardboard)
       return Cardboard.SDK.Triggered;
+    else
+    {
+      if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || (Input.GetMouseButtonDown(0)))
+        return true;
+    }
 
     return false;
   }

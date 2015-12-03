@@ -71,7 +71,7 @@ public class WelcomeRoom : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Utilities.UserClicked())
+    if (AppCentral.APP.UserClicked())
     {
       FadeOutSign();
     }

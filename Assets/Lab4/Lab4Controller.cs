@@ -52,7 +52,7 @@ public class Lab4Controller : MonoBehaviour
 
   void Update()
   {
-    if (Utilities.UserClicked())
+    if (AppCentral.APP.UserClicked())
     {
       if (linedMode)
       {

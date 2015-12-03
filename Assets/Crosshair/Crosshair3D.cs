@@ -52,7 +52,7 @@ public class Crosshair3D : MonoBehaviour
     // keeps the sprite pointed towards camera
     transform.forward = cameraForward;
 
-    if (Utilities.UserClicked())
+    if (AppCentral.APP.UserClicked())
     {
       ray = new Ray(cameraPosition, cameraForward);
       if (Physics.Raycast(ray, out hit))

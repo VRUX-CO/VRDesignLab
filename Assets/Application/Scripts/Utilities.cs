@@ -3,17 +3,6 @@ using System.Collections;
 
 public class Utilities : MonoBehaviour
 {
-  public static bool UserClicked()
-  {
-    if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") ||
-AppCentral.APP.CardboardClickEvent() || (Input.GetMouseButtonDown(0)))
-    {
-      return true;
-    }
-
-    return false;
-  }
-
   public static void ReverseNormals(GameObject gameObject)
   {
     MeshFilter filter = gameObject.GetComponent(typeof(MeshFilter)) as MeshFilter;

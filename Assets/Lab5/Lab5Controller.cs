@@ -27,7 +27,7 @@ public class Lab5Controller : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Utilities.UserClicked())
+    if (AppCentral.APP.UserClicked())
     {
       StartCoroutine(DisableTrackingForSeconds(2));
     }
