@@ -13,3 +13,6 @@
 - Polish/Animations/FadeIn/Outs to make things nicer
 
 
+## Notes:
+- To move camera around easily with mouse.  Click the App Boot Strap object in the scene, check the Build for Cardboard checkbox. Then run and hold down the Control key and move the mouse to steer camera.
+
