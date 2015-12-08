@@ -381,6 +381,28 @@ Transform:
   - {fileID: 1299248522}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &729175861
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 764888466}
+    m_Modifications:
+    - target: {fileID: 493030, guid: 701ed126e4b0cc34fb46a6a0f404585b, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11495104, guid: 701ed126e4b0cc34fb46a6a0f404585b, type: 2}
+      propertyPath: cameraPositionOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11495104, guid: 701ed126e4b0cc34fb46a6a0f404585b, type: 2}
+      propertyPath: cameraRotation
+      value: 180
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 701ed126e4b0cc34fb46a6a0f404585b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &764888465
 Prefab:
   m_ObjectHideFlags: 0
@@ -428,6 +450,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &764888466 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 462384, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
+  m_PrefabInternal: {fileID: 764888465}
 --- !u!4 &812787165 stripped
 Transform:
   m_PrefabParentObject: {fileID: 444268, guid: 85fe6728d6c3e014c81d5ec9464dcd13, type: 2}
