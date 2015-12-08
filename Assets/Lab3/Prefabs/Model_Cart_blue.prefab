@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &102690
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -17,9 +17,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &116464
+--- !u!1 &107436
 GameObject:
   m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495256}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &116464
+GameObject:
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -42,7 +57,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462384}
-  - 65: {fileID: 6512556}
+  - 114: {fileID: 11407628}
   m_Layer: 0
   m_Name: Model_Cart_blue
   m_TagString: Untagged
@@ -52,7 +67,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &173440
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -77,7 +92,7 @@ Transform:
   m_LocalPosition: {x: -.00269363401, y: .00701209065, z: -.0133394264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 462384}
+  m_Father: {fileID: 495256}
   m_RootOrder: 0
 --- !u!4 &403958
 Transform:
@@ -89,7 +104,7 @@ Transform:
   m_LocalPosition: {x: -.036128249, y: .198980898, z: .522775471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 462384}
+  m_Father: {fileID: 495256}
   m_RootOrder: 1
 --- !u!4 &440370
 Transform:
@@ -101,7 +116,7 @@ Transform:
   m_LocalPosition: {x: -.036128249, y: .198980898, z: -.802029014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 462384}
+  m_Father: {fileID: 495256}
   m_RootOrder: 2
 --- !u!4 &462384
 Transform:
@@ -110,13 +125,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.40799999, y: 0, z: 0}
+  m_LocalPosition: {x: -.00580495596, y: -.0847151279, z: -.699490249}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 495256}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &495256
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .0827151537, z: .127490163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401010}
   - {fileID: 403958}
   - {fileID: 440370}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 462384}
   m_RootOrder: 0
 --- !u!23 &2337698
 MeshRenderer:
@@ -218,25 +246,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102690}
   m_Mesh: {fileID: 4300002, guid: ea7c19d8404551948ad82049e8e57c8c, type: 3}
---- !u!65 &6512556
-BoxCollider:
+--- !u!114 &11407628
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134340}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.53999996, y: 1.14999998, z: 2.5}
-  m_Center: {x: 0, y: .600000024, z: -.0900000036}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6a78188ba4b5d478ea65b1c7833754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackPieces: []
+  NowPathID: 1
+  Speed: 15
+  Wheels:
+  - {fileID: 403958}
+  - {fileID: 440370}
+  TurnPerPoint: .5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: TurnPerPoint
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134340}

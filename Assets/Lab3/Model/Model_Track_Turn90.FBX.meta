@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: 294f144114cc0c84486ff163e634a91a
+timeCreated: 1448368576
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Collider
+    100004: Collider2
+    100006: Track_Turn
+    100008: Object001
+    100010: Object002
+    100012: Object003
+    100014: Object004
+    100016: Object005
+    100018: Object006
+    100020: Object007
+    100022: Object008
+    100024: Object009
+    100026: Object010
+    100028: Object011
+    100030: Object012
+    400000: //RootNode
+    400002: Collider
+    400004: Collider2
+    400006: Track_Turn
+    400008: Object001
+    400010: Object002
+    400012: Object003
+    400014: Object004
+    400016: Object005
+    400018: Object006
+    400020: Object007
+    400022: Object008
+    400024: Object009
+    400026: Object010
+    400028: Object011
+    400030: Object012
+    2300000: //RootNode
+    2300002: Collider
+    2300004: Collider2
+    2300006: Track_Turn
+    2300008: Object001
+    2300010: Object002
+    2300012: Object003
+    2300014: Object004
+    2300016: Object005
+    2300018: Object006
+    2300020: Object007
+    2300022: Object008
+    2300024: Object009
+    2300026: Object010
+    2300028: Object011
+    2300030: Object012
+    3300000: //RootNode
+    3300002: Collider
+    3300004: Collider2
+    3300006: Track_Turn
+    3300008: Object001
+    3300010: Object002
+    3300012: Object003
+    3300014: Object004
+    3300016: Object005
+    3300018: Object006
+    3300020: Object007
+    3300022: Object008
+    3300024: Object009
+    3300026: Object010
+    3300028: Object011
+    3300030: Object012
+    4300000: Track_Turn
+    4300002: Collider
+    4300004: Collider2
+    4300006: Object001
+    4300008: Object002
+    4300010: Object003
+    4300012: Object004
+    4300014: Object005
+    4300016: Object006
+    4300018: Object007
+    4300020: Object008
+    4300022: Object009
+    4300024: Object010
+    4300026: Object011
+    4300028: Object012
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
