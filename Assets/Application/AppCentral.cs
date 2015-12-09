@@ -260,17 +260,18 @@ public class AppCentral : MonoBehaviour
     iTween.MoveTo(player, iTween.Hash("position", newPosition, "time", 1, "easeType", iTween.EaseType.linear, "oncomplete", "OnCompleteCallback"));
   }
 
-    // Drive the MainCamera by attaching to a gameobject.
-    public void AttachCamera(GameObject Parent)
+    /// <summary>
+    ///     Retrieve the main camera object.
+    /// </summary>
+    public GameObject GetCameraObject()
     {
         if (isCardboard)
         {
-            player.transform.parent = Parent.transform;
+            return player;
         }
-        else
-        {
-            Debug.LogError("AttachCamera: Currently only tested with GoogleCardboard (i.e. not Oculus or non-VR)");
-        }
-    }
 
+        Debug.LogError("GetCameraObject: Currently only tested with GoogleCardboard (i.e. not Oculus or non-VR)");
+
+        return null;
+    }
 }
