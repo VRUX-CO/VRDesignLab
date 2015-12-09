@@ -186,6 +186,10 @@ Prefab:
       propertyPath: m_Name
       value: Camera_Attachment_Point
       objectReference: {fileID: 0}
+    - target: {fileID: 179414, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
+      propertyPath: m_TagString
+      value: targetable
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11468498, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
@@ -407,6 +411,29 @@ MonoBehaviour:
 GameObject:
   m_PrefabParentObject: {fileID: 179414, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
   m_PrefabInternal: {fileID: 95513502}
+--- !u!114 &343384348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 343384347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cef1a9cf21dd6e49bc809feb04ab0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &343384349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 343384347}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.5, z: 2.25}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &343384350
 MonoBehaviour:
   m_ObjectHideFlags: 0

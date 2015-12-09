@@ -18,7 +18,7 @@ public class AttachCamera : MonoBehaviour
     /// </summary>
     public void Attach()
     {
-        if (AppCentral.APP != null && AttachmentPoint != null)
+        if (enabled && AppCentral.APP != null && AttachmentPoint != null)
         {
             GameObject mainCameraObject = AppCentral.APP.GetCameraObject();
 
@@ -35,6 +35,10 @@ public class AttachCamera : MonoBehaviour
                 AttachmentPoint.position = CameraPositionOffset;
                 AttachmentPoint.Rotate(Vector3.up * CameraRotation);
             }
+        }
+        else
+        {
+            enabled = true;
         }
     }
 
