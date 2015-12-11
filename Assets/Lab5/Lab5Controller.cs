@@ -6,6 +6,9 @@ public class Lab5Controller : MonoBehaviour
   public Material trackingOffMat;
   public Material instructionsMat;
 
+    [SerializeField]
+    private GameObject instructionsBillboard = null;
+
   Material fadeMaterial;
 
   bool trackingDisabled = false;
@@ -13,7 +16,9 @@ public class Lab5Controller : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    TextureBillboard.Billboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1.4f, 1.5f), transform, true).Show(0f);
+    //TextureBillboard.Billboard(instructionsMat, new Vector3(1, 1, 1), 1, new Vector3(0, 1.4f, 1.5f), transform, true).Show(0f);
+
+      CanvasBillboard.Billboard(instructionsBillboard, new Vector3(0, 1.4f, 1.5f), transform, true).Show();
   }
 
   void OnDestroy()
