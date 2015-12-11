@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &101364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 460400}
+  - 114: {fileID: 11485420}
+  m_Layer: 0
+  m_Name: Camera_Attachment_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &102690
 GameObject:
   m_ObjectHideFlags: 1
@@ -58,6 +74,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 462384}
   - 114: {fileID: 11407628}
+  - 114: {fileID: 11432964}
+  - 114: {fileID: 11484256}
+  - 65: {fileID: 6526654}
   m_Layer: 0
   m_Name: Model_Cart_blue
   m_TagString: Untagged
@@ -118,6 +137,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 495256}
   m_RootOrder: 2
+--- !u!4 &460400
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101364}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
+  m_LocalPosition: {x: 0, y: 2.1, z: 10.187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462384}
+  m_RootOrder: 1
 --- !u!4 &462384
 Transform:
   m_ObjectHideFlags: 1
@@ -129,6 +160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495256}
+  - {fileID: 460400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &495256
@@ -246,6 +278,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102690}
   m_Mesh: {fileID: 4300002, guid: ea7c19d8404551948ad82049e8e57c8c, type: 3}
+--- !u!65 &6526654
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.5, z: 2.25}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &11407628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +308,45 @@ MonoBehaviour:
   - {fileID: 403958}
   - {fileID: 440370}
   TurnPerPoint: 0.5
+--- !u!114 &11432964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cef1a9cf21dd6e49bc809feb04ab0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11484256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134340}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed6f8a21c92dd940955a2496eb53e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraPositionOffset: {x: 0, y: 0, z: 0}
+  CameraRotation: 0
+  AttachmentPoint: {fileID: 0}
+--- !u!114 &11485420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47356a91793d2a344bd198269bb1a7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 1
+  y: 0
+  z: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

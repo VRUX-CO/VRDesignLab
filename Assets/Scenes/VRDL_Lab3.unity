@@ -174,24 +174,7 @@ Prefab:
       propertyPath: trackPieces.Array.data[10]
       value: 
       objectReference: {fileID: 1180299304}
-    - target: {fileID: 11468498, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-      propertyPath: CameraRotation
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11468498, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 179154, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-      propertyPath: m_Name
-      value: Camera_Attachment_Point
-      objectReference: {fileID: 0}
-    - target: {fileID: 179414, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-      propertyPath: m_TagString
-      value: targetable
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11468498, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &142455400
@@ -407,47 +390,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 290943928}
   m_Script: {fileID: 11500000, guid: 525336ac503a2b941b962de6871bf6dd, type: 3}
---- !u!1 &343384347 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 179414, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-  m_PrefabInternal: {fileID: 95513502}
---- !u!114 &343384348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 343384347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cef1a9cf21dd6e49bc809feb04ab0e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &343384349
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 343384347}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.75, y: 1.5, z: 2.25}
-  m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &343384350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 343384347}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed6f8a21c92dd940955a2496eb53e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraPositionOffset: {x: 0, y: 0, z: 0}
-  CameraRotation: 0
-  AttachmentPoint: {fileID: 975907046}
 --- !u!1 &498409541
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,10 +745,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 438972, guid: 4b1f713e5dbecdd498a52a986500ac03, type: 2}
   m_PrefabInternal: {fileID: 832796256}
---- !u!4 &975907046 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 401410, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-  m_PrefabInternal: {fileID: 95513502}
 --- !u!1001 &1117203317
 Prefab:
   m_ObjectHideFlags: 0
