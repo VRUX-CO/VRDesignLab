@@ -20,8 +20,18 @@ public class RunWithPath : MonoBehaviour
   Vector3 LastRot;
   float NowSpeed = 0F;
 
+    private AttachCamera attachCamera;
+    private Vector3 startPosition;
+
+    protected virtual void Awake()
+    {
+        attachCamera = GetComponent<AttachCamera>();
+    }
+
   void Start()
   {
+      startPosition = transform.position;
+
     foreach (TrackPiece piece in trackPieces)
     {
       points.AddRange(piece.trackPoints());
@@ -30,6 +40,16 @@ public class RunWithPath : MonoBehaviour
     GetPost(NowPathID);
     NowSpeed = Speed * 0.2F;
   }
+
+    private void OnDisable()
+    {
+        transform.position = startPosition;
+
+        if (attachCamera != null)
+        {
+            attachCamera.enabled = false;
+        }
+    }
 
   // Update is called once per frame
   void Update()
@@ -93,6 +113,7 @@ public class RunWithPath : MonoBehaviour
       isEnd = true;
       Debug.Log("End");
       _NowPathID = points.Count - 2;
+        enabled = false;
     }
     else
     {
