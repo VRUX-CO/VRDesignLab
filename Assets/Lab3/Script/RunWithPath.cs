@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,12 +21,15 @@ public class RunWithPath : MonoBehaviour
   Vector3 LastRot;
   float NowSpeed = 0F;
 
-
     public int StartPathId = 0;
 
     private AttachCamera attachCamera;
     private Vector3 startPosition;
     private Quaternion startRotation;
+
+    public static event Action PathStarted;
+
+    public static event Action PathEnded;
 
     protected virtual void Awake()
     {
@@ -45,6 +49,11 @@ public class RunWithPath : MonoBehaviour
         NowPathID = StartPathId;
         GetPost(NowPathID);
         NowSpeed = Speed * 0.2F;
+
+        if (PathStarted != null)
+        {
+            PathStarted.Invoke();
+        }
     }
 
     protected virtual void OnDisable()
@@ -58,6 +67,11 @@ public class RunWithPath : MonoBehaviour
         }
 
         isEnd = false;
+
+        if (PathEnded != null)
+        {
+            PathEnded.Invoke();
+        }
     }
 
   // Update is called once per frame
