@@ -9,7 +9,7 @@ public abstract class CartTargetable : MonoBehaviour
     {
         get
         {
-            return (gameObject.tag == "targetable");
+            return (gameObject.tag == "targetable" && ScreenFader.IsFaded == false);
         }
     }
 

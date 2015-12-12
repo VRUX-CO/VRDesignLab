@@ -9,25 +9,29 @@ public class CartClick : CartTargetable
     {
         if (IsTargetable)
         {
-            // Attach the camera to the cart.
-            if (attachCamera != null)
+            ScreenFader.Fade(null, () =>
             {
-                attachCamera.Attach();
-            }
-            else
+                // Attach the camera to the cart.
+                if (attachCamera != null)
+                {
+                    attachCamera.Attach();
+                }
+                else
+                {
+                    Debug.LogError("CartClick: AttachCamera is null.");
+                }
+            }, () =>
             {
-                Debug.LogError("CartClick: AttachCamera is null.");
-            }
-
-            // Start the cart running its path.
-            if (runWithPath != null)
-            {
-                runWithPath.enabled = true;
-            }
-            else
-            {
-                Debug.LogError("CartClick: RunWithPath is null.");
-            }
+                // Start the cart running its path.
+                if (runWithPath != null)
+                {
+                    runWithPath.enabled = true;
+                }
+                else
+                {
+                    Debug.LogError("CartClick: RunWithPath is null.");
+                }
+            });
         }
     }
 
