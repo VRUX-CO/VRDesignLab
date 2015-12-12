@@ -7,7 +7,7 @@ public class RunWithPath : MonoBehaviour
   public TrackPiece[] trackPieces;
   List<Transform> points = new List<Transform>();
 
-  public int NowPathID = 0;
+  int NowPathID = 0;
   public float Speed = 3F;
   public Transform[] Wheels;
   public float TurnPerPoint = 1F;
@@ -20,35 +20,44 @@ public class RunWithPath : MonoBehaviour
   Vector3 LastRot;
   float NowSpeed = 0F;
 
+
+    public int StartPathId = 0;
+
     private AttachCamera attachCamera;
     private Vector3 startPosition;
+    private Quaternion startRotation;
 
     protected virtual void Awake()
     {
         attachCamera = GetComponent<AttachCamera>();
+
+        foreach (TrackPiece piece in trackPieces)
+        {
+            points.AddRange(piece.trackPoints());
+        }
+
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
-  void Start()
-  {
-      startPosition = transform.position;
-
-    foreach (TrackPiece piece in trackPieces)
+    protected virtual void OnEnable()
     {
-      points.AddRange(piece.trackPoints());
+        NowPathID = StartPathId;
+        GetPost(NowPathID);
+        NowSpeed = Speed * 0.2F;
     }
 
-    GetPost(NowPathID);
-    NowSpeed = Speed * 0.2F;
-  }
-
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         transform.position = startPosition;
+        transform.rotation = startRotation;
 
         if (attachCamera != null)
         {
             attachCamera.enabled = false;
         }
+
+        isEnd = false;
     }
 
   // Update is called once per frame

@@ -313,12 +313,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  NowPathID: 1
   Speed: 15
   Wheels:
   - {fileID: 480510}
   - {fileID: 417626}
   TurnPerPoint: 0.5
+  StartPathId: 1
 --- !u!114 &11463388
 MonoBehaviour:
   m_ObjectHideFlags: 1
