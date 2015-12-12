@@ -143,8 +143,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101364}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 2.1, z: 10.187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 462384}
@@ -155,8 +155,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.3121791, z: 0, w: 0.9500233}
+  m_LocalPosition: {x: -3.4261608, y: 0, z: 4.6754208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495256}
@@ -301,13 +301,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6a78188ba4b5d478ea65b1c7833754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackPieces: []
-  NowPathID: 1
+  trackPieces:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Speed: 15
   Wheels:
   - {fileID: 403958}
   - {fileID: 440370}
   TurnPerPoint: 0.5
+  StartPathId: 0
 --- !u!114 &11432964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraPositionOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
-  AttachmentPoint: {fileID: 0}
+  AttachmentPoint: {fileID: 460400}
 --- !u!114 &11485420
 MonoBehaviour:
   m_ObjectHideFlags: 1
