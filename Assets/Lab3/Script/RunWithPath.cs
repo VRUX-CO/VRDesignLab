@@ -58,20 +58,24 @@ public class RunWithPath : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        transform.position = startPosition;
-        transform.rotation = startRotation;
-
-        if (attachCamera != null)
-        {
-            attachCamera.enabled = false;
-        }
-
         isEnd = false;
 
-        if (PathEnded != null)
+        ScreenFader.Fade(null, () =>
         {
-            PathEnded.Invoke();
-        }
+            transform.position = startPosition;
+            transform.rotation = startRotation;
+
+            if (attachCamera != null)
+            {
+                attachCamera.enabled = false;
+            }
+        }, () =>
+        {
+            if (PathEnded != null)
+            {
+                PathEnded.Invoke();
+            }
+        });
     }
 
   // Update is called once per frame
