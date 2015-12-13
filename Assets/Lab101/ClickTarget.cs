@@ -1,58 +1,34 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ClickTarget : MonoBehaviour
 {
-  public GameObject targetPrefab;
+    [SerializeField]
+    private Transform movePositionTransform = null;
 
-  // private
-  GameObject clickDelegate;
-  string clickCallback;
-  GameObject targetModel;
-  string targetID;
-
-  void Update()
-  {
-  }
-
-  // Use this for initialization
-  void Start()
-  {
-    targetModel = Instantiate(targetPrefab);
-
-    targetModel.transform.parent = transform;  // parent this quad
-    targetModel.transform.localPosition = Vector3.zero;
-
-    targetModel.tag = Crosshair3D.kCrosshairTargetable;
-
-    EventDelegate ed = targetModel.AddComponent<EventDelegate>();
-    ed.eventDelegate = gameObject;
-
-    targetModel.transform.localScale = new Vector3(22, 22, 22);
-  }
-
-  public void SetClickDelegate(GameObject del, string callb, string inTargetID)
-  {
-    clickDelegate = del;
-    clickCallback = callb;
-
-    targetID = inTargetID;
-  }
-
-  public void OnClick()
-  {
-    if (clickDelegate != null)
+    protected virtual void OnClick()
     {
-      clickDelegate.SendMessage(clickCallback, gameObject, SendMessageOptions.DontRequireReceiver);
+        if (movePositionTransform != null)
+        {
+            StartCoroutine(MoveCamera(movePositionTransform.position));
+        }
     }
-  }
 
-  public void OnHoverStart()
-  {
-  }
+    private IEnumerator MoveCamera(Vector3 newPosition)
+    {
+        GameObject cameraObject = AppCentral.APP.GetCameraObject();
+        if (cameraObject != null)
+        {
+            Vector3 startPosition = cameraObject.transform.position;
+            newPosition.y = startPosition.y;
 
-  public void OnHoverEnd()
-  {
-  }
-
+            float progress = 0.0f;
+            while (progress <= 1.0f)
+            {
+                progress = progress + Time.deltaTime;
+                cameraObject.transform.position = Vector3.Lerp(startPosition, newPosition, progress);
+                yield return null;
+            }
+        }
+    }
 }
