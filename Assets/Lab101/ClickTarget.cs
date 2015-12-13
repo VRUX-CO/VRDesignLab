@@ -1,10 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class ClickTarget : MonoBehaviour
 {
+    private const float FADE_DURATION_SECONDS = 0.5f;
+
     [SerializeField]
     private Transform movePositionTransform = null;
+
+    [SerializeField]
+    private Material[] materials = null;
+
+    public static event Action DestinationReached;
+
+    public static event Action MovingCamera;
+
+    protected virtual void Awake()
+    {
+        MovingCamera += OnMovingCamera;
+        DestinationReached += OnDestinationReached;
+        SetMaterialsAlpha(1.0f);
+    }
 
     protected virtual void OnClick()
     {
@@ -14,11 +31,41 @@ public class ClickTarget : MonoBehaviour
         }
     }
 
+    protected virtual void OnDestroy()
+    {
+        MovingCamera -= OnMovingCamera;
+    }
+
+    /// <summary>
+    ///     Fades the attached materials from an alpha value to another.
+    /// </summary>
+    private IEnumerator Fade(float from, float to, float seconds)
+    {
+        if (materials != null && materials.Length > 0)
+        {
+            float progress = 0.0f;
+            while (progress <= 1.0f)
+            {
+                progress = progress + (Time.deltaTime / seconds);
+                SetMaterialsAlpha(Mathf.Lerp(from, to, progress));
+                yield return null;
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Moves the camera to a new position.
+    /// </summary>
     private IEnumerator MoveCamera(Vector3 newPosition)
     {
         GameObject cameraObject = AppCentral.APP.GetCameraObject();
         if (cameraObject != null)
         {
+            if (MovingCamera != null)
+            {
+                MovingCamera.Invoke();
+            }
+
             Vector3 startPosition = cameraObject.transform.position;
             newPosition.y = startPosition.y;
 
@@ -28,6 +75,59 @@ public class ClickTarget : MonoBehaviour
                 progress = progress + Time.deltaTime;
                 cameraObject.transform.position = Vector3.Lerp(startPosition, newPosition, progress);
                 yield return null;
+            }
+
+            if (DestinationReached != null)
+            {
+                DestinationReached.Invoke();
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Called when the camera reaches its destination.
+    /// </summary>
+    private void OnDestinationReached()
+    {
+        StartCoroutine(Fade(0.0f, 1.0f, FADE_DURATION_SECONDS));
+    }
+
+    /// <summary>
+    ///     Called when the camera starts moving.
+    /// </summary>
+    private void OnMovingCamera()
+    {
+        StartCoroutine(Fade(1.0f, 0.0f, FADE_DURATION_SECONDS));
+    }
+
+    /// <summary>
+    ///     Sets attached material alpha values.
+    /// </summary>
+    private void SetMaterialsAlpha(float alpha)
+    {
+        if (materials != null)
+        {
+            for (int i = 0; i < materials.Length; ++i)
+            {
+                Material material = materials[i];
+                if (material != null)
+                {
+                    // check if the material is using a particle shader.
+                    if (material.shader.name == "Particles/Additive")
+                    {
+                        // must adjust the shader's tint colour property.
+                        Color colour = material.GetColor("_TintColor");
+                        colour.a = alpha;
+                        material.SetColor("_TintColor", colour);
+                    }
+                    else
+                    {
+                        // can adjust the regular main texture colour property.
+                        Color colour = material.color;
+                        colour.a = alpha;
+                        material.color = colour;
+                    }
+                }
             }
         }
     }
