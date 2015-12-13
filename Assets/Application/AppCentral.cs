@@ -35,7 +35,7 @@ public class AppCentral : MonoBehaviour
 
   static AppCentral app = null;
 
-    private Vector3 cameraHomePosition;
+    private Vector3 cameraResetPosition;
 
   // singleton access
   public static AppCentral APP
@@ -100,10 +100,10 @@ public class AppCentral : MonoBehaviour
       player = Instantiate(oculusCameraPrefab, cameraPosition, transform.rotation) as GameObject;
     }
 
-      // get camera's home position so it can be reset when resetting back to the home state.
+      // get camera's reset position so that it can be reset.
       if (player != null)
       {
-          cameraHomePosition = player.transform.position;
+          cameraResetPosition = player.transform.position;
       }
 
     // must create reticle after cameras since it trys to access them
@@ -137,6 +137,8 @@ public class AppCentral : MonoBehaviour
   {
     // reset this if set by the level
     ShowReticleOnClick(false);
+
+        ResetCameraPositon();
 
     levelManager.LoadNextLevel(currentCategory);
   }
@@ -201,10 +203,7 @@ public class AppCentral : MonoBehaviour
 
     ShowEnvironment(EnvironmentEnum.kNone);
 
-      if (player != null)
-      {
-          player.transform.position = cameraHomePosition;
-      }
+        ResetCameraPositon();
   }
 
   public void ShowLookdownNotifier()
@@ -286,5 +285,17 @@ public class AppCentral : MonoBehaviour
         Debug.LogError("GetCameraObject: Currently only tested with GoogleCardboard (i.e. not Oculus or non-VR)");
 
         return null;
+    }
+
+    /// <summary>
+    ///     Resets the camera position.
+    /// </summary>
+    public void ResetCameraPositon()
+    {
+        GameObject cameraObject = GetCameraObject();
+        if (cameraObject != null)
+        {
+            cameraObject.transform.position = cameraResetPosition;
+        }
     }
 }
