@@ -35,6 +35,8 @@ public class AppCentral : MonoBehaviour
 
   static AppCentral app = null;
 
+    private Vector3 cameraHomePosition;
+
   // singleton access
   public static AppCentral APP
   {
@@ -97,6 +99,12 @@ public class AppCentral : MonoBehaviour
 
       player = Instantiate(oculusCameraPrefab, cameraPosition, transform.rotation) as GameObject;
     }
+
+      // get camera's home position so it can be reset when resetting back to the home state.
+      if (player != null)
+      {
+          cameraHomePosition = player.transform.position;
+      }
 
     // must create reticle after cameras since it trys to access them
     reticle = Instantiate(reticlePrefab).GetComponent<Crosshair3D>();
@@ -192,6 +200,11 @@ public class AppCentral : MonoBehaviour
     lookDownMenu = null;
 
     ShowEnvironment(EnvironmentEnum.kNone);
+
+      if (player != null)
+      {
+          player.transform.position = cameraHomePosition;
+      }
   }
 
   public void ShowLookdownNotifier()
