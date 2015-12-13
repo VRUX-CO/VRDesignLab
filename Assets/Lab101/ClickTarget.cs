@@ -12,6 +12,17 @@ public class ClickTarget : MonoBehaviour
     [SerializeField]
     private Material[] materials = null;
 
+    /// <summary>
+    ///     Gets whether the game object is targetable.
+    /// </summary>
+    public bool IsTargetable
+    {
+        get
+        {
+            return (gameObject.tag == "targetable");
+        }
+    }
+
     public static event Action DestinationReached;
 
     public static event Action MovingCamera;
@@ -20,12 +31,11 @@ public class ClickTarget : MonoBehaviour
     {
         MovingCamera += OnMovingCamera;
         DestinationReached += OnDestinationReached;
-        SetMaterialsAlpha(1.0f);
     }
 
     protected virtual void OnClick()
     {
-        if (movePositionTransform != null)
+        if (IsTargetable && movePositionTransform != null)
         {
             StartCoroutine(MoveCamera(movePositionTransform.position));
         }
@@ -34,6 +44,12 @@ public class ClickTarget : MonoBehaviour
     protected virtual void OnDestroy()
     {
         MovingCamera -= OnMovingCamera;
+    }
+
+    protected virtual void Start()
+    {
+        SetTargetable(true);
+        SetMaterialsAlpha(1.0f);
     }
 
     /// <summary>
@@ -90,6 +106,7 @@ public class ClickTarget : MonoBehaviour
     private void OnDestinationReached()
     {
         StartCoroutine(Fade(0.0f, 1.0f, FADE_DURATION_SECONDS));
+        SetTargetable(true);
     }
 
     /// <summary>
@@ -98,6 +115,7 @@ public class ClickTarget : MonoBehaviour
     private void OnMovingCamera()
     {
         StartCoroutine(Fade(1.0f, 0.0f, FADE_DURATION_SECONDS));
+        SetTargetable(false);
     }
 
     /// <summary>
@@ -129,6 +147,21 @@ public class ClickTarget : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    /// <summary>
+    ///     Gets the targetable state of the game object.
+    /// </summary>
+    private void SetTargetable(bool state)
+    {
+        if (state)
+        {
+            gameObject.tag = "targetable";
+        }
+        else
+        {
+            gameObject.tag = "Untagged";
         }
     }
 }
