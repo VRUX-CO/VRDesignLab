@@ -188,28 +188,28 @@ public class LevelManager : MonoBehaviour
       newItem = new Dictionary<string, string>();
       newItem["name"] = "7. Leveraging Scale";
       newItem["cmd"] = "scale";
-      newItem["scene"] = "VRDL_Lab102";
+      newItem["scene"] = "VRDL_Lab101";
       newItem["category"] = "2";
       result.Add(newItem);
 
       newItem = new Dictionary<string, string>();
       newItem["name"] = "8. Spatial Audio";
       newItem["cmd"] = "audio";
-      newItem["scene"] = "VRDL_Lab103";
+      newItem["scene"] = "VRDL_Lab101";
       newItem["category"] = "2";
       result.Add(newItem);
 
       newItem = new Dictionary<string, string>();
       newItem["name"] = "9. Gaze Cues";
       newItem["cmd"] = "gaze";
-      newItem["scene"] = "VRDL_Lab104";
+      newItem["scene"] = "VRDL_Lab101";
       newItem["category"] = "2";
       result.Add(newItem);
 
       newItem = new Dictionary<string, string>();
       newItem["name"] = "10. Make it Beautiful";
       newItem["cmd"] = "beautiful";
-      newItem["scene"] = "VRDL_Lab105";
+      newItem["scene"] = "VRDL_Lab101";
       newItem["category"] = "2";
       result.Add(newItem);
 
