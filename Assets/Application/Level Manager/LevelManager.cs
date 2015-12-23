@@ -10,7 +10,8 @@ public class LevelManager : MonoBehaviour
   string currentLoadedLevel = null;
   List<Dictionary<string, string>> menuItems;
 
-  void Awake()
+
+    void Awake()
   {
     // stay alive always so we can loadLevels with fadein/out and not get destroyed ourselves.
     DontDestroyOnLoad(gameObject);
@@ -30,32 +31,35 @@ public class LevelManager : MonoBehaviour
       Application.UnloadLevel(currentLoadedLevel);
       currentLoadedLevel = null;
     }
+     
   }
 
   public void LoadLevel(string levelName)
   {
-    levelToLoad = levelName;
+
+    levelToLoad = levelName; // "VRDL_Lab101" to load scene 6 from any scene
     GetFadeScreen().FadeOut("FadeOutDone");
-  }
+
+    }
 
   public void LoadNextLevel(string category)
   {
-    int index = IndexForLevel(currentLoadedLevel, category);
+        int index = IndexForLevel(currentLoadedLevel, category);
 
-    LoadLevel(LevelNameForIndex(index + 1, category));
-  }
+        LoadLevel(LevelNameForIndex(index + 1, category));
+        
+    }
 
   public void FadeOutDone()
   {
     UnloadLevel(null); // null unloads currentLoadedLevel
+    Application.LoadLevelAdditive(levelToLoad);    // synchronous
 
-    // synchronous
-    Application.LoadLevelAdditive(levelToLoad);
     currentLoadedLevel = levelToLoad;
 
     GetFadeScreen().FadeIn();
   }
-
+ 
   private CameraFadeScreen GetFadeScreen()
   {
     CameraFadeScreen result = null;
