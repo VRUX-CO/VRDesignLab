@@ -21,15 +21,11 @@ public class RunWithPath : MonoBehaviour
   Vector3 LastRot;
   float NowSpeed = 0F;
 
-    [SerializeField]
-    private bool isConstantSpeed = false;
-
     public int StartPathId = 0;
 
     private AttachCamera attachCamera;
     private Vector3 startPosition;
     private Quaternion startRotation;
-    private bool isChangingSpeed;
 
     public static event Action PathStarted;
 
@@ -53,8 +49,6 @@ public class RunWithPath : MonoBehaviour
         NowPathID = StartPathId;
         GetPost(NowPathID);
         NowSpeed = Speed * 0.2F;
-
-        StartCoroutine(Accelerate(0.1f, Speed));
 
         if (PathStarted != null)
         {
@@ -92,28 +86,16 @@ public class RunWithPath : MonoBehaviour
       return;
     }
 
-      if (isConstantSpeed == false)
-      {
-          if (NowPathID < points.Count / 3F)
-          {
-              NowSpeed = Mathf.Lerp(Speed * 0.2F, Speed, Mathf.Clamp01(NowPathID / (points.Count / 3F)));
-          }
-          if (NowPathID > points.Count / 3F * 2F)
-          {
-              NowSpeed = Mathf.Lerp(Speed, 0F, Mathf.Clamp01((NowPathID - (points.Count / 3F * 2F)) / (points.Count / 3F)));
-          }
-      }
-      else
-      {
-          float distanceToEnd = Vector3.Distance(transform.position, points[points.Count - 1].position);
+    if (NowPathID < points.Count / 3F)
+    {
+      NowSpeed = Mathf.Lerp(Speed * 0.2F, Speed, Mathf.Clamp01(NowPathID / (points.Count / 3F)));
+    }
+    if (NowPathID > points.Count / 3F * 2F)
+    {
+      NowSpeed = Mathf.Lerp(Speed, 0F, Mathf.Clamp01((NowPathID - (points.Count / 3F * 2F)) / (points.Count / 3F)));
+    }
 
-          if (isChangingSpeed == false)
-          {
-              NowSpeed = Speed * Mathf.Clamp(distanceToEnd / 5.0f, 0.01f, 1.0f);
-          }
-      }
-
-      transform.position = Vector3.Lerp(LastPos, NowPos, RunProgress);
+    transform.position = Vector3.Lerp(LastPos, NowPos, RunProgress);
     transform.eulerAngles = new Vector3(Mathf.Lerp(LastRot.x, RotX, RunProgress), Mathf.Lerp(LastRot.y, RotY, RunProgress), 0F);
     if (RunProgress < 1F)
     {
@@ -130,17 +112,6 @@ public class RunWithPath : MonoBehaviour
     }
 
   }
-
-    private IEnumerator Accelerate(float from, float to)
-    {
-        isChangingSpeed = true;
-        for (float progress = 0.0f; progress <= 1.0f; progress += Time.deltaTime)
-        {
-            NowSpeed =  Mathf.Lerp(from, to, progress);
-            yield return null;
-        }
-        isChangingSpeed = false;
-    }
 
   private float FormAngles(float OriAngle, float NowAngle)
   {

@@ -250,10 +250,6 @@ Prefab:
       propertyPath: trackPieces.Array.data[10]
       value: 
       objectReference: {fileID: 1180299304}
-    - target: {fileID: 11410816, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
-      propertyPath: isConstantSpeed
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dac83e70eb33ac47b09842b7b2d0201, type: 2}
   m_IsPrefabParent: 0
@@ -2107,25 +2103,17 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 462384, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.550723
+      value: -3.4261608
       objectReference: {fileID: 0}
     - target: {fileID: 462384, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 462384, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.844489
+      value: 4.6754208
       objectReference: {fileID: 0}
     - target: {fileID: 462384, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2243,98 +2231,6 @@ Prefab:
       propertyPath: trackPieces.Array.data[23]
       value: 
       objectReference: {fileID: 792070095}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[0].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[0].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[1].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[1].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[2].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[2].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedChangeStart.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[1].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[1].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: constantSpeedAcceleration.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11407628, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
-      propertyPath: accelDecelTime
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb044fdf8cf1cda4eb0e7f8635ef8f8a, type: 2}
   m_IsPrefabParent: 0
