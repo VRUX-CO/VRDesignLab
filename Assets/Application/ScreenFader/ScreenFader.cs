@@ -16,18 +16,25 @@ public class ScreenFader : MonoBehaviour
     private Action fadeMiddle;
     private Action fadeStart;
 
-    static ScreenFader()
-    {
-        screenFaderPrefab = Resources.Load<GameObject>("Prefab-ScreenFader");
-    }
-
     public static bool IsFaded { get; private set; }
+
+    public static GameObject ScreenFaderPrefab
+    {
+        get
+        {
+            if (screenFaderPrefab == null)
+            {
+                screenFaderPrefab = Resources.Load<GameObject>("Prefab-ScreenFader");
+            }
+            return screenFaderPrefab;
+        }
+    }
 
     public static void Fade(Action fadeStart, Action fadeMiddle, Action fadeEnd)
     {
-        if (screenFaderPrefab != null)
+        if (ScreenFaderPrefab != null)
         {
-            GameObject screenFaderObject = Instantiate(screenFaderPrefab);
+            GameObject screenFaderObject = Instantiate(ScreenFaderPrefab);
             if (screenFaderObject != null)
             {
                 ScreenFader screenFader = screenFaderObject.GetComponent<ScreenFader>();
