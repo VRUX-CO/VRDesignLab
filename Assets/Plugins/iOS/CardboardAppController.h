@@ -16,30 +16,16 @@
 #import "UnityAppController+Rendering.h"
 #import "UnityAppController+ViewHandling.h"
 
-// Unity 4.6.2 added a category to the app controller.
-#if UNITY_VERSION < 462
-#import "UnityInterface.h"
-#else
 #import "UnityAppController+UnityInterface.h"
-#endif
-
-// Unity 4 used a different method name to create the UnityView.
-#if UNITY_VERSION < 500
-#define createUnityView initUnityViewImpl
-#endif
 
 @interface CardboardAppController : UnityAppController
 
 - (UnityView *)createUnityView;
 
-- (void)launchSettingsDialog;
-
-- (void)startSettingsDialog:(UIViewController *)dialog;
-
-- (void)stopSettingsDialog;
-
-- (void)vrBackButtonPressed;
-
 - (void)pause:(bool)paused;
+
+// Override this method in a subclass to hook your own finishActivityAndReturn
+// functionality.
+- (void)finishActivityAndReturn:(BOOL)backTo2D;
 
 @end

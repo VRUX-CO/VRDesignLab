@@ -14,25 +14,40 @@
 
 using UnityEngine;
 
+/// Clears the entire screen.  This script and CardboardPostRender work together
+/// to draw the whole screen in VR Mode.  There should be exactly one of each
+/// component in any Cardboard scene.  It is part of the _CardboardCamera_
+/// prefab, which is included in _CardboardMain_.  The Cardboard script will
+/// create one at runtime if the scene doesn't already have it, so generally
+/// it is not necessary to manually add it unless you wish to edit the _Camera_
+/// component that it controls.
 [RequireComponent(typeof(Camera))]
+[AddComponentMenu("Cardboard/CardboardPreRender")]
 public class CardboardPreRender : MonoBehaviour {
 
-#if UNITY_5
-  new public Camera camera { get; private set; }
-#endif
+  public Camera cam { get; private set; }
 
   void Awake() {
-#if UNITY_5
-    camera = GetComponent<Camera>();
-#endif
+    cam = GetComponent<Camera>();
+  }
+
+  void Start() {
+    // Ensure distortion shader variables are initialized, because we can't count on
+    // getting a ProfileChanged event on the first frame rendered.
+    SetShaderGlobals();
   }
 
   void Reset() {
-    camera.clearFlags = CameraClearFlags.SolidColor;
-    camera.backgroundColor = Color.black;
-    camera.cullingMask = 0;
-    camera.useOcclusionCulling = false;
-    camera.depth = -100;
+#if UNITY_EDITOR
+    // Member variable 'cam' not always initialized when this method called in Editor.
+    // So, we'll just make a local of the same name.
+    var cam = GetComponent<Camera>();
+#endif
+    cam.clearFlags = CameraClearFlags.SolidColor;
+    cam.backgroundColor = Color.black;
+    cam.cullingMask = 0;
+    cam.useOcclusionCulling = false;
+    cam.depth = -100;
   }
 
   void OnPreCull() {
@@ -40,24 +55,30 @@ public class CardboardPreRender : MonoBehaviour {
     if (Cardboard.SDK.ProfileChanged) {
       SetShaderGlobals();
     }
-    camera.clearFlags = Cardboard.SDK.VRModeEnabled ?
+    cam.clearFlags = Cardboard.SDK.VRModeEnabled ?
         CameraClearFlags.SolidColor : CameraClearFlags.Nothing;
-    var stereoScreen = Cardboard.SDK.StereoScreen;
-    if (stereoScreen != null && !stereoScreen.IsCreated()) {
-      stereoScreen.Create();
-    }
   }
 
   private void SetShaderGlobals() {
-    // For any shaders that want to use these numbers for distortion correction.
-    CardboardProfile p = Cardboard.SDK.Profile;
-    Shader.SetGlobalVector("_Undistortion",
-        new Vector4(p.device.inverse.k1, p.device.inverse.k2));
-    Shader.SetGlobalVector("_Distortion",
-        new Vector4(p.device.distortion.k1, p.device.distortion.k2));
-    float[] rect = new float[4];
-    p.GetLeftEyeVisibleTanAngles(rect);
-    float r = CardboardProfile.GetMaxRadius(rect);
-    Shader.SetGlobalFloat("_MaxRadSq", r*r);
+    // For any shaders that want to use these numbers for distortion correction.  But only
+    // if distortion correction is needed, yet not already being handled by another method.
+    if (Cardboard.SDK.VRModeEnabled
+        && Cardboard.SDK.DistortionCorrection == Cardboard.DistortionCorrectionMethod.None) {
+      CardboardProfile p = Cardboard.SDK.Profile;
+      // Distortion vertex shader currently setup for only 6 coefficients.
+      if (p.device.inverse.Coef.Length > 6) {
+        Debug.LogWarning("Inverse distortion correction has more than 6 coefficents. "
+                         + "Shader only supports 6.");
+      }
+      Matrix4x4 mat = new Matrix4x4() {};
+      for (int i=0; i<p.device.inverse.Coef.Length; i++) {
+        mat[i] = p.device.inverse.Coef[i];
+      }
+      Shader.SetGlobalMatrix("_Undistortion", mat);
+      float[] rect = new float[4];
+      p.GetLeftEyeVisibleTanAngles(rect);
+      float r = CardboardProfile.GetMaxRadius(rect);
+      Shader.SetGlobalFloat("_MaxRadSq", r*r);
+    }
   }
 }

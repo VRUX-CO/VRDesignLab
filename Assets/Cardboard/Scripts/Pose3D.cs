@@ -13,7 +13,7 @@
 // limitations under the License.
 using UnityEngine;
 
-/// @ingroup Scripts
+/// @cond
 /// Encapsulates a rotation and a translation.  This is a convenience class that allows
 /// construction and value access either by Matrix4x4 or Quaternion + Vector3 types.
 public class Pose3D {
@@ -66,7 +66,9 @@ public class Pose3D {
     Orientation = Quaternion.LookRotation(matrix.GetColumn(2), matrix.GetColumn(1));
   }
 }
+/// @endcond
 
+/// @cond
 /// Mutable version of Pose3D.
 public class MutablePose3D : Pose3D {
   /// Sets the position and orientation from a Vector3 + Quaternion.
@@ -84,3 +86,4 @@ public class MutablePose3D : Pose3D {
     Set(flipZ * matrix * flipZ);
   }
 }
+/// @endcond

@@ -14,12 +14,22 @@
 
 using UnityEngine;
 
+/// Performs distortion correction on the rendered stereo screen.  This script
+/// and CardboardPreRender work together to draw the whole screen in VR Mode.
+/// There should be exactly one of each component in any Cardboard scene. It
+/// is part of the _CardboardCamera_ prefab, which is included in
+/// _CardboardMain_. The Cardboard script will create one at runtime if the
+/// scene doesn't already have it, so generally it is not necessary to manually
+/// add it unless you wish to edit the Camera component that it controls.
+///
+/// In the Unity editor, this script also draws the analog of the UI layer on
+/// the phone (alignment marker, settings gear, etc).
 [RequireComponent(typeof(Camera))]
+[AddComponentMenu("Cardboard/CardboardPostRender")]
 public class CardboardPostRender : MonoBehaviour {
 
-#if UNITY_5
-  new public Camera camera { get; private set; }
-#endif
+  // Convenient accessor to the camera component used through this script.
+  public Camera cam { get; private set; }
 
   // Distortion mesh parameters.
 
@@ -41,19 +51,22 @@ public class CardboardPostRender : MonoBehaviour {
   private Matrix4x4 xfm;
 
   void Reset() {
-    camera.clearFlags = CameraClearFlags.Depth;
-    camera.backgroundColor = Color.magenta;  // Should be noticeable if the clear flags change.
-    camera.orthographic = true;
-    camera.orthographicSize = 0.5f;
-    camera.cullingMask = 0;
-    camera.useOcclusionCulling = false;
-    camera.depth = 100;
+#if UNITY_EDITOR
+    // Member variable 'cam' not always initialized when this method called in Editor.
+    // So, we'll just make a local of the same name.
+    var cam = GetComponent<Camera>();
+#endif
+    cam.clearFlags = CameraClearFlags.Depth;
+    cam.backgroundColor = Color.magenta;  // Should be noticeable if the clear flags change.
+    cam.orthographic = true;
+    cam.orthographicSize = 0.5f;
+    cam.cullingMask = 0;
+    cam.useOcclusionCulling = false;
+    cam.depth = 100;
   }
 
   void Awake() {
-#if UNITY_5
-    camera = GetComponent<Camera>();
-#endif
+    cam = GetComponent<Camera>();
     Reset();
     meshMaterial = new Material(Shader.Find("Cardboard/UnlitTexture"));
     uiMaterial = new Material(Shader.Find("Cardboard/SolidColor"));
@@ -71,12 +84,12 @@ public class CardboardPostRender : MonoBehaviour {
     float realAspect = (float)Screen.width / Screen.height;
     float fakeAspect = Cardboard.SDK.Profile.screen.width / Cardboard.SDK.Profile.screen.height;
     aspectComparison = fakeAspect / realAspect;
-    camera.orthographicSize = 0.5f * Mathf.Max(1, aspectComparison);
+    cam.orthographicSize = 0.5f * Mathf.Max(1, aspectComparison);
   }
 #endif
 
   void OnRenderObject() {
-    if (Camera.current != camera)
+    if (Camera.current != cam)
       return;
     Cardboard.SDK.UpdateState();
     var correction = Cardboard.SDK.DistortionCorrection;
@@ -86,7 +99,7 @@ public class CardboardPostRender : MonoBehaviour {
     }
     if (correction == Cardboard.DistortionCorrectionMethod.Native
         && Cardboard.SDK.NativeDistortionCorrectionSupported) {
-      Cardboard.SDK.PostRender();
+      Cardboard.SDK.PostRender(stereoScreen);
     } else {
       if (distortionMesh == null || Cardboard.SDK.ProfileChanged) {
         RebuildDistortionMesh();
@@ -96,7 +109,7 @@ public class CardboardPostRender : MonoBehaviour {
       Graphics.DrawMeshNow(distortionMesh, transform.position, transform.rotation);
     }
     stereoScreen.DiscardContents();
-    if (!Cardboard.SDK.NativeUILayerSupported) {
+    if (!Cardboard.SDK.NativeUILayerSupported && Cardboard.SDK.UILayerEnabled) {
       DrawUILayer();
     }
   }

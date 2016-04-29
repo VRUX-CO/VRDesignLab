@@ -21,9 +21,9 @@ using UnityEngine;
 /// By default, it continuously updates the local transform to Cardboard.HeadView.
 /// A target object may be specified to provide an alternate reference frame for the motion.
 ///
-/// This script will typically be attached directly to a Camera object, or to its
+/// This script will typically be attached directly to a _Camera_ object, or to its
 /// parent if you need to offset the camera from the origin.
-/// Alternatively it can be inserted as a child of the Camera and parent of the
+/// Alternatively it can be inserted as a child of the _Camera_ but parent of the
 /// CardboardEye camera.  Do this if you already have steering logic driving the
 /// mono Camera and wish to have the user's head motion be relative to that.  Note
 /// that in the latter setup, head tracking is visible only when VR Mode is enabled.
@@ -32,6 +32,7 @@ using UnityEngine;
 /// different targets (one of which may be the parent), in order to split where
 /// the rotation is applied from where the positional offset is applied.  Use the
 /// #trackRotation and #trackPosition properties in this case.
+[AddComponentMenu("Cardboard/CardboardHead")]
 public class CardboardHead : MonoBehaviour {
   /// Determines whether to apply the user's head rotation to this gameobject's
   /// orientation.  True means to update the gameobject's orientation with the
@@ -51,7 +52,6 @@ public class CardboardHead : MonoBehaviour {
   /// fixed point of reference for the direction the user is looking.  Often, the
   /// grandparent or higher ancestor is a suitable target.
   public Transform target;
-
 
   /// Determines whether the head tracking is applied during `LateUpdate()` or
   /// `Update()`.  The default is false, which means it is applied during `LateUpdate()`
@@ -73,6 +73,15 @@ public class CardboardHead : MonoBehaviour {
       UpdateHead();
       return new Ray(transform.position, transform.forward);
     }
+  }
+
+  public delegate void HeadUpdatedDelegate(GameObject head);
+
+  /// Called after the head pose has been updated with the latest sensor data.
+  public event HeadUpdatedDelegate OnHeadUpdated;
+
+  void Awake() {
+    Cardboard.Create();
   }
 
   private bool updated;
@@ -113,6 +122,10 @@ public class CardboardHead : MonoBehaviour {
       } else {
         transform.position = target.position + target.rotation * pos;
       }
+    }
+
+    if (OnHeadUpdated != null) {
+      OnHeadUpdated(gameObject);
     }
   }
 }

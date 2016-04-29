@@ -43,27 +43,27 @@ public class StereoControllerEditor : Editor {
     GUILayout.EndHorizontal();
   }
 
-  [MenuItem("Component/Cardboard/Update Stereo Cameras", true)]
+  [MenuItem("Component/Cardboard/Update Stereo Cameras", true, 40)]
   public static bool CanUpdateStereoCameras() {
     // Make sure all selected items have valid cameras.
     return Selection.gameObjects.Where(go => CanUpdateStereoCameras(go)).Count()
         == Selection.gameObjects.Length;
   }
 
-  [MenuItem("CONTEXT/Camera/Update Stereo Cameras", true)]
+  [MenuItem("CONTEXT/Camera/Update Stereo Cameras", true, 41)]
   public static bool CanUpdateStereoCamerasContext(MenuCommand command) {
     var camera = (Camera)command.context;
     return CanUpdateStereoCameras(camera.gameObject);
   }
 
-  [MenuItem("Component/Cardboard/Update Stereo Cameras")]
+  [MenuItem("Component/Cardboard/Update Stereo Cameras", false, 42)]
   public static void UpdateStereoCameras() {
     foreach (var go in Selection.gameObjects) {
       DoUpdateStereoCameras(go);
     }
   }
 
-  [MenuItem("CONTEXT/Camera/Update Stereo Cameras")]
+  [MenuItem("CONTEXT/Camera/Update Stereo Cameras", false, 43)]
   public static void UpdateStereoCamerasContext(MenuCommand command) {
     var camera = (Camera)command.context;
     DoUpdateStereoCameras(camera.gameObject);
@@ -86,27 +86,12 @@ public class StereoControllerEditor : Editor {
     }
 
     // Remember current state of stereo rig.
-#if !UNITY_5
-    bool hadSkybox = go.GetComponent<SkyboxMesh>() != null;
-#endif
     bool hadHead = controller.Head != null;
     bool hadEyes = controller.Eyes.Length > 0;
 
     controller.AddStereoRig();
 
     // Support undo...
-
-#if !UNITY_5
-    // Skybox mesh.  Deletes it if camera is not Main.
-    var skybox = go.GetComponent<SkyboxMesh>();
-    if (skybox != null) {
-      if (!hadSkybox) {
-        Undo.RegisterCreatedObjectUndo(skybox, ACTION_NAME);
-      } else if (go.GetComponent<Camera>().tag != "MainCamera") {
-        Undo.DestroyObjectImmediate(skybox);
-      }
-    }
-#endif
 
     // Head.
     var head = go.GetComponent<CardboardHead>();
