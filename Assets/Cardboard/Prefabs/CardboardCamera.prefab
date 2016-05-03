@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 413106}
   - 114: {fileID: 11403204}
   m_Layer: 0
-  m_Name: CardboardManager
+  m_Name: CardboardCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,6 +63,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 413106}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &413104
 Transform:
   m_ObjectHideFlags: 1
@@ -75,6 +76,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 413106}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &413106
 Transform:
   m_ObjectHideFlags: 1
@@ -89,6 +91,7 @@ Transform:
   - {fileID: 413104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2013102
 Camera:
   m_ObjectHideFlags: 1
@@ -105,7 +108,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -117,10 +120,12 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!20 &2013104
 Camera:
   m_ObjectHideFlags: 1
@@ -137,11 +142,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: .5
+  orthographic size: 0.5
   m_Depth: 100
   m_CullingMask:
     serializedVersion: 2
@@ -149,10 +154,12 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!92 &9213102
 Behaviour:
   m_ObjectHideFlags: 1
@@ -217,4 +224,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113106}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

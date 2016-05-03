@@ -51,7 +51,7 @@ Material:
       second:
         m_Texture: {fileID: 2800000, guid: f41d798894eb5444bb909711331e38cc, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
-        m_Offset: {x: 0.75, y: 0.5}
+        m_Offset: {x: 0, y: 0.75}
     - first:
         name: _OcclusionMap
       second:
