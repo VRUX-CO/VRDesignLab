@@ -89,7 +89,6 @@ public static class MeshUtilities
     mesh.triangles = triangles;
 
     mesh.RecalculateBounds();
-    mesh.Optimize();
 
     return filter;
   }
